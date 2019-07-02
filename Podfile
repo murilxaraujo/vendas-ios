@@ -7,6 +7,8 @@ target 'Vendas' do
 
   # Pods for Vendas
 
+  pod 'RealmSwift'
+
   target 'VendasTests' do
     inherit! :search_paths
     # Pods for testing
