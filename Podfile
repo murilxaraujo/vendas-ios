@@ -8,6 +8,7 @@ target 'Vendas' do
   # Pods for Vendas
 
   pod 'RealmSwift'
+  pod 'Firebase/Core'
 
   target 'VendasTests' do
     inherit! :search_paths

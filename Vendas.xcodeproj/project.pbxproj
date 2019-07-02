@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,7 @@
 		4B5DB53A22CA80E10062E64D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B5DB53822CA80E10062E64D /* LaunchScreen.storyboard */; };
 		4B5DB54522CA80E10062E64D /* VendasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5DB54422CA80E10062E64D /* VendasTests.swift */; };
 		4B5DB55022CA80E10062E64D /* VendasUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5DB54F22CA80E10062E64D /* VendasUITests.swift */; };
+		4BB72FD922CBB0D000058239 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BB72FD822CBB0D000058239 /* GoogleService-Info.plist */; };
 		BBD42A37264ED462D3BD779B /* Pods_Vendas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439AE58B54BA5855A75FB86E /* Pods_Vendas.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		4B5DB54B22CA80E10062E64D /* VendasUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VendasUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B5DB54F22CA80E10062E64D /* VendasUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendasUITests.swift; sourceTree = "<group>"; };
 		4B5DB55122CA80E10062E64D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4BB72FD822CBB0D000058239 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		507EF6C9D84F4BD38BD2C13B /* Pods-Vendas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vendas.release.xcconfig"; path = "Target Support Files/Pods-Vendas/Pods-Vendas.release.xcconfig"; sourceTree = "<group>"; };
 		69AA472DB6A960C84F168055 /* Pods_VendasTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VendasTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A84AF0C8550326E704B2ECE5 /* Pods_VendasUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VendasUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +122,7 @@
 				4B5DB53622CA80E10062E64D /* Assets.xcassets */,
 				4B5DB53822CA80E10062E64D /* LaunchScreen.storyboard */,
 				4B5DB53B22CA80E10062E64D /* Info.plist */,
+				4BB72FD822CBB0D000058239 /* GoogleService-Info.plist */,
 			);
 			path = Vendas;
 			sourceTree = "<group>";
@@ -162,7 +165,6 @@
 				208CA965861749B9CF199190 /* Pods-VendasUITests.debug.xcconfig */,
 				C10A0F06006A9D5D108EAFA8 /* Pods-VendasUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -275,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B5DB53A22CA80E10062E64D /* LaunchScreen.storyboard in Resources */,
+				4BB72FD922CBB0D000058239 /* GoogleService-Info.plist in Resources */,
 				4B5DB53722CA80E10062E64D /* Assets.xcassets in Resources */,
 				4B5DB53522CA80D90062E64D /* Main.storyboard in Resources */,
 			);
@@ -571,7 +574,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.modevstudio.Vendas;
+				PRODUCT_BUNDLE_IDENTIFIER = com.modevstudio.vendass;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -590,7 +593,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.modevstudio.Vendas;
+				PRODUCT_BUNDLE_IDENTIFIER = com.modevstudio.vendass;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
