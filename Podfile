@@ -11,6 +11,7 @@ target 'Vendas' do
   pod 'Firebase/Core'
   pod 'lottie-ios'
   pod 'MaterialComponents'
+  pod 'IQKeyboardManager'
 
   target 'VendasTests' do
     inherit! :search_paths
