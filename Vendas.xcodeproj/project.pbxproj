@@ -10,12 +10,13 @@
 		46B0D0D480631B0FEB7485DA /* Pods_VendasTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69AA472DB6A960C84F168055 /* Pods_VendasTests.framework */; };
 		4859E251204567EC2B244C16 /* Pods_VendasUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A84AF0C8550326E704B2ECE5 /* Pods_VendasUITests.framework */; };
 		4B5DB53022CA80D80062E64D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5DB52F22CA80D80062E64D /* AppDelegate.swift */; };
-		4B5DB53222CA80D80062E64D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5DB53122CA80D80062E64D /* ViewController.swift */; };
-		4B5DB53522CA80D90062E64D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B5DB53322CA80D90062E64D /* Main.storyboard */; };
+		4B5DB53222CA80D80062E64D /* LoadingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5DB53122CA80D80062E64D /* LoadingScreenViewController.swift */; };
 		4B5DB53722CA80E10062E64D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B5DB53622CA80E10062E64D /* Assets.xcassets */; };
 		4B5DB53A22CA80E10062E64D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B5DB53822CA80E10062E64D /* LaunchScreen.storyboard */; };
 		4B5DB54522CA80E10062E64D /* VendasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5DB54422CA80E10062E64D /* VendasTests.swift */; };
 		4B5DB55022CA80E10062E64D /* VendasUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5DB54F22CA80E10062E64D /* VendasUITests.swift */; };
+		4B6FA6C722CFCA6800138303 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B6FA6C622CFCA6800138303 /* loading.json */; };
+		4B6FA6C922CFD00C00138303 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6FA6C822CFD00C00138303 /* LoginViewController.swift */; };
 		4BB72FD922CBB0D000058239 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BB72FD822CBB0D000058239 /* GoogleService-Info.plist */; };
 		4BB72FDD22CBCF8400058239 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB72FDC22CBCF8400058239 /* RealmService.swift */; };
 		4BBA3C8522CD2B6800D4D49B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBA3C8422CD2B6800D4D49B /* NetworkService.swift */; };
@@ -48,8 +49,7 @@
 		439AE58B54BA5855A75FB86E /* Pods_Vendas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vendas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B5DB52C22CA80D80062E64D /* Vendas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vendas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B5DB52F22CA80D80062E64D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4B5DB53122CA80D80062E64D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../ViewController.swift; sourceTree = "<group>"; };
-		4B5DB53422CA80D90062E64D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4B5DB53122CA80D80062E64D /* LoadingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoadingScreenViewController.swift; path = ../LoadingScreenViewController.swift; sourceTree = "<group>"; };
 		4B5DB53622CA80E10062E64D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4B5DB53922CA80E10062E64D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4B5DB53B22CA80E10062E64D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -59,6 +59,8 @@
 		4B5DB54B22CA80E10062E64D /* VendasUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VendasUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B5DB54F22CA80E10062E64D /* VendasUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendasUITests.swift; sourceTree = "<group>"; };
 		4B5DB55122CA80E10062E64D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4B6FA6C622CFCA6800138303 /* loading.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = loading.json; path = Vendas/loading.json; sourceTree = "<group>"; };
+		4B6FA6C822CFD00C00138303 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4BB72FD822CBB0D000058239 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4BB72FDC22CBCF8400058239 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		4BBA3C8422CD2B6800D4D49B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 		4B5DB52322CA80D80062E64D = {
 			isa = PBXGroup;
 			children = (
+				4B6FA6C622CFCA6800138303 /* loading.json */,
 				4B5DB52E22CA80D80062E64D /* Vendas */,
 				4B5DB54322CA80E10062E64D /* VendasTests */,
 				4B5DB54E22CA80E10062E64D /* VendasUITests */,
@@ -122,11 +125,10 @@
 		4B5DB52E22CA80D80062E64D /* Vendas */ = {
 			isa = PBXGroup;
 			children = (
-				4BBA3C8922CD370400D4D49B /* New Group */,
+				4BBA3C8922CD370400D4D49B /* ViewControllers */,
 				4BB72FDB22CBCF3400058239 /* Model */,
 				4BB72FDA22CBCF2800058239 /* Services */,
 				4B5DB52F22CA80D80062E64D /* AppDelegate.swift */,
-				4B5DB53322CA80D90062E64D /* Main.storyboard */,
 				4B5DB53622CA80E10062E64D /* Assets.xcassets */,
 				4B5DB53822CA80E10062E64D /* LaunchScreen.storyboard */,
 				4B5DB53B22CA80E10062E64D /* Info.plist */,
@@ -170,12 +172,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		4BBA3C8922CD370400D4D49B /* New Group */ = {
+		4BBA3C8922CD370400D4D49B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				4B5DB53122CA80D80062E64D /* ViewController.swift */,
+				4B5DB53122CA80D80062E64D /* LoadingScreenViewController.swift */,
+				4B6FA6C822CFD00C00138303 /* LoginViewController.swift */,
 			);
-			path = "New Group";
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		835844AD1F1BFE495B05FBC4 /* Frameworks */ = {
@@ -311,8 +314,8 @@
 			files = (
 				4B5DB53A22CA80E10062E64D /* LaunchScreen.storyboard in Resources */,
 				4BB72FD922CBB0D000058239 /* GoogleService-Info.plist in Resources */,
+				4B6FA6C722CFCA6800138303 /* loading.json in Resources */,
 				4B5DB53722CA80E10062E64D /* Assets.xcassets in Resources */,
-				4B5DB53522CA80D90062E64D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,7 +426,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B5DB53222CA80D80062E64D /* ViewController.swift in Sources */,
+				4B6FA6C922CFD00C00138303 /* LoginViewController.swift in Sources */,
+				4B5DB53222CA80D80062E64D /* LoadingScreenViewController.swift in Sources */,
 				4BB72FDD22CBCF8400058239 /* RealmService.swift in Sources */,
 				4BBA3C8522CD2B6800D4D49B /* NetworkService.swift in Sources */,
 				4BBA3C8722CD323E00D4D49B /* Reachability.swift in Sources */,
@@ -463,14 +467,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		4B5DB53322CA80D90062E64D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4B5DB53422CA80D90062E64D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4B5DB53822CA80E10062E64D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
