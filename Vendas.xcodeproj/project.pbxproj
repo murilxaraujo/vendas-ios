@@ -18,6 +18,14 @@
 		4B6FA6C722CFCA6800138303 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B6FA6C622CFCA6800138303 /* loading.json */; };
 		4B6FA6C922CFD00C00138303 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6FA6C822CFD00C00138303 /* LoginViewController.swift */; };
 		4B6FA6CB22CFE89100138303 /* BackupDataDownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6FA6CA22CFE89100138303 /* BackupDataDownloadViewController.swift */; };
+		4B7B02D622D3B8FB00408443 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7B02D522D3B8FB00408443 /* User.swift */; };
+		4B7B02D822D3B9F700408443 /* NewOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7B02D722D3B9F700408443 /* NewOrderViewController.swift */; };
+		4B7B02DB22D3BEFD00408443 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7B02DA22D3BEFD00408443 /* HomeViewController.swift */; };
+		4B7B02DD22D3BFC700408443 /* NewOrderSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7B02DC22D3BFC700408443 /* NewOrderSecondViewController.swift */; };
+		4B7B02DF22D3C31D00408443 /* ClientSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7B02DE22D3C31D00408443 /* ClientSelectionViewController.swift */; };
+		4B7B02E122D3C3A400408443 /* NewOrderThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7B02E022D3C3A400408443 /* NewOrderThirdViewController.swift */; };
+		4B7B02E322D3C3B700408443 /* ItemsSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7B02E222D3C3B700408443 /* ItemsSelectionViewController.swift */; };
+		4B7B02E522D3C82800408443 /* NewClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7B02E422D3C82800408443 /* NewClientViewController.swift */; };
 		4BB72FD922CBB0D000058239 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BB72FD822CBB0D000058239 /* GoogleService-Info.plist */; };
 		4BB72FDD22CBCF8400058239 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB72FDC22CBCF8400058239 /* RealmService.swift */; };
 		4BBA3C8522CD2B6800D4D49B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBA3C8422CD2B6800D4D49B /* NetworkService.swift */; };
@@ -63,6 +71,14 @@
 		4B6FA6C622CFCA6800138303 /* loading.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = loading.json; path = Vendas/loading.json; sourceTree = "<group>"; };
 		4B6FA6C822CFD00C00138303 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4B6FA6CA22CFE89100138303 /* BackupDataDownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupDataDownloadViewController.swift; sourceTree = "<group>"; };
+		4B7B02D522D3B8FB00408443 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		4B7B02D722D3B9F700408443 /* NewOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrderViewController.swift; sourceTree = "<group>"; };
+		4B7B02DA22D3BEFD00408443 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		4B7B02DC22D3BFC700408443 /* NewOrderSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrderSecondViewController.swift; sourceTree = "<group>"; };
+		4B7B02DE22D3C31D00408443 /* ClientSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientSelectionViewController.swift; sourceTree = "<group>"; };
+		4B7B02E022D3C3A400408443 /* NewOrderThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrderThirdViewController.swift; sourceTree = "<group>"; };
+		4B7B02E222D3C3B700408443 /* ItemsSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsSelectionViewController.swift; sourceTree = "<group>"; };
+		4B7B02E422D3C82800408443 /* NewClientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewClientViewController.swift; sourceTree = "<group>"; };
 		4BB72FD822CBB0D000058239 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4BB72FDC22CBCF8400058239 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		4BBA3C8422CD2B6800D4D49B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -157,6 +173,17 @@
 			path = VendasUITests;
 			sourceTree = "<group>";
 		};
+		4B7B02D922D3BA1200408443 /* NewOrderVCs */ = {
+			isa = PBXGroup;
+			children = (
+				4B7B02DC22D3BFC700408443 /* NewOrderSecondViewController.swift */,
+				4B7B02DE22D3C31D00408443 /* ClientSelectionViewController.swift */,
+				4B7B02E022D3C3A400408443 /* NewOrderThirdViewController.swift */,
+				4B7B02E222D3C3B700408443 /* ItemsSelectionViewController.swift */,
+			);
+			path = NewOrderVCs;
+			sourceTree = "<group>";
+		};
 		4BB72FDA22CBCF2800058239 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +197,7 @@
 		4BB72FDB22CBCF3400058239 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4B7B02D522D3B8FB00408443 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -177,9 +205,13 @@
 		4BBA3C8922CD370400D4D49B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				4B7B02D922D3BA1200408443 /* NewOrderVCs */,
 				4B5DB53122CA80D80062E64D /* LoadingScreenViewController.swift */,
 				4B6FA6C822CFD00C00138303 /* LoginViewController.swift */,
 				4B6FA6CA22CFE89100138303 /* BackupDataDownloadViewController.swift */,
+				4B7B02D722D3B9F700408443 /* NewOrderViewController.swift */,
+				4B7B02DA22D3BEFD00408443 /* HomeViewController.swift */,
+				4B7B02E422D3C82800408443 /* NewClientViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -430,10 +462,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B6FA6C922CFD00C00138303 /* LoginViewController.swift in Sources */,
+				4B7B02E122D3C3A400408443 /* NewOrderThirdViewController.swift in Sources */,
 				4B5DB53222CA80D80062E64D /* LoadingScreenViewController.swift in Sources */,
+				4B7B02DF22D3C31D00408443 /* ClientSelectionViewController.swift in Sources */,
 				4BB72FDD22CBCF8400058239 /* RealmService.swift in Sources */,
 				4BBA3C8522CD2B6800D4D49B /* NetworkService.swift in Sources */,
+				4B7B02D622D3B8FB00408443 /* User.swift in Sources */,
+				4B7B02DD22D3BFC700408443 /* NewOrderSecondViewController.swift in Sources */,
+				4B7B02E322D3C3B700408443 /* ItemsSelectionViewController.swift in Sources */,
+				4B7B02E522D3C82800408443 /* NewClientViewController.swift in Sources */,
+				4B7B02DB22D3BEFD00408443 /* HomeViewController.swift in Sources */,
 				4B6FA6CB22CFE89100138303 /* BackupDataDownloadViewController.swift in Sources */,
+				4B7B02D822D3B9F700408443 /* NewOrderViewController.swift in Sources */,
 				4BBA3C8722CD323E00D4D49B /* Reachability.swift in Sources */,
 				4B5DB53022CA80D80062E64D /* AppDelegate.swift in Sources */,
 			);
