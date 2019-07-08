@@ -13,6 +13,10 @@ class BackupDataDownloadViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupViewElements()
     }
 
+    func setupViewElements() {
+        self.view.backgroundColor = .white
+    }
 }

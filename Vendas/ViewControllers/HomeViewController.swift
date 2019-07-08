@@ -111,7 +111,7 @@ class HomeViewController: UIViewController {
         let vc = UINavigationController(rootViewController: NewClientViewController())
         self.show(vc, sender: nil)
     }
-    
+
     @objc func dataLocalBackup(sender: Any) {
         self.show(BackupDataDownloadViewController(), sender: nil)
     }

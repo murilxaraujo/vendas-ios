@@ -48,7 +48,10 @@ class LoadingScreenViewController: UIViewController {
         self.view.addSubview(loadingLabel)
         loadingLabel.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         loadingLabel.topAnchor.constraint(equalTo: animationView.bottomAnchor, constant: 50).isActive = true
+    
     }
 
+    
+    
 }
 

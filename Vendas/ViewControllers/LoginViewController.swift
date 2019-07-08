@@ -103,5 +103,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+    @objc func authenticate(user: String, password: String) -> String? {
+        return nil
+    }
 
 }
