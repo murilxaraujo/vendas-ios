@@ -24,6 +24,9 @@ class HomeViewController: UIViewController {
         button.setTitle("Novo Cliente", for: .normal)
         button.setBackgroundColor(UIColor(red:0.25, green:0.32, blue:0.71, alpha:1.0))
         button.layer.cornerRadius = 10
+        let newClientIcon = UIImage(named: "round_person_add_black_24pt")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(newClientIcon, for: .normal)
+        button.setImageTintColor(.white, for: .normal)
         return button
     }()
     
@@ -33,6 +36,9 @@ class HomeViewController: UIViewController {
         button.setTitle("Novo pedido", for: .normal)
         button.setBackgroundColor(UIColor(red:0.25, green:0.32, blue:0.71, alpha:1.0))
         button.layer.cornerRadius = 10
+        let newOrderIcon = UIImage(named: "round_how_to_vote_black_24pt")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(newOrderIcon, for: .normal)
+        button.setImageTintColor(.white, for: .normal)
         return button
     }()
     
@@ -42,12 +48,19 @@ class HomeViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setBackgroundColor(UIColor(red:0.25, green:0.32, blue:0.71, alpha:1.0))
         button.layer.cornerRadius = 10
+        let dataDownloadIcon = UIImage(named: "baseline_save_alt_black_24pt")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(dataDownloadIcon, for: .normal)
+        button.setImageTintColor(.white, for: .normal)
         return button
     }()
     
-    let syncDataButton: MDCButton = {
-        let button = MDCButton()
+    let syncDataButton: MDCFloatingButton = {
+        let button = MDCFloatingButton()
         button.translatesAutoresizingMaskIntoConstraints = false
+        let buttonImage = UIImage(named: "baseline_backup_black_24pt")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(buttonImage, for: .normal)
+        button.backgroundColor = .white
+        button.setImageTintColor(UIColor(red:0.25, green:0.32, blue:0.71, alpha:1.0), for: .normal)
         return button
     }()
 
@@ -71,28 +84,22 @@ class HomeViewController: UIViewController {
         newClientButton.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         newClientButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         newClientButton.addTarget(self, action: #selector(newClient(sender:)), for: .touchUpInside)
-        let newClientIcon = UIImage(named: "round_person_add_black_48pt")?.withRenderingMode(.alwaysTemplate)
-        newClientButton.setImage(newClientIcon, for: .normal)
-        newClientButton.setImageTintColor(.white, for: .normal)
         
         self.view.addSubview(newOrderButton)
         newOrderButton.topAnchor.constraint(equalTo: newClientButton.bottomAnchor, constant: 20).isActive = true
         newOrderButton.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         newOrderButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         newOrderButton.addTarget(self, action: #selector(newOrder(sender:)), for: .touchUpInside)
-        let newOrderIcon = UIImage(named: "round_how_to_vote_black_48pt")?.withRenderingMode(.alwaysTemplate)
-        newOrderButton.setImage(newOrderIcon, for: .normal)
-        newOrderButton.setImageTintColor(.white, for: .normal)
         
         self.view.addSubview(downloadDataButton)
         downloadDataButton.topAnchor.constraint(equalTo: newOrderButton.bottomAnchor, constant: 20).isActive = true
         downloadDataButton.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         downloadDataButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
-        downloadDataButton.addTarget(self, action: #selector(dataLocalBackup(sender:)), for: .touchUpInside )
-        let dataDownloadIcon = UIImage(named: "baseline_save_alt_black_48pt")?.withRenderingMode(.alwaysTemplate)
-        downloadDataButton.setImage(dataDownloadIcon, for: .normal)
-        downloadDataButton.setImageTintColor(.white, for: .normal)
+        downloadDataButton.addTarget(self, action: #selector(dataLocalBackup(sender:)), for: .touchUpInside)
         
+        self.topView.addSubview(syncDataButton)
+        syncDataButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        syncDataButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
     }
     
     @objc func newOrder(sender: Any) {
