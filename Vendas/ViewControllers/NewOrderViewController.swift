@@ -42,6 +42,13 @@ class NewOrderViewController: UIViewController {
     }
     
     func setupViewElements() {
+        
+        self.view.backgroundColor = .white
+        self.navigationItem.title = "Novo pedido"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        let backbutton = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(closeView(sender:)))
+        self.navigationItem.setLeftBarButton(backbutton, animated: true)
+        
         self.view.addSubview(label)
         label.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         label.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
@@ -52,12 +59,15 @@ class NewOrderViewController: UIViewController {
         brButton.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         brButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
-        
         self.view.addSubview(poloButton)
-        poloButton.topAnchor.constraint(equalToSystemSpacingBelow: brButton.bottomAnchor, multiplier: 20).isActive = true
+        poloButton.topAnchor.constraint(equalTo: brButton.bottomAnchor, constant: 20).isActive = true
         poloButton.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         poloButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
+    }
+    
+    @objc func closeView(sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
 }
