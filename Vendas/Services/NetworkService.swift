@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import SystemConfiguration
 
-class NetworkService {    
+class NetworkService {
     
-    init() {
-        
+    func isInternetAvailable() throws -> Bool {
+        return true
     }
+    
 }

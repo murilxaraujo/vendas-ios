@@ -98,14 +98,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(loginButton)
         loginButton.topAnchor.constraint(equalTo: senhaTextField.bottomAnchor, constant: 0).isActive = true
         loginButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        loginButton.addTarget(self, action: #selector(authenticate(sender:)), for: .touchUpInside)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
-    @objc func authenticate(user: String, password: String) -> String? {
-        return nil
+    @objc func authenticate(sender: Any) {
+        
     }
 
 }
