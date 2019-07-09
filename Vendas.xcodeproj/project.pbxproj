@@ -31,6 +31,7 @@
 		4BB72FDD22CBCF8400058239 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB72FDC22CBCF8400058239 /* RealmService.swift */; };
 		4BBA3C8522CD2B6800D4D49B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBA3C8422CD2B6800D4D49B /* NetworkService.swift */; };
 		4BBA3C8722CD323E00D4D49B /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBA3C8622CD323E00D4D49B /* Reachability.swift */; };
+		4BDE2C1222D520C000743508 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDE2C1122D520C000743508 /* AuthService.swift */; };
 		BBD42A37264ED462D3BD779B /* Pods_Vendas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439AE58B54BA5855A75FB86E /* Pods_Vendas.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,7 @@
 		4BB72FDC22CBCF8400058239 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		4BBA3C8422CD2B6800D4D49B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		4BBA3C8622CD323E00D4D49B /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		4BDE2C1122D520C000743508 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		507EF6C9D84F4BD38BD2C13B /* Pods-Vendas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vendas.release.xcconfig"; path = "Target Support Files/Pods-Vendas/Pods-Vendas.release.xcconfig"; sourceTree = "<group>"; };
 		69AA472DB6A960C84F168055 /* Pods_VendasTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VendasTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A84AF0C8550326E704B2ECE5 /* Pods_VendasUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VendasUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +194,7 @@
 				4BB72FDC22CBCF8400058239 /* RealmService.swift */,
 				4BBA3C8422CD2B6800D4D49B /* NetworkService.swift */,
 				4BBA3C8622CD323E00D4D49B /* Reachability.swift */,
+				4BDE2C1122D520C000743508 /* AuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				4B6FA6CB22CFE89100138303 /* BackupDataDownloadViewController.swift in Sources */,
 				4B7B02D822D3B9F700408443 /* NewOrderViewController.swift in Sources */,
 				4B7B02E722D3E1DE00408443 /* SyncDataViewController.swift in Sources */,
+				4BDE2C1222D520C000743508 /* AuthService.swift in Sources */,
 				4BBA3C8722CD323E00D4D49B /* Reachability.swift in Sources */,
 				4B5DB53022CA80D80062E64D /* AppDelegate.swift in Sources */,
 			);
