@@ -72,7 +72,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func setupViewInterface() {
         self.view.backgroundColor = .white
         
-        
         self.view.addSubview(logoBackgroundView)
         logoBackgroundView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         logoBackgroundView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true

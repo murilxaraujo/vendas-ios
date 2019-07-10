@@ -27,6 +27,7 @@
 		4B7B02E322D3C3B700408443 /* ItemsSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7B02E222D3C3B700408443 /* ItemsSelectionViewController.swift */; };
 		4B7B02E522D3C82800408443 /* NewClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7B02E422D3C82800408443 /* NewClientViewController.swift */; };
 		4B7B02E722D3E1DE00408443 /* SyncDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7B02E622D3E1DE00408443 /* SyncDataViewController.swift */; };
+		4B8AE69122D6605D006E1AD7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AE69022D6605D006E1AD7 /* NetworkManager.swift */; };
 		4BB72FD922CBB0D000058239 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BB72FD822CBB0D000058239 /* GoogleService-Info.plist */; };
 		4BB72FDD22CBCF8400058239 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB72FDC22CBCF8400058239 /* RealmService.swift */; };
 		4BBA3C8522CD2B6800D4D49B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBA3C8422CD2B6800D4D49B /* NetworkService.swift */; };
@@ -82,6 +83,7 @@
 		4B7B02E222D3C3B700408443 /* ItemsSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsSelectionViewController.swift; sourceTree = "<group>"; };
 		4B7B02E422D3C82800408443 /* NewClientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewClientViewController.swift; sourceTree = "<group>"; };
 		4B7B02E622D3E1DE00408443 /* SyncDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncDataViewController.swift; sourceTree = "<group>"; };
+		4B8AE69022D6605D006E1AD7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		4BB72FD822CBB0D000058239 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4BB72FDC22CBCF8400058239 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		4BBA3C8422CD2B6800D4D49B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				4BBA3C8422CD2B6800D4D49B /* NetworkService.swift */,
 				4BBA3C8622CD323E00D4D49B /* Reachability.swift */,
 				4BDE2C1122D520C000743508 /* AuthService.swift */,
+				4B8AE69022D6605D006E1AD7 /* NetworkManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B8AE69122D6605D006E1AD7 /* NetworkManager.swift in Sources */,
 				4B6FA6C922CFD00C00138303 /* LoginViewController.swift in Sources */,
 				4B7B02E122D3C3A400408443 /* NewOrderThirdViewController.swift in Sources */,
 				4B5DB53222CA80D80062E64D /* LoadingScreenViewController.swift in Sources */,

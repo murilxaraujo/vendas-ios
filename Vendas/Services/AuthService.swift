@@ -12,7 +12,7 @@ class AuthService {
     
     let url: URL! = URL(string: "")
     
-    let shared = AuthService()
+    let defaults = UserDefaults.standard
     
     enum LoginError: Error {
         case userNotFound
@@ -41,15 +41,18 @@ class AuthService {
         
         _ = semaphone.wait(timeout: .distantFuture)
         
-        if error == nil {
+        if error != nil {
+            disableSavedCredentials()
             throw LoginError.networkError
         }
         
         if data == nil {
+            disableSavedCredentials()
             throw LoginError.networkError
         }
         
         if response == nil {
+            disableSavedCredentials()
             throw LoginError.networkError
         }
         
@@ -58,36 +61,73 @@ class AuthService {
         do {
             json = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary ?? nil
         } catch {
+            disableSavedCredentials()
             throw LoginError.networkError
         }
         
         if json == nil {
+            disableSavedCredentials()
             throw LoginError.networkError
         }
         
         if json!["0"] != nil {
+            disableSavedCredentials()
             throw LoginError.userNotFound
         }
         
         if json!["2"] != nil {
+            disableSavedCredentials()
             throw LoginError.blockedUser
         }
         
         if json!["3"] != nil {
+            disableSavedCredentials()
             throw LoginError.notAttachedSeller
         }
         
         if json!["4"] != nil {
+            disableSavedCredentials()
             throw LoginError.wrongPassword
         }
         
         if json!["1"] == nil {
+            disableSavedCredentials()
             throw LoginError.networkError
         }
         
         authenticatedUser = User(id: json!["1"] as! String)
         
         return authenticatedUser!
+    }
+    
+    func hasSavedLoginCredentials() -> Bool {
+        return defaults.bool(forKey: "hasSavedCredentials")
+    }
+    
+    func saveLoginCredentials(username: String, password: String) {
+        defaults.set(true, forKey: "hasSavedCredentials")
+        defaults.set(username,forKey: "username")
+        defaults.set(password, forKey: "batata")
+    }
+    
+    func disableSavedCredentials() {
+        defaults.set(false, forKey: "hasSavedCredentials")
+    }
+    
+    func getSavedUsername() -> String {
+        return defaults.string(forKey: "username")!
+    }
+    
+    func getSavedPassword() -> String {
+        return defaults.string(forKey: "batata")!
+    }
+    
+    func saveUserID(id: String) {
+       defaults.set(id, forKey: "userID")
+    }
+    
+    func getSavedUserID() -> String? {
+        return defaults.string(forKey: "userID") ?? nil
     }
     
 }
