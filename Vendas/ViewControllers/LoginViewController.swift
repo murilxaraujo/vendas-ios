@@ -12,6 +12,8 @@ import MaterialComponents.MaterialButtons
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
+    let authService = AuthService()
+    
     let logoBackgroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -105,6 +107,32 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func authenticate(sender: Any) {
+        
+        let username: String = userNameTextField.text!
+        let password: String = senhaTextField.text!
+        
+        do {
+            
+            let newUser: User = try authService.authenticate(username: username, password: password)
+            
+            authService.saveLoginCredentials(username: username, password: password)
+            authService.saveUserID(id: newUser.id)
+            
+            self.present(HomeViewController(), animated: true, completion: nil)
+            
+        } catch LoginError.networkError {
+            
+        } catch LoginError.blockedUser {
+            
+        } catch LoginError.notAttachedSeller {
+            
+        } catch LoginError.userNotFound {
+            
+        } catch LoginError.wrongPassword {
+            
+        } catch {
+            
+        }
         
     }
 
