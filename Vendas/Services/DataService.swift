@@ -11,6 +11,8 @@ import Foundation
 class DataService {
     
     let defaults = UserDefaults.standard
+    
+    static let shared = DataService()
 
     func hasDownloadedData() -> Bool {
         return defaults.bool(forKey: "hasDownloadedData")

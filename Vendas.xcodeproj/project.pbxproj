@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		46B0D0D480631B0FEB7485DA /* Pods_VendasTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69AA472DB6A960C84F168055 /* Pods_VendasTests.framework */; };
 		4859E251204567EC2B244C16 /* Pods_VendasUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A84AF0C8550326E704B2ECE5 /* Pods_VendasUITests.framework */; };
+		4B1BE6E522D77E440043F5E0 /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BE6E422D77E440043F5E0 /* OfflineViewController.swift */; };
+		4B1BE6E722D77F830043F5E0 /* offline.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B1BE6E622D77F830043F5E0 /* offline.json */; };
+		4B1BE6E922D784760043F5E0 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BE6E822D784760043F5E0 /* DataService.swift */; };
+		4B1BE6EB22D78D340043F5E0 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BE6EA22D78D340043F5E0 /* Enums.swift */; };
 		4B5DB53022CA80D80062E64D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5DB52F22CA80D80062E64D /* AppDelegate.swift */; };
 		4B5DB53222CA80D80062E64D /* LoadingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5DB53122CA80D80062E64D /* LoadingScreenViewController.swift */; };
 		4B5DB53722CA80E10062E64D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B5DB53622CA80E10062E64D /* Assets.xcassets */; };
@@ -59,6 +63,10 @@
 		37EDA6204D9BC7513BC793D9 /* Pods-Vendas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vendas.debug.xcconfig"; path = "Target Support Files/Pods-Vendas/Pods-Vendas.debug.xcconfig"; sourceTree = "<group>"; };
 		41BE7AC7848BC491B39E0A32 /* Pods-VendasTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VendasTests.release.xcconfig"; path = "Target Support Files/Pods-VendasTests/Pods-VendasTests.release.xcconfig"; sourceTree = "<group>"; };
 		439AE58B54BA5855A75FB86E /* Pods_Vendas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vendas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B1BE6E422D77E440043F5E0 /* OfflineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineViewController.swift; sourceTree = "<group>"; };
+		4B1BE6E622D77F830043F5E0 /* offline.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = offline.json; sourceTree = "<group>"; };
+		4B1BE6E822D784760043F5E0 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		4B1BE6EA22D78D340043F5E0 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		4B5DB52C22CA80D80062E64D /* Vendas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vendas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B5DB52F22CA80D80062E64D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4B5DB53122CA80D80062E64D /* LoadingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoadingScreenViewController.swift; path = ../LoadingScreenViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +134,7 @@
 		4B5DB52322CA80D80062E64D = {
 			isa = PBXGroup;
 			children = (
+				4B1BE6E622D77F830043F5E0 /* offline.json */,
 				4B6FA6C622CFCA6800138303 /* loading.json */,
 				4B5DB52E22CA80D80062E64D /* Vendas */,
 				4B5DB54322CA80E10062E64D /* VendasTests */,
@@ -198,6 +207,7 @@
 				4BBA3C8622CD323E00D4D49B /* Reachability.swift */,
 				4BDE2C1122D520C000743508 /* AuthService.swift */,
 				4B8AE69022D6605D006E1AD7 /* NetworkManager.swift */,
+				4B1BE6E822D784760043F5E0 /* DataService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -206,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				4B7B02D522D3B8FB00408443 /* User.swift */,
+				4B1BE6EA22D78D340043F5E0 /* Enums.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -221,6 +232,7 @@
 				4B7B02DA22D3BEFD00408443 /* HomeViewController.swift */,
 				4B7B02E422D3C82800408443 /* NewClientViewController.swift */,
 				4B7B02E622D3E1DE00408443 /* SyncDataViewController.swift */,
+				4B1BE6E422D77E440043F5E0 /* OfflineViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -358,6 +370,7 @@
 			files = (
 				4B5DB53A22CA80E10062E64D /* LaunchScreen.storyboard in Resources */,
 				4BB72FD922CBB0D000058239 /* GoogleService-Info.plist in Resources */,
+				4B1BE6E722D77F830043F5E0 /* offline.json in Resources */,
 				4B6FA6C722CFCA6800138303 /* loading.json in Resources */,
 				4B5DB53722CA80E10062E64D /* Assets.xcassets in Resources */,
 			);
@@ -473,6 +486,8 @@
 				4B8AE69122D6605D006E1AD7 /* NetworkManager.swift in Sources */,
 				4B6FA6C922CFD00C00138303 /* LoginViewController.swift in Sources */,
 				4B7B02E122D3C3A400408443 /* NewOrderThirdViewController.swift in Sources */,
+				4B1BE6E522D77E440043F5E0 /* OfflineViewController.swift in Sources */,
+				4B1BE6EB22D78D340043F5E0 /* Enums.swift in Sources */,
 				4B5DB53222CA80D80062E64D /* LoadingScreenViewController.swift in Sources */,
 				4B7B02DF22D3C31D00408443 /* ClientSelectionViewController.swift in Sources */,
 				4BB72FDD22CBCF8400058239 /* RealmService.swift in Sources */,
@@ -488,6 +503,7 @@
 				4BDE2C1222D520C000743508 /* AuthService.swift in Sources */,
 				4BBA3C8722CD323E00D4D49B /* Reachability.swift in Sources */,
 				4B5DB53022CA80D80062E64D /* AppDelegate.swift in Sources */,
+				4B1BE6E922D784760043F5E0 /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

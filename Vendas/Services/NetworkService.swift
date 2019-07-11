@@ -12,6 +12,8 @@ import SystemConfiguration
 class NetworkService {
     let network: NetworkManager = NetworkManager.sharedInstance
     
+    static let shared = NetworkService()
+    
     func isNetworkAvailable() throws -> Bool {
         var value: Bool?
         

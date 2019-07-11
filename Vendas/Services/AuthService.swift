@@ -10,6 +10,8 @@ import Foundation
 
 class AuthService {
     
+    static let shared = AuthService()
+    
     let url: URL! = URL(string: "")
     
     let defaults = UserDefaults.standard

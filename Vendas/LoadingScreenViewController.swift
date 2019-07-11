@@ -12,10 +12,6 @@ import MaterialComponents.MaterialDialogs
 
 class LoadingScreenViewController: UIViewController {
     
-    let networkSer = NetworkService()
-    let authSer = AuthService()
-    let dataSer = DataService()
-    
     var animationView: AnimationView = {
         let av = AnimationView()
         av.loopMode = .loop
@@ -63,7 +59,7 @@ class LoadingScreenViewController: UIViewController {
         var hasNetwork: Bool?
         
         do {
-            hasNetwork = try networkSer.isNetworkAvailable()
+            hasNetwork = try NetworkService.shared.isNetworkAvailable()
         } catch {
             
         }
@@ -78,14 +74,14 @@ class LoadingScreenViewController: UIViewController {
     func goToNextScreen() {
         if netWorkAvailable() {
             //Device has internet
-            print("Login credentials:", authSer.hasSavedLoginCredentials())
-            if authSer.hasSavedLoginCredentials(){
+            print("Login credentials:", AuthService.shared.hasSavedLoginCredentials())
+            if AuthService.shared.hasSavedLoginCredentials(){
                 //Has saved credentials
                 
                 var user: User?
                 
                 do {
-                    user = try authSer.authenticate(username: authSer.getSavedUsername(), password: authSer.getSavedPassword())
+                    user = try AuthService.shared.authenticate(username: AuthService.shared.getSavedUsername(), password: AuthService.shared.getSavedPassword())
                 } catch NetworkServiceErrors.valueisNil {
                     
                 } catch {
@@ -96,7 +92,7 @@ class LoadingScreenViewController: UIViewController {
                     self.present(LoginViewController(), animated: true, completion: nil)
                     return
                 } else {
-                    authSer.saveUserID(id: user!.id)
+                    AuthService.shared.saveUserID(id: user!.id)
                     self.present(HomeViewController(), animated: true, completion: nil)
                     
                 }
@@ -110,7 +106,7 @@ class LoadingScreenViewController: UIViewController {
         } else {
             //Has no network
             
-            if dataSer.hasDownloadedData() {
+            if DataService.shared.hasDownloadedData() {
                 //Has backup made
                 
                 let alertController = MDCAlertController(title: "Opa!", message: "Você está sem internet... mas possui um backup das tabelas! Gostaria de logar mesmo assim?")

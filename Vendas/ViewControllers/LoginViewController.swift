@@ -12,8 +12,6 @@ import MaterialComponents.MaterialButtons
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
-    let authService = AuthService()
-    
     let logoBackgroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -113,10 +111,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         do {
             
-            let newUser: User = try authService.authenticate(username: username, password: password)
+            let newUser: User = try AuthService.shared.authenticate(username: username, password: password)
             
-            authService.saveLoginCredentials(username: username, password: password)
-            authService.saveUserID(id: newUser.id)
+            AuthService.shared.saveLoginCredentials(username: username, password: password)
+            AuthService.shared.saveUserID(id: newUser.id)
             
             self.present(HomeViewController(), animated: true, completion: nil)
             
