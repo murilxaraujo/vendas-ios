@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = LoadingScreenViewController()
+        window?.rootViewController = HomeViewController()
         window?.makeKeyAndVisible()
         
         IQKeyboardManager.shared().isEnabled = true

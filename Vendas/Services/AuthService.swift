@@ -12,7 +12,7 @@ class AuthService {
     
     static let shared = AuthService()
     
-    let url: URL! = URL(string: "")
+    let url: URL! = URL(string: "www.google.com")
     
     let defaults = UserDefaults.standard
     
