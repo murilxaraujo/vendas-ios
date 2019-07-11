@@ -14,14 +14,6 @@ class AuthService {
     
     let defaults = UserDefaults.standard
     
-    enum LoginError: Error {
-        case userNotFound
-        case blockedUser
-        case notAttachedSeller
-        case wrongPassword
-        case networkError
-    }
-    
     func authenticate(username: String, password: String) throws -> User {
         let session = URLSession.shared
         let authenticatedUser: User?

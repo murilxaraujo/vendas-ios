@@ -12,10 +12,6 @@ import SystemConfiguration
 class NetworkService {
     let network: NetworkManager = NetworkManager.sharedInstance
     
-    enum NetworkServiceErrors: Error {
-        case valueisNil
-    }
-    
     func isNetworkAvailable() throws -> Bool {
         var value: Bool?
         
