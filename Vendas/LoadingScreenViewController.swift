@@ -8,11 +8,13 @@
 
 import UIKit
 import Lottie
+import MaterialComponents.MaterialDialogs
 
 class LoadingScreenViewController: UIViewController {
     
     let networkSer = NetworkService()
     let authSer = AuthService()
+    let dataSer = DataService()
     
     var animationView: AnimationView = {
         let av = AnimationView()
@@ -84,6 +86,8 @@ class LoadingScreenViewController: UIViewController {
                 
                 do {
                     user = try authSer.authenticate(username: authSer.getSavedUsername(), password: authSer.getSavedPassword())
+                } catch NetworkServiceErrors.valueisNil {
+                    
                 } catch {
                     
                 }
@@ -105,6 +109,23 @@ class LoadingScreenViewController: UIViewController {
             
         } else {
             //Has no network
+            
+            if dataSer.hasDownloadedData() {
+                //Has backup made
+                
+                let alertController = MDCAlertController(title: "Opa!", message: "Você está sem internet... mas possui um backup das tabelas! Gostaria de logar mesmo assim?")
+                let action = MDCAlertAction(title: "Entrar") { (action) in
+                    self.present(HomeViewController(), animated: true, completion: nil)
+                }
+                let actiontwo = MDCAlertAction(title: "Sair") { (action) in
+                    self.present(OfflineViewController(), animated: true, completion: nil)
+                }
+                alertController.addAction(action)
+                alertController.addAction(actiontwo)
+            } else {
+                //Hasn't backup made
+                self.present(OfflineViewController(), animated: true, completion: nil)
+            }
         }
     }
     
