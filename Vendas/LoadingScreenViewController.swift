@@ -54,25 +54,9 @@ class LoadingScreenViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         goToNextScreen()
     }
-
-    func netWorkAvailable() -> Bool {
-        var hasNetwork: Bool?
-        
-        do {
-            hasNetwork = try NetworkService.shared.isNetworkAvailable()
-        } catch {
-            
-        }
-        
-        if hasNetwork == nil {
-            return true
-        }
-        
-        return hasNetwork!
-    }
     
     func goToNextScreen() {
-        if netWorkAvailable() {
+        if NetworkService.shared.networkIsAvailable() {
             //Device has internet
             print("Login credentials:", AuthService.shared.hasSavedLoginCredentials())
             if AuthService.shared.hasSavedLoginCredentials(){
