@@ -37,4 +37,20 @@ class NetworkService {
         
         return value!
     }
+    
+    func networkIsAvailable() -> Bool {
+        var hasNetwork: Bool?
+        
+        do {
+            hasNetwork = try isNetworkAvailable()
+        } catch {
+            
+        }
+        
+        if hasNetwork == nil {
+            return true
+        }
+        
+        return hasNetwork!
+    }
 }
