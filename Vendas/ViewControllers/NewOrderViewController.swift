@@ -11,11 +11,14 @@ import MaterialComponents.MaterialButtons
 
 class NewOrderViewController: UIViewController {
 
+    //MARK: -Variables and constants
+    
+    let newOrderItem = NewOrder()
+    
     let label: UILabel = {
         let label = UILabel()
         label.text = "Selecione a filial"
         label.numberOfLines = 0
-        label.font = UIFont.boldSystemFont(ofSize: 34.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -24,7 +27,9 @@ class NewOrderViewController: UIViewController {
         let button = MDCButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Metalforte BR", for: .normal)
-        
+        button.backgroundColor = UIColor(red:0.25, green:0.32, blue:0.71, alpha:1.0)
+        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(brSelected(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -32,6 +37,9 @@ class NewOrderViewController: UIViewController {
         let button = MDCButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Metalforte Polo", for: .normal)
+        button.backgroundColor = UIColor(red:0.25, green:0.32, blue:0.71, alpha:1.0)
+        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(poloSelected(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -68,6 +76,20 @@ class NewOrderViewController: UIViewController {
     
     @objc func closeView(sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func poloSelected(_ sender: Any) {
+        let vc = NewOrderSecondViewController()
+        newOrderItem.filial = 1
+        vc.newOrderItem = newOrderItem
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func brSelected(_ sender: Any) {
+        let vc = NewOrderSecondViewController()
+        newOrderItem.filial = 2
+        vc.newOrderItem = newOrderItem
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

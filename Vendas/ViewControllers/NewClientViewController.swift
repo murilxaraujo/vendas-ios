@@ -9,6 +9,7 @@
 import UIKit
 import MaterialComponents.MDCTextInput
 import MaterialComponents.MDCNavigationBar
+import MaterialComponents.MaterialButtons
 
 class NewClientViewController: UIViewController {
     // MARK: - Variables and constants
@@ -108,6 +109,13 @@ class NewClientViewController: UIViewController {
         return input
     }()
     
+    let saveButton: MDCButton = {
+        let button = MDCButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Enviar", for: .normal)
+        return button
+    }()
+    
     let nomeTextFieldController: MDCTextInputControllerOutlined
     let nomeFantasiaTextFieldController: MDCTextInputControllerOutlined
     let cpfcnpjTextFieldController: MDCTextInputControllerOutlined
@@ -161,7 +169,7 @@ class NewClientViewController: UIViewController {
         scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height:850)
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: 900)
         
         scrollView.addSubview(companyNameInput)
         companyNameInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
@@ -212,9 +220,18 @@ class NewClientViewController: UIViewController {
         companyPhoneInput.topAnchor.constraint(equalTo: companyCityInput.bottomAnchor).isActive = true
         companyPhoneInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         companyPhoneInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        
+        scrollView.addSubview(saveButton)
+        saveButton.topAnchor.constraint(equalTo: companyPhoneInput.bottomAnchor, constant: 20).isActive = true
+        saveButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        
     }
     
     @objc func closeView(sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func saveInfo() {
+        //DataService.shared.saveNewClient(client: <#T##NewClient#>)
     }
 }
