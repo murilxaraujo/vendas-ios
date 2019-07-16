@@ -18,6 +18,15 @@ class HomeViewController: UIViewController {
         return view
     }()
     
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Metalforte"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 34.0)
+        return label
+    }()
+    
     let newClientButton: MDCButton = {
         let button = MDCButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -79,6 +88,10 @@ class HomeViewController: UIViewController {
         topView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         topView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
+        topView.addSubview(titleLabel)
+        titleLabel.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: topView.bottomAnchor, constant: -20).isActive = true
+        
         self.view.addSubview(newClientButton)
         newClientButton.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 20).isActive = true
         newClientButton.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
@@ -96,10 +109,12 @@ class HomeViewController: UIViewController {
         downloadDataButton.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         downloadDataButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         downloadDataButton.addTarget(self, action: #selector(dataLocalBackup(sender:)), for: .touchUpInside)
+        downloadDataButton.isEnabled = false
         
         self.topView.addSubview(syncDataButton)
         syncDataButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         syncDataButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        syncDataButton.isEnabled = false
     }
     
     @objc func newOrder(sender: Any) {
