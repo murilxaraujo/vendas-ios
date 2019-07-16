@@ -15,7 +15,7 @@ class RealmService {
     
     var realm = try! Realm()
     
-    func create<T: Object>(_ object: T) {
+    func save<T: Object>(_ object: T) {
         do {
             try realm.write {
                 realm.add(object)
