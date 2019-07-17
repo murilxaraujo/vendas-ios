@@ -380,6 +380,9 @@ class NewOrderSecondViewController: UIViewController {
         cepTextInput.topAnchor.constraint(equalTo: pesoBrutoTextInput.bottomAnchor, constant: 20).isActive = true
         cepTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         cepTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        
+        let nextButton = UIBarButtonItem(title: "Próximo", style: .plain, target: self, action: #selector(nextPage(_:)))
+        self.navigationItem.rightBarButtonItem = nextButton
     }
     
     func onClientSelected(_ client: Client) {
@@ -396,6 +399,13 @@ class NewOrderSecondViewController: UIViewController {
     
     fileprivate func fillInfoWithClientDetais(_ client: Client) {
         
+    }
+    
+    @objc fileprivate func nextPage(_ sender: Any) {
+        let vc = NewOrderThirdViewController()
+        vc.previousVC = self
+        vc.newOrderItem = newOrderItem
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }
