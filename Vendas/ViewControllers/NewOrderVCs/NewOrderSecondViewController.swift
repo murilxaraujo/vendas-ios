@@ -125,6 +125,8 @@ class NewOrderSecondViewController: UIViewController {
     
     let transportadoraTextInput: MDCTextField = {
         let input = MDCTextField()
+        input.translatesAutoresizingMaskIntoConstraints = false
+        input.placeholder = "Transportadora"
         return input
     }()
     
@@ -262,7 +264,7 @@ class NewOrderSecondViewController: UIViewController {
         scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height: 800)
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: 1900)
         scrollView.backgroundColor = .white
 
         let textFieldButton = UIButton(type: .custom)
@@ -277,107 +279,107 @@ class NewOrderSecondViewController: UIViewController {
         clientTextInput.rightViewMode = .always
         
         scrollView.addSubview(lojaTextInput)
-        lojaTextInput.topAnchor.constraint(equalTo: clientTextInput.bottomAnchor, constant: 20).isActive = true
+        lojaTextInput.topAnchor.constraint(equalTo: clientTextInput.bottomAnchor, constant: 0).isActive = true
         lojaTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         lojaTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(clienteDeEntregaTextInput)
-        clienteDeEntregaTextInput.topAnchor.constraint(equalTo: lojaTextInput.bottomAnchor, constant: 20).isActive = true
+        clienteDeEntregaTextInput.topAnchor.constraint(equalTo: lojaTextInput.bottomAnchor, constant: 0).isActive = true
         clienteDeEntregaTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         clienteDeEntregaTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(clientNameTextInput)
-        clientNameTextInput.topAnchor.constraint(equalTo: clienteDeEntregaTextInput.bottomAnchor, constant: 20).isActive = true
+        clientNameTextInput.topAnchor.constraint(equalTo: clienteDeEntregaTextInput.bottomAnchor, constant: 0).isActive = true
         clientNameTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         clientNameTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(pvVinculadoTextInput)
-        pvVinculadoTextInput.topAnchor.constraint(equalTo: clientNameTextInput.bottomAnchor, constant: 20).isActive = true
+        pvVinculadoTextInput.topAnchor.constraint(equalTo: clientNameTextInput.bottomAnchor, constant: 0).isActive = true
         pvVinculadoTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         pvVinculadoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(avalistaTextInput)
-        avalistaTextInput.topAnchor.constraint(equalTo: pvVinculadoTextInput.bottomAnchor, constant: 20).isActive = true
+        avalistaTextInput.topAnchor.constraint(equalTo: pvVinculadoTextInput.bottomAnchor, constant: 0).isActive = true
         avalistaTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         avalistaTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(lojaAvalistaTextInput)
-        lojaAvalistaTextInput.topAnchor.constraint(equalTo: avalistaTextInput.bottomAnchor, constant: 20).isActive = true
+        lojaAvalistaTextInput.topAnchor.constraint(equalTo: avalistaTextInput.bottomAnchor, constant: 0).isActive = true
         lojaAvalistaTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         lojaAvalistaTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(kitTextInput)
-        kitTextInput.topAnchor.constraint(equalTo: lojaAvalistaTextInput.bottomAnchor, constant: 20).isActive = true
+        kitTextInput.topAnchor.constraint(equalTo: lojaAvalistaTextInput.bottomAnchor, constant: 0).isActive = true
         kitTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         kitTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(tipoDeClienteTextInput)
-        tipoDeClienteTextInput.topAnchor.constraint(equalTo: kitTextInput.bottomAnchor, constant: 20).isActive = true
+        tipoDeClienteTextInput.topAnchor.constraint(equalTo: kitTextInput.bottomAnchor, constant: 0).isActive = true
         tipoDeClienteTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         tipoDeClienteTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(expressTextInput)
-        expressTextInput.topAnchor.constraint(equalTo: tipoDeClienteTextInput.bottomAnchor, constant: 20).isActive = true
+        expressTextInput.topAnchor.constraint(equalTo: tipoDeClienteTextInput.bottomAnchor, constant: 0).isActive = true
         expressTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         expressTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(unidadeDeMedidaTextInput)
-        unidadeDeMedidaTextInput.topAnchor.constraint(equalTo: expressTextInput.bottomAnchor, constant: 20).isActive = true
+        unidadeDeMedidaTextInput.topAnchor.constraint(equalTo: expressTextInput.bottomAnchor, constant: 0).isActive = true
         unidadeDeMedidaTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         unidadeDeMedidaTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(tipodeFreteTextInput)
-        tipodeFreteTextInput.topAnchor.constraint(equalTo: unidadeDeMedidaTextInput.bottomAnchor, constant: 20).isActive = true
+        tipodeFreteTextInput.topAnchor.constraint(equalTo: unidadeDeMedidaTextInput.bottomAnchor, constant: 0).isActive = true
         tipodeFreteTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         tipodeFreteTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(transportadoraTextInput)
-        transportadoraTextInput.topAnchor.constraint(equalTo: tipodeFreteTextInput.bottomAnchor, constant: 20).isActive = true
+        transportadoraTextInput.topAnchor.constraint(equalTo: tipodeFreteTextInput.bottomAnchor, constant: 0).isActive = true
         transportadoraTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         transportadoraTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(condicaoDePagamentoTextInput)
-        condicaoDePagamentoTextInput.topAnchor.constraint(equalTo: transportadoraTextInput.bottomAnchor, constant: 20).isActive = true
+        condicaoDePagamentoTextInput.topAnchor.constraint(equalTo: transportadoraTextInput.bottomAnchor, constant: 0).isActive = true
         condicaoDePagamentoTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         condicaoDePagamentoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(descDasCondicoesDePagamentoTextInput)
-        descDasCondicoesDePagamentoTextInput.topAnchor.constraint(equalTo: condicaoDePagamentoTextInput.bottomAnchor, constant: 20).isActive = true
+        descDasCondicoesDePagamentoTextInput.topAnchor.constraint(equalTo: condicaoDePagamentoTextInput.bottomAnchor, constant: 0).isActive = true
         descDasCondicoesDePagamentoTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         descDasCondicoesDePagamentoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(regraDeDescontoTextInput)
-        regraDeDescontoTextInput.topAnchor.constraint(equalTo: descDasCondicoesDePagamentoTextInput.bottomAnchor, constant: 20).isActive = true
+        regraDeDescontoTextInput.topAnchor.constraint(equalTo: descDasCondicoesDePagamentoTextInput.bottomAnchor, constant: 0).isActive = true
         regraDeDescontoTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         regraDeDescontoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(descontoTextInput)
-        descontoTextInput.topAnchor.constraint(equalTo: regraDeDescontoTextInput.bottomAnchor, constant: 20).isActive = true
+        descontoTextInput.topAnchor.constraint(equalTo: regraDeDescontoTextInput.bottomAnchor, constant: 0).isActive = true
         descontoTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         descontoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(contratoTextInput)
-        contratoTextInput.topAnchor.constraint(equalTo: descontoTextInput.bottomAnchor, constant: 20).isActive = true
+        contratoTextInput.topAnchor.constraint(equalTo: descontoTextInput.bottomAnchor, constant: 0).isActive = true
         contratoTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         contratoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(observacaoTextInput)
-        observacaoTextInput.topAnchor.constraint(equalTo: contratoTextInput.bottomAnchor, constant: 20).isActive = true
+        observacaoTextInput.topAnchor.constraint(equalTo: contratoTextInput.bottomAnchor, constant: 0).isActive = true
         observacaoTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         observacaoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
     
         scrollView.addSubview(pesoLiquidoTextInput)
-        pesoLiquidoTextInput.topAnchor.constraint(equalTo: observacaoTextInput.bottomAnchor, constant: 20).isActive = true
+        pesoLiquidoTextInput.topAnchor.constraint(equalTo: observacaoTextInput.bottomAnchor, constant: 0).isActive = true
         pesoLiquidoTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         pesoLiquidoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(pesoBrutoTextInput)
-        pesoBrutoTextInput.topAnchor.constraint(equalTo: pesoLiquidoTextInput.bottomAnchor, constant: 20).isActive = true
+        pesoBrutoTextInput.topAnchor.constraint(equalTo: pesoLiquidoTextInput.bottomAnchor, constant: 0).isActive = true
         pesoBrutoTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         pesoBrutoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
     
         scrollView.addSubview(cepTextInput)
-        cepTextInput.topAnchor.constraint(equalTo: pesoBrutoTextInput.bottomAnchor, constant: 20).isActive = true
+        cepTextInput.topAnchor.constraint(equalTo: pesoBrutoTextInput.bottomAnchor, constant: 0).isActive = true
         cepTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         cepTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
