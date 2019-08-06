@@ -11,6 +11,8 @@ import MaterialComponents.MaterialButtons
 
 class HomeViewController: UIViewController {
     
+    // MARK: - View elements
+    
     let topView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -72,12 +74,20 @@ class HomeViewController: UIViewController {
         button.setImageTintColor(UIColor(red:0.25, green:0.32, blue:0.71, alpha:1.0), for: .normal)
         return button
     }()
+    
+    // MARK: - Class routine functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupViewElements()
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+            return .lightContent
+        }
+    
+    // MARK: - Methods
     
     func setupViewElements() {
         self.view.backgroundColor = .white
@@ -124,15 +134,11 @@ class HomeViewController: UIViewController {
     
     @objc func newClient(sender: Any) {
         let vc = UINavigationController(rootViewController: NewClientViewController())
-        self.show(vc, sender: nil)
+        self.present(vc, animated: true, completion: nil)
     }
 
     @objc func dataLocalBackup(sender: Any) {
         self.show(BackupDataDownloadViewController(), sender: nil)
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-
 }

@@ -11,6 +11,8 @@ import Lottie
 
 class OfflineViewController: UIViewController {
     
+    // MARK: - View elements
+    
     let animationView: AnimationView = {
         let animation = AnimationView()
         animation.translatesAutoresizingMaskIntoConstraints = false
@@ -26,12 +28,16 @@ class OfflineViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    // MARK: - Class routine functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
        setupViewElements()
     }
+    
+    // MARK: - Methods
     
     func setupViewElements() {
         self.view.backgroundColor = .white
