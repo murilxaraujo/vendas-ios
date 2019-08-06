@@ -53,7 +53,6 @@ class NewOrderViewController: UIViewController {
         
         self.view.backgroundColor = .white
         self.navigationItem.title = "Novo pedido"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
         let backbutton = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(closeView(sender:)))
         self.navigationItem.setLeftBarButton(backbutton, animated: true)
         

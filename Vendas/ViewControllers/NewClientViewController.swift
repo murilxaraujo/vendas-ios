@@ -158,7 +158,7 @@ class NewClientViewController: UIViewController {
 
     func setupViewElements() {
         self.navigationItem.title = "Cadastrar cliente"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+
         let backbutton = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(closeView(sender:)))
         self.navigationItem.setLeftBarButton(backbutton, animated: true)
         
@@ -169,7 +169,7 @@ class NewClientViewController: UIViewController {
         scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height: 900)
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: 950)
         
         scrollView.addSubview(companyNameInput)
         companyNameInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
