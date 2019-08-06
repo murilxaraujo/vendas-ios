@@ -8,6 +8,8 @@
 
 import Foundation
 import RealmSwift
+import Alamofire
+import SwiftyJSON
 
 class DataService {
     
@@ -57,6 +59,17 @@ class DataService {
     }
     
     fileprivate func getClientsFromCloud() -> [Client] {
+        let url = URL(string: "189.112.124.67:8013/REST/clientes_pv")
+        Alamofire.request(url!, method: HTTPMethod.get).responseJSON { (response) in
+            if let data = response.data {
+                let json = try! JSON(data: data)
+                
+                
+                
+            }
+            
+        }
+        
         return [Client()]
     }
     
