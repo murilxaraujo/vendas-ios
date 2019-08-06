@@ -23,8 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = HomeViewController()
         window?.makeKeyAndVisible()
-        
+        window?.backgroundColor = .white
         IQKeyboardManager.shared().isEnabled = true
+        
          
         return true
     }
