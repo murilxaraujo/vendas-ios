@@ -45,6 +45,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.2.1):
     - GoogleUtilities/Logger
+  - HandyJSON (5.0.0)
   - IQKeyboardManager (6.4.0)
   - lottie-ios (3.1.1)
   - MaterialComponents (85.1.0):
@@ -639,6 +640,15 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - PromiseKit (6.10.0):
+    - PromiseKit/CorePromise (= 6.10.0)
+    - PromiseKit/Foundation (= 6.10.0)
+    - PromiseKit/UIKit (= 6.10.0)
+  - PromiseKit/CorePromise (6.10.0)
+  - PromiseKit/Foundation (6.10.0):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.10.0):
+    - PromiseKit/CorePromise
   - Realm (3.17.0):
     - Realm/Headers (= 3.17.0)
   - Realm/Headers (3.17.0)
@@ -649,9 +659,11 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Firebase/Core
+  - HandyJSON
   - IQKeyboardManager
   - lottie-ios
   - MaterialComponents
+  - PromiseKit
   - RealmSwift
   - SwiftyJSON
 
@@ -664,6 +676,7 @@ SPEC REPOS:
     - FirebaseInstanceID
     - GoogleAppMeasurement
     - GoogleUtilities
+    - HandyJSON
     - IQKeyboardManager
     - lottie-ios
     - MaterialComponents
@@ -673,6 +686,7 @@ SPEC REPOS:
     - MotionInterchange
     - MotionTransitioning
     - nanopb
+    - PromiseKit
     - Realm
     - RealmSwift
     - SwiftyJSON
@@ -685,6 +699,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: f20243a1d828e0e9a3798b995174dedc16f1b32a
   GoogleAppMeasurement: a35a645835bae31b6bdc0576396bc23908f12a22
   GoogleUtilities: c7a0b08bda3bf808be823ed151f0e28ac6866e71
+  HandyJSON: 992f2d661716d6a91de82d0056927bc7813b5770
   IQKeyboardManager: fcef267266379c003181fc3592f6bdb8bf4db839
   lottie-ios: 43a472d22b2dd2bed292cc4010c0b4d2e66d3ba8
   MaterialComponents: 7401c9849f9860a214f35453e040dc17502e8b6f
@@ -694,10 +709,11 @@ SPEC CHECKSUMS:
   MotionInterchange: ead0e3ae1f3a5fb539e289debbc7ae036160a10d
   MotionTransitioning: 23d25edc2f4606efb922403cbac6d81af37aa33a
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  PromiseKit: 1fdaeb6c0a94a5114fcb814ff3d772b86886ad4e
   Realm: b30db41ff34fc858ffc25ba8d44a82c164e7ccd0
   RealmSwift: fe733e459d60dc7b6971d4cbee2eb4854097d12c
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: f6d084cfcb047a2db84fc940f7df26b5e2a78d89
+PODFILE CHECKSUM: 4fd4b9ebc8fe3547be161375caafc834a89c5b1b
 
 COCOAPODS: 1.7.3

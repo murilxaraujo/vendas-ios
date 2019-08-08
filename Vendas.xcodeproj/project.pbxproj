@@ -35,6 +35,7 @@
 		4B831B6222DD147F009D390D /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B831B6122DD147F009D390D /* Client.swift */; };
 		4B831B6422DD184B009D390D /* NewOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B831B6322DD184B009D390D /* NewOrder.swift */; };
 		4B8AE69122D6605D006E1AD7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AE69022D6605D006E1AD7 /* NetworkManager.swift */; };
+		4BAF9F3222FC88A600C30739 /* Produto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAF9F3122FC88A600C30739 /* Produto.swift */; };
 		4BB72FD922CBB0D000058239 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BB72FD822CBB0D000058239 /* GoogleService-Info.plist */; };
 		4BB72FDD22CBCF8400058239 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB72FDC22CBCF8400058239 /* RealmService.swift */; };
 		4BBA3C8522CD2B6800D4D49B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBA3C8422CD2B6800D4D49B /* NetworkService.swift */; };
@@ -98,6 +99,7 @@
 		4B831B6122DD147F009D390D /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		4B831B6322DD184B009D390D /* NewOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrder.swift; sourceTree = "<group>"; };
 		4B8AE69022D6605D006E1AD7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		4BAF9F3122FC88A600C30739 /* Produto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Produto.swift; sourceTree = "<group>"; };
 		4BB72FD822CBB0D000058239 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4BB72FDC22CBCF8400058239 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		4BBA3C8422CD2B6800D4D49B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				4B69B41322D8C98800F367C7 /* NewClient.swift */,
 				4B831B6122DD147F009D390D /* Client.swift */,
 				4B831B6322DD184B009D390D /* NewOrder.swift */,
+				4BAF9F3122FC88A600C30739 /* Produto.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 				4B8AE69122D6605D006E1AD7 /* NetworkManager.swift in Sources */,
 				4B6FA6C922CFD00C00138303 /* LoginViewController.swift in Sources */,
 				4B7B02E122D3C3A400408443 /* NewOrderThirdViewController.swift in Sources */,
+				4BAF9F3222FC88A600C30739 /* Produto.swift in Sources */,
 				4B69B41422D8C98800F367C7 /* NewClient.swift in Sources */,
 				4B1BE6E522D77E440043F5E0 /* OfflineViewController.swift in Sources */,
 				4B1BE6EB22D78D340043F5E0 /* Enums.swift in Sources */,

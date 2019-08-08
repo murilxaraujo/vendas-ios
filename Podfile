@@ -14,7 +14,9 @@ target 'Vendas' do
   pod 'IQKeyboardManager'
   pod 'Alamofire'
   pod 'SwiftyJSON'
-
+  pod 'HandyJSON'
+  pod 'PromiseKit'
+  
   target 'VendasTests' do
     inherit! :search_paths
     # Pods for testing
