@@ -10,6 +10,8 @@ import Foundation
 import RealmSwift
 import Alamofire
 import SwiftyJSON
+import HandyJSON
+import PromiseKit
 
 class DataService {
     
@@ -62,20 +64,27 @@ class DataService {
         let url = URL(string: "189.112.124.67:8013/REST/clientes_pv")
         Alamofire.request(url!, method: HTTPMethod.get).responseJSON { (response) in
             if let data = response.data {
-                let json = try! JSON(data: data)
                 
-                
+                if let object = clientsJsonBasicTypes.deserialize(from: String(data: data, encoding: .utf8)) {
+                    
+                }
                 
             }
             
         }
         
-        return [Client()]
+        return []
     }
     
     fileprivate func getClientsFromRealDB() -> [Client] {
         let clients = realm.objects(Client.self)
         return Array(clients.sorted(byKeyPath: "name"))
+    }
+    
+    // MARK: - Support Classes
+    
+    struct clientsJsonBasicTypes: HandyJSON {
+        var nome: String = ""
     }
     
 }
