@@ -389,7 +389,7 @@ class NewOrderSecondViewController: UIViewController {
     
     func onClientSelected(_ client: Client) {
         newOrderItem?.client = client
-        clientTextInput.text = client.name
+        clientTextInput.text = client.Nome
         fillInfoWithClientDetais(client)
     }
     
