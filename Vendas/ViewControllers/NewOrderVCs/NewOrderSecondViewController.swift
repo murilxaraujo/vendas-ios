@@ -16,6 +16,9 @@ class NewOrderSecondViewController: UIViewController {
 
     var newOrderItem: NewOrder?
     
+    let unidadeDeMedidas = ["Kg", "Peça"]
+    let tiposDeFrete = ["CIF", "FOB"]
+    
     // MARK: - View elements
     
     let scrollView: UIScrollView = {
@@ -74,52 +77,31 @@ class NewOrderSecondViewController: UIViewController {
         return input
     }()
     
-    let avalistaTextInput: MDCTextField = {
-        let input = MDCTextField()
-        input.placeholder = "Avalista"
+    let kitSwitch: UISwitch = {
+        let input = UISwitch()
         input.translatesAutoresizingMaskIntoConstraints = false
+        input.isOn = true
         return input
     }()
     
-    let lojaAvalistaTextInput: MDCTextField = {
-        let input = MDCTextField()
+    let expressSwitch: UISwitch = {
+        let input = UISwitch()
         input.translatesAutoresizingMaskIntoConstraints = false
-        input.placeholder = "Loja Avalista"
+        input.addTarget(self, action: #selector(expressValueChanged(_:)), for: .valueChanged);
         return input
     }()
     
-    let kitTextInput: MDCTextField = {
-        let input = MDCTextField()
+    let unidadeDeMedidaSegmentedControl: UISegmentedControl = {
+        let input = UISegmentedControl(items: ["Kg", "Peça"])
         input.translatesAutoresizingMaskIntoConstraints = false
-        input.placeholder = "Kit"
+        input.addTarget(self, action: #selector(unidadeDeMedidaChangedValue(_:)), for: .valueChanged)
         return input
     }()
     
-    let tipoDeClienteTextInput: MDCTextField = {
-        let input = MDCTextField()
+    let tipodeFreteSegmentedControl: UISegmentedControl = {
+        let input = UISegmentedControl(items: ["CIF", "FOB"])
         input.translatesAutoresizingMaskIntoConstraints = false
-        input.placeholder = "Tipo de cliente"
-        return input
-    }()
-    
-    let expressTextInput: MDCTextField = {
-        let input = MDCTextField()
-        input.translatesAutoresizingMaskIntoConstraints = false
-        input.placeholder = "Express"
-        return input
-    }()
-    
-    let unidadeDeMedidaTextInput: MDCTextField = {
-        let input = MDCTextField()
-        input.translatesAutoresizingMaskIntoConstraints = false
-        input.placeholder = "Unidade de medida"
-        return input
-    }()
-    
-    let tipodeFreteTextInput: MDCTextField = {
-        let input = MDCTextField()
-        input.translatesAutoresizingMaskIntoConstraints = false
-        input.placeholder = "Tipo de frete"
+        input.addTarget(self, action: #selector(tipoDeFreteChangedValue(_:)), for: .valueChanged)
         return input
     }()
     
@@ -158,13 +140,6 @@ class NewOrderSecondViewController: UIViewController {
         return input
     }()
     
-    let contratoTextInput: MDCTextField = {
-        let input = MDCTextField()
-        input.translatesAutoresizingMaskIntoConstraints = false
-        input.placeholder = "Contrato"
-        return input
-    }()
-    
     let observacaoTextInput: MDCTextField = {
         let input = MDCTextField()
         input.translatesAutoresizingMaskIntoConstraints = false
@@ -176,6 +151,7 @@ class NewOrderSecondViewController: UIViewController {
         let input = MDCTextField()
         input.translatesAutoresizingMaskIntoConstraints = false
         input.placeholder = "Peso líquido"
+        input.isEnabled = false
         return input
     }()
     
@@ -183,13 +159,7 @@ class NewOrderSecondViewController: UIViewController {
         let input = MDCTextField()
         input.translatesAutoresizingMaskIntoConstraints = false
         input.placeholder = "Peso bruto"
-        return input
-    }()
-    
-    let cepTextInput: MDCTextField = {
-        let input = MDCTextField()
-        input.translatesAutoresizingMaskIntoConstraints = false
-        input.placeholder = "CEP"
+        input.isEnabled = false
         return input
     }()
     
@@ -198,23 +168,14 @@ class NewOrderSecondViewController: UIViewController {
     let clienteDeEntregaTextInputController: MDCTextInputControllerOutlined!
     let clientNameTextInputController: MDCTextInputControllerOutlined!
     let pvVinculadoTextInputController: MDCTextInputControllerOutlined!
-    let avalistaTextInputController: MDCTextInputControllerOutlined!
-    let lojaAvalistaTextInputController: MDCTextInputControllerOutlined!
-    let kitTextInputController: MDCTextInputControllerOutlined!
-    let tipoDeClienteTextInputController: MDCTextInputControllerOutlined!
-    let expressTextInputController: MDCTextInputControllerOutlined!
-    let unidadeDeMedidaTextInputController: MDCTextInputControllerOutlined!
-    let tipoDeFreteTextInputController: MDCTextInputControllerOutlined!
     let transportadoraTextInputController: MDCTextInputControllerOutlined!
     let condicaoDePagamentoTextInputController: MDCTextInputControllerOutlined!
     let descDasCondicoesDePagamentoTextInputController: MDCTextInputControllerOutlined!
     let regraDeDescontoTextInputController: MDCTextInputControllerOutlined!
     let descontoTextInputController: MDCTextInputControllerOutlined!
-    let contratoTextInputController: MDCTextInputControllerOutlined!
     let observacaoTextInputController: MDCTextInputControllerOutlined!
     let pesoLiquidoTextInputController: MDCTextInputControllerOutlined!
     let pesoBrutoTextInputController: MDCTextInputControllerOutlined!
-    let cepTextInputController: MDCTextInputControllerOutlined!
     // MARK: - Class routine functions
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -223,23 +184,14 @@ class NewOrderSecondViewController: UIViewController {
         clienteDeEntregaTextInputController = MDCTextInputControllerOutlined(textInput: clienteDeEntregaTextInput)
         clientNameTextInputController = MDCTextInputControllerOutlined(textInput: clientNameTextInput)
         pvVinculadoTextInputController = MDCTextInputControllerOutlined(textInput: pvVinculadoTextInput)
-        avalistaTextInputController = MDCTextInputControllerOutlined(textInput: avalistaTextInput)
-        lojaAvalistaTextInputController = MDCTextInputControllerOutlined(textInput: lojaAvalistaTextInput)
-        kitTextInputController = MDCTextInputControllerOutlined(textInput: kitTextInput)
-        tipoDeClienteTextInputController = MDCTextInputControllerOutlined(textInput: tipoDeClienteTextInput)
-        expressTextInputController = MDCTextInputControllerOutlined(textInput: expressTextInput)
-        unidadeDeMedidaTextInputController = MDCTextInputControllerOutlined(textInput: unidadeDeMedidaTextInput)
-        tipoDeFreteTextInputController = MDCTextInputControllerOutlined(textInput: tipodeFreteTextInput)
         transportadoraTextInputController = MDCTextInputControllerOutlined(textInput: transportadoraTextInput)
         condicaoDePagamentoTextInputController = MDCTextInputControllerOutlined(textInput: condicaoDePagamentoTextInput)
         descDasCondicoesDePagamentoTextInputController = MDCTextInputControllerOutlined(textInput: descDasCondicoesDePagamentoTextInput)
         regraDeDescontoTextInputController = MDCTextInputControllerOutlined(textInput: regraDeDescontoTextInput)
         descontoTextInputController = MDCTextInputControllerOutlined(textInput: descontoTextInput)
-        contratoTextInputController = MDCTextInputControllerOutlined(textInput: contratoTextInput)
         observacaoTextInputController = MDCTextInputControllerOutlined(textInput: observacaoTextInput)
         pesoLiquidoTextInputController = MDCTextInputControllerOutlined(textInput: pesoLiquidoTextInput)
         pesoBrutoTextInputController = MDCTextInputControllerOutlined(textInput: pesoBrutoTextInput)
-        cepTextInputController = MDCTextInputControllerOutlined(textInput: cepTextInput)
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
@@ -264,7 +216,7 @@ class NewOrderSecondViewController: UIViewController {
         scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height: 1900)
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: 1300)
         scrollView.backgroundColor = .white
 
         let textFieldButton = UIButton(type: .custom)
@@ -298,43 +250,70 @@ class NewOrderSecondViewController: UIViewController {
         pvVinculadoTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         pvVinculadoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
-        scrollView.addSubview(avalistaTextInput)
-        avalistaTextInput.topAnchor.constraint(equalTo: pvVinculadoTextInput.bottomAnchor, constant: 0).isActive = true
-        avalistaTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
-        avalistaTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        scrollView.addSubview(kitSwitch)
+        kitSwitch.topAnchor.constraint(equalTo: pvVinculadoTextInput.bottomAnchor, constant: 0).isActive = true
+        kitSwitch.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
-        scrollView.addSubview(lojaAvalistaTextInput)
-        lojaAvalistaTextInput.topAnchor.constraint(equalTo: avalistaTextInput.bottomAnchor, constant: 0).isActive = true
-        lojaAvalistaTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
-        lojaAvalistaTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        let kitSwitchLabel: UILabel = {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.text = "Kit"
+            return label
+        }()
         
-        scrollView.addSubview(kitTextInput)
-        kitTextInput.topAnchor.constraint(equalTo: lojaAvalistaTextInput.bottomAnchor, constant: 0).isActive = true
-        kitTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
-        kitTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        scrollView.addSubview(kitSwitchLabel)
+        kitSwitchLabel.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor,constant: 20).isActive = true
+        kitSwitchLabel.centerYAnchor.constraint(equalTo: kitSwitch.centerYAnchor).isActive = true
+        kitSwitchLabel.rightAnchor.constraint(equalTo: kitSwitch.leftAnchor, constant: -20).isActive = true
         
-        scrollView.addSubview(tipoDeClienteTextInput)
-        tipoDeClienteTextInput.topAnchor.constraint(equalTo: kitTextInput.bottomAnchor, constant: 0).isActive = true
-        tipoDeClienteTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
-        tipoDeClienteTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
-        scrollView.addSubview(expressTextInput)
-        expressTextInput.topAnchor.constraint(equalTo: tipoDeClienteTextInput.bottomAnchor, constant: 0).isActive = true
-        expressTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
-        expressTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        scrollView.addSubview(expressSwitch)
+        expressSwitch.topAnchor.constraint(equalTo: kitSwitch.bottomAnchor, constant: 20).isActive = true
+        expressSwitch.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
-        scrollView.addSubview(unidadeDeMedidaTextInput)
-        unidadeDeMedidaTextInput.topAnchor.constraint(equalTo: expressTextInput.bottomAnchor, constant: 0).isActive = true
-        unidadeDeMedidaTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
-        unidadeDeMedidaTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        let expressSwitchLabel: UILabel = {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.text = "Express"
+            return label
+        }()
         
-        scrollView.addSubview(tipodeFreteTextInput)
-        tipodeFreteTextInput.topAnchor.constraint(equalTo: unidadeDeMedidaTextInput.bottomAnchor, constant: 0).isActive = true
-        tipodeFreteTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
-        tipodeFreteTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        scrollView.addSubview(expressSwitchLabel)
+        expressSwitchLabel.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
+        expressSwitchLabel.centerYAnchor.constraint(equalTo: expressSwitch.centerYAnchor).isActive = true
+        
+        scrollView.addSubview(unidadeDeMedidaSegmentedControl)
+        unidadeDeMedidaSegmentedControl.topAnchor.constraint(equalTo: expressSwitch.bottomAnchor, constant: 20).isActive = true
+        unidadeDeMedidaSegmentedControl.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        
+        let unidadeDeMedidaSegmentedControlLabel: UILabel = {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.text = "Unidade de medida"
+            return label
+        }()
+        
+        scrollView.addSubview(unidadeDeMedidaSegmentedControlLabel)
+        unidadeDeMedidaSegmentedControlLabel.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
+        unidadeDeMedidaSegmentedControlLabel.centerYAnchor.constraint(equalTo: unidadeDeMedidaSegmentedControl.centerYAnchor).isActive = true
+        
+        scrollView.addSubview(tipodeFreteSegmentedControl)
+        tipodeFreteSegmentedControl.topAnchor.constraint(equalTo: unidadeDeMedidaSegmentedControl.bottomAnchor, constant: 20).isActive = true
+        tipodeFreteSegmentedControl.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        
+        let tipodeFreteSegmentedControlLabel: UILabel = {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.text = "Tipo de frete"
+            return label
+        }()
+        
+        scrollView.addSubview(tipodeFreteSegmentedControlLabel)
+        tipodeFreteSegmentedControlLabel.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
+        tipodeFreteSegmentedControlLabel.centerYAnchor.constraint(equalTo: tipodeFreteSegmentedControl.centerYAnchor).isActive = true
         
         scrollView.addSubview(transportadoraTextInput)
-        transportadoraTextInput.topAnchor.constraint(equalTo: tipodeFreteTextInput.bottomAnchor, constant: 0).isActive = true
+        transportadoraTextInput.topAnchor.constraint(equalTo: tipodeFreteSegmentedControl.bottomAnchor, constant: 20).isActive = true
         transportadoraTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         transportadoraTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
@@ -358,13 +337,8 @@ class NewOrderSecondViewController: UIViewController {
         descontoTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         descontoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
-        scrollView.addSubview(contratoTextInput)
-        contratoTextInput.topAnchor.constraint(equalTo: descontoTextInput.bottomAnchor, constant: 0).isActive = true
-        contratoTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
-        contratoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
-        
         scrollView.addSubview(observacaoTextInput)
-        observacaoTextInput.topAnchor.constraint(equalTo: contratoTextInput.bottomAnchor, constant: 0).isActive = true
+        observacaoTextInput.topAnchor.constraint(equalTo: descontoTextInput.bottomAnchor, constant: 0).isActive = true
         observacaoTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         observacaoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
     
@@ -377,11 +351,6 @@ class NewOrderSecondViewController: UIViewController {
         pesoBrutoTextInput.topAnchor.constraint(equalTo: pesoLiquidoTextInput.bottomAnchor, constant: 0).isActive = true
         pesoBrutoTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         pesoBrutoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
-    
-        scrollView.addSubview(cepTextInput)
-        cepTextInput.topAnchor.constraint(equalTo: pesoBrutoTextInput.bottomAnchor, constant: 0).isActive = true
-        cepTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
-        cepTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         let nextButton = UIBarButtonItem(title: "Próximo", style: .plain, target: self, action: #selector(nextPage(_:)))
         self.navigationItem.rightBarButtonItem = nextButton
@@ -408,6 +377,22 @@ class NewOrderSecondViewController: UIViewController {
         vc.previousVC = self
         vc.newOrderItem = newOrderItem
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func expressValueChanged(_ sender: UISwitch) {
+        if (sender.isOn) {
+            unidadeDeMedidaSegmentedControl.selectedSegmentIndex = 1
+        }
+    }
+    
+    //MARK: - Segmented controls targets
+    
+    @objc func unidadeDeMedidaChangedValue(_ sender: UISegmentedControl) {
+        
+    }
+    
+    @objc func tipoDeFreteChangedValue(_ sender: UISegmentedControl) {
+        
     }
     
 }
