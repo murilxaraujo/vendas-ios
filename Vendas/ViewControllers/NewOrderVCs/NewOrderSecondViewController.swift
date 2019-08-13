@@ -382,6 +382,9 @@ class NewOrderSecondViewController: UIViewController {
     @objc func expressValueChanged(_ sender: UISwitch) {
         if (sender.isOn) {
             unidadeDeMedidaSegmentedControl.selectedSegmentIndex = 1
+            unidadeDeMedidaSegmentedControl.setEnabled(false, forSegmentAt: 0)
+        } else {
+            unidadeDeMedidaSegmentedControl.setEnabled(true, forSegmentAt: 0)
         }
     }
     

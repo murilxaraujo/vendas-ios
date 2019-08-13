@@ -84,8 +84,8 @@ class HomeViewController: UIViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-            return .lightContent
-        }
+        return .lightContent
+    }
     
     // MARK: - Methods
     
