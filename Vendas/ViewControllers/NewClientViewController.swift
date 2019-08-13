@@ -22,7 +22,7 @@ class NewClientViewController: UIViewController {
         return segmentedControl
     }()
     
-    // MARK: - Pessoa física view elements
+    // MARK: - View elements
     
     let scrollView: UIScrollView = {
         let view = UIScrollView()
