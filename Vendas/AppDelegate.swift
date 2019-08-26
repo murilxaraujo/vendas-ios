@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import IQKeyboardManager
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
+        let migrationBlock: MigrationBlock = { migration, oldSchemaVersion in
+            //Leave the block empty
+        }
+        Realm.Configuration.defaultConfiguration = Realm.Configuration(schemaVersion: 2, migrationBlock: migrationBlock)
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = HomeViewController()

@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		46B0D0D480631B0FEB7485DA /* Pods_VendasTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69AA472DB6A960C84F168055 /* Pods_VendasTests.framework */; };
 		4859E251204567EC2B244C16 /* Pods_VendasUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A84AF0C8550326E704B2ECE5 /* Pods_VendasUITests.framework */; };
+		4B08107A2314553E00770BAC /* Transportadora.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0810792314553E00770BAC /* Transportadora.swift */; };
+		4B08107C231455C400770BAC /* CondicaoDePagamento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B08107B231455C400770BAC /* CondicaoDePagamento.swift */; };
+		4B1BB511230AD1E1005C6FA8 /* SignatureDrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BB50F230AD1E0005C6FA8 /* SignatureDrawingViewController.swift */; };
+		4B1BB51A230AD241005C6FA8 /* SignatureDrawingModelAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BB515230AD240005C6FA8 /* SignatureDrawingModelAsync.swift */; };
+		4B1BB51B230AD241005C6FA8 /* SignatureDrawingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BB516230AD240005C6FA8 /* SignatureDrawingModel.swift */; };
+		4B1BB51C230AD241005C6FA8 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BB517230AD240005C6FA8 /* CGPoint+Extensions.swift */; };
+		4B1BB51D230AD241005C6FA8 /* UIBezierPath+WeightedPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BB518230AD240005C6FA8 /* UIBezierPath+WeightedPoint.swift */; };
+		4B1BB51E230AD241005C6FA8 /* SignatureBezierProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BB519230AD241005C6FA8 /* SignatureBezierProvider.swift */; };
+		4B1BB520230AD3A3005C6FA8 /* SignatureCollectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BB51F230AD3A3005C6FA8 /* SignatureCollectorViewController.swift */; };
 		4B1BE6E522D77E440043F5E0 /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BE6E422D77E440043F5E0 /* OfflineViewController.swift */; };
 		4B1BE6E722D77F830043F5E0 /* offline.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B1BE6E622D77F830043F5E0 /* offline.json */; };
 		4B1BE6E922D784760043F5E0 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BE6E822D784760043F5E0 /* DataService.swift */; };
@@ -67,6 +76,15 @@
 		37EDA6204D9BC7513BC793D9 /* Pods-Vendas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vendas.debug.xcconfig"; path = "Target Support Files/Pods-Vendas/Pods-Vendas.debug.xcconfig"; sourceTree = "<group>"; };
 		41BE7AC7848BC491B39E0A32 /* Pods-VendasTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VendasTests.release.xcconfig"; path = "Target Support Files/Pods-VendasTests/Pods-VendasTests.release.xcconfig"; sourceTree = "<group>"; };
 		439AE58B54BA5855A75FB86E /* Pods_Vendas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vendas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B0810792314553E00770BAC /* Transportadora.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transportadora.swift; sourceTree = "<group>"; };
+		4B08107B231455C400770BAC /* CondicaoDePagamento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CondicaoDePagamento.swift; sourceTree = "<group>"; };
+		4B1BB50F230AD1E0005C6FA8 /* SignatureDrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignatureDrawingViewController.swift; sourceTree = "<group>"; };
+		4B1BB515230AD240005C6FA8 /* SignatureDrawingModelAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignatureDrawingModelAsync.swift; sourceTree = "<group>"; };
+		4B1BB516230AD240005C6FA8 /* SignatureDrawingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignatureDrawingModel.swift; sourceTree = "<group>"; };
+		4B1BB517230AD240005C6FA8 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
+		4B1BB518230AD240005C6FA8 /* UIBezierPath+WeightedPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+WeightedPoint.swift"; sourceTree = "<group>"; };
+		4B1BB519230AD241005C6FA8 /* SignatureBezierProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignatureBezierProvider.swift; sourceTree = "<group>"; };
+		4B1BB51F230AD3A3005C6FA8 /* SignatureCollectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureCollectorViewController.swift; sourceTree = "<group>"; };
 		4B1BE6E422D77E440043F5E0 /* OfflineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineViewController.swift; sourceTree = "<group>"; };
 		4B1BE6E622D77F830043F5E0 /* offline.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = offline.json; sourceTree = "<group>"; };
 		4B1BE6E822D784760043F5E0 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
@@ -139,6 +157,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B1BB50E230AD1BA005C6FA8 /* SignatureService */ = {
+			isa = PBXGroup;
+			children = (
+				4B1BB513230AD22D005C6FA8 /* internal */,
+				4B1BB50F230AD1E0005C6FA8 /* SignatureDrawingViewController.swift */,
+			);
+			path = SignatureService;
+			sourceTree = "<group>";
+		};
+		4B1BB513230AD22D005C6FA8 /* internal */ = {
+			isa = PBXGroup;
+			children = (
+				4B1BB517230AD240005C6FA8 /* CGPoint+Extensions.swift */,
+				4B1BB519230AD241005C6FA8 /* SignatureBezierProvider.swift */,
+				4B1BB516230AD240005C6FA8 /* SignatureDrawingModel.swift */,
+				4B1BB515230AD240005C6FA8 /* SignatureDrawingModelAsync.swift */,
+				4B1BB518230AD240005C6FA8 /* UIBezierPath+WeightedPoint.swift */,
+			);
+			path = internal;
+			sourceTree = "<group>";
+		};
 		4B5DB52322CA80D80062E64D = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +242,7 @@
 				4B7B02DE22D3C31D00408443 /* ClientSelectionViewController.swift */,
 				4B7B02E022D3C3A400408443 /* NewOrderThirdViewController.swift */,
 				4B7B02E222D3C3B700408443 /* ItemsSelectionViewController.swift */,
+				4B1BB51F230AD3A3005C6FA8 /* SignatureCollectorViewController.swift */,
 			);
 			path = NewOrderVCs;
 			sourceTree = "<group>";
@@ -210,6 +250,7 @@
 		4BB72FDA22CBCF2800058239 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				4B1BB50E230AD1BA005C6FA8 /* SignatureService */,
 				4BB72FDC22CBCF8400058239 /* RealmService.swift */,
 				4BBA3C8422CD2B6800D4D49B /* NetworkService.swift */,
 				4BBA3C8622CD323E00D4D49B /* Reachability.swift */,
@@ -229,6 +270,8 @@
 				4B831B6122DD147F009D390D /* Client.swift */,
 				4B831B6322DD184B009D390D /* NewOrder.swift */,
 				4BAF9F3122FC88A600C30739 /* Produto.swift */,
+				4B0810792314553E00770BAC /* Transportadora.swift */,
+				4B08107B231455C400770BAC /* CondicaoDePagamento.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -498,11 +541,17 @@
 				4B8AE69122D6605D006E1AD7 /* NetworkManager.swift in Sources */,
 				4B6FA6C922CFD00C00138303 /* LoginViewController.swift in Sources */,
 				4B7B02E122D3C3A400408443 /* NewOrderThirdViewController.swift in Sources */,
+				4B1BB51E230AD241005C6FA8 /* SignatureBezierProvider.swift in Sources */,
 				4BAF9F3222FC88A600C30739 /* Produto.swift in Sources */,
 				4B69B41422D8C98800F367C7 /* NewClient.swift in Sources */,
+				4B1BB51B230AD241005C6FA8 /* SignatureDrawingModel.swift in Sources */,
 				4B1BE6E522D77E440043F5E0 /* OfflineViewController.swift in Sources */,
+				4B1BB520230AD3A3005C6FA8 /* SignatureCollectorViewController.swift in Sources */,
 				4B1BE6EB22D78D340043F5E0 /* Enums.swift in Sources */,
+				4B1BB51A230AD241005C6FA8 /* SignatureDrawingModelAsync.swift in Sources */,
 				4B5DB53222CA80D80062E64D /* LoadingScreenViewController.swift in Sources */,
+				4B1BB511230AD1E1005C6FA8 /* SignatureDrawingViewController.swift in Sources */,
+				4B08107C231455C400770BAC /* CondicaoDePagamento.swift in Sources */,
 				4B831B6422DD184B009D390D /* NewOrder.swift in Sources */,
 				4B7B02DF22D3C31D00408443 /* ClientSelectionViewController.swift in Sources */,
 				4BB72FDD22CBCF8400058239 /* RealmService.swift in Sources */,
@@ -510,11 +559,14 @@
 				4B7B02D622D3B8FB00408443 /* User.swift in Sources */,
 				4B7B02DD22D3BFC700408443 /* NewOrderSecondViewController.swift in Sources */,
 				4B831B6222DD147F009D390D /* Client.swift in Sources */,
+				4B08107A2314553E00770BAC /* Transportadora.swift in Sources */,
 				4B7B02E322D3C3B700408443 /* ItemsSelectionViewController.swift in Sources */,
 				4B7B02E522D3C82800408443 /* NewClientViewController.swift in Sources */,
 				4B7B02DB22D3BEFD00408443 /* HomeViewController.swift in Sources */,
 				4B6FA6CB22CFE89100138303 /* BackupDataDownloadViewController.swift in Sources */,
 				4B7B02D822D3B9F700408443 /* NewOrderViewController.swift in Sources */,
+				4B1BB51C230AD241005C6FA8 /* CGPoint+Extensions.swift in Sources */,
+				4B1BB51D230AD241005C6FA8 /* UIBezierPath+WeightedPoint.swift in Sources */,
 				4B7B02E722D3E1DE00408443 /* SyncDataViewController.swift in Sources */,
 				4BDE2C1222D520C000743508 /* AuthService.swift in Sources */,
 				4BBA3C8722CD323E00D4D49B /* Reachability.swift in Sources */,
