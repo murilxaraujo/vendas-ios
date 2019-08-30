@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let migrationBlock: MigrationBlock = { migration, oldSchemaVersion in
             //Leave the block empty
         }
-        Realm.Configuration.defaultConfiguration = Realm.Configuration(schemaVersion: 2, migrationBlock: migrationBlock)
+        Realm.Configuration.defaultConfiguration = Realm.Configuration(schemaVersion: 4, migrationBlock: migrationBlock)
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = HomeViewController()

@@ -18,4 +18,8 @@ class Transportadora: Object {
         self.codigo = codigo
         self.nome = nome
     }
+    
+    func getCodigoAndNomeAsString() -> String {
+        return "\(codigo) - \(nome)"
+    }
 }

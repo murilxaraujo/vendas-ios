@@ -60,28 +60,44 @@ class DataService {
     }
     
     func getClients() -> [Client] {
-        if NetworkService.shared.networkIsAvailable() {
-            return getClientsFromCloud()
-        } else {
-            return getClientsFromRealDB()
-        }
+        return getClientsFromRealDB()
     }
     
     fileprivate func getClientsFromCloud() -> [Client] {
-        let url = URL(string: "http://189.112.124.67:8013/REST/clientes_pv")
-        Alamofire.request(url!, method: HTTPMethod.get).responseJSON { (response) in
-            if let data = response.data {
-                
-            }
-            
-        }
         
         return []
+    }
+    
+    func saveClientsInitialFileToDB() {
+        if let path = Bundle.main.path(forResource: "clientesfile", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let clientes = try JSONDecoder().decode([ClientsFileParsingStruct].self, from: data)
+                print("Clientes em arquivo:",clientes.count)
+                
+                for item in clientes {
+                    let object = Client(codigo: item.CODIGO.trimmingCharacters(in: .whitespacesAndNewlines), loja: item.LOJA.trimmingCharacters(in: .whitespacesAndNewlines), Nome: item.NOME, Cidade: item.CIDADE, Estado: item.ESTADO, Endereco: item.ENDERECO, Cep: item.CEP.trimmingCharacters(in: .whitespacesAndNewlines))
+                    RealmService.shared.save(object)
+                }
+            } catch {
+                print("Erro:", error)
+            }
+        }
     }
     
     fileprivate func getClientsFromRealDB() -> [Client] {
         let clients = realm.objects(Client.self)
         return Array(clients.sorted(byKeyPath: "name"))
+    }
+    
+    fileprivate struct ClientsFileParsingStruct: Decodable {
+        var CODIGO:String
+        var LOJA:String
+        var NOME:String
+        var CIDADE:String
+        var ESTADO:String
+        var ENDERECO:String
+        var CEP:String
     }
     
     // MARK: - Produtos functions
@@ -114,18 +130,159 @@ class DataService {
         return Array(products.sorted(byKeyPath: "nome"))
     }
     
+    func saveProductsInitialFileToDB() {
+        if let path = Bundle.main.path(forResource: "produtos", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let produtos = try JSONDecoder().decode([ProductsFileParsingStruct].self, from: data)
+                print("Produtos em arquivo:",produtos.count)
+                
+                for item in produtos {
+                    let object = Product(codigo: item.codigo, nome: item.nome, unidadeDeMedida: item.unidademedida, saldo: item.saldo)
+                    print("Saving:", object)
+                    RealmService.shared.save(object)
+                }
+            } catch {
+                print("Erro:", error)
+            }
+        }
+    }
+    
+    fileprivate struct ProductsFileParsingStruct: Decodable {
+        var codigo: String
+        var nome: String
+        var unidademedida: String
+        var saldo: String
+    }
+    
     // MARK: - Get transportadoras functions
     
-    fileprivate func getTransportadorasFromDB() -> [Transportadora] {
+    func getTransportadorasFromDB() -> [Transportadora] {
         let transportadoras = realm.objects(Transportadora.self)
         return Array(transportadoras.sorted(byKeyPath: "nome"))
     }
     
-    // MARK: - Get condições de pagametno functions
+    func getTransportadorasDataFromCloudToLocal() {
+        let jsonString = "http://189.112.124.67:8013/transportadores_pv"
+        guard let url = URL(string: jsonString) else {return}
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            do {
+                
+                if error != nil {return}
+                if response == nil {return}
+                if data == nil {return}
+                let transportadoras = try JSONDecoder().decode([TransportadoraParseStruct].self, from: data!)
+                
+                for item in transportadoras {
+                    let object = Transportadora(codigo: item.Codigo, nome: item.Nome)
+                    print("Saving:", item)
+                    RealmService.shared.save(object)
+                    print("Saved:", object)
+                }
+            } catch {
+                print("Erro", error)
+            }
+        }.resume()
+    }
     
-    fileprivate func getCondsPagamentoFromDB() -> [CondicaoDePagamento] {
+    fileprivate struct TransportadoraParseStruct: Decodable {
+        var Codigo: String
+        var Nome: String
+    }
+    
+    // MARK: - Get condições de pagamento functions
+    
+    func getCondsPagamentoFromDB() -> [CondicaoDePagamento] {
         let condspagamento = realm.objects(CondicaoDePagamento.self)
         return Array(condspagamento.sorted(byKeyPath: "descricao"))
+    }
+    
+    func getCondsPagamentoFromCloudToLocal() {
+        let jsonString = "http://189.112.124.67:8013/condpag_pv"
+        guard let url = URL(string: jsonString) else {
+            print("Eroor converting to url")
+            return
+        }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if error != nil {
+                print(error!)
+                return
+            }
+            if response == nil {
+                print("nil response")
+                return
+            }
+            if data == nil {
+                print("nil Data")
+                return
+            }
+            
+            do {
+                let condPagamentos = try JSONDecoder().decode([CondPagamentoParseStruct].self, from: data!)
+                
+                for item in condPagamentos {
+                    let object = CondicaoDePagamento()
+                    object.codigo = item.Codigo
+                    object.descricao = item.Descricao
+                    RealmService.shared.save(object)
+                    print("Saved", object)
+                }
+            } catch {
+                print("Erro", error)
+            }
+        }.resume()
+    }
+    
+    fileprivate struct CondPagamentoParseStruct: Decodable {
+        var Codigo: String
+        var Descricao: String
+    }
+    
+    // MARK: - Regra de desconto functions
+    
+    func getRegraDeDescontoFromCloudToLocal() {
+        let jsonString = "http://189.112.124.67:8013/regradesconto_pv"
+        guard let url = URL(string: jsonString) else {
+            print("Error converting to url")
+            return
+        }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if error != nil {
+                print(error!)
+                return
+            }
+            if response == nil {
+                print("nil response")
+                return
+            }
+            if data == nil {
+                print("nil Data")
+                return
+            }
+            
+            do {
+                let regrasDeDesconto = try JSONDecoder().decode([regraDeDescontoParseStruct].self, from: data!)
+                
+                for item in regrasDeDesconto {
+                    let object = RegraDeDesconto(codigo: item.Codigo, descricao: item.Descricao)
+                    RealmService.shared.save(object)
+                    print("Saved:", object)
+                }
+            } catch {
+                print("Erro", error)
+            }
+        }.resume()
+    }
+    
+    fileprivate struct regraDeDescontoParseStruct: Decodable {
+        var Codigo: String
+        var Descricao: String
+    }
+    
+    // MARK: - Send order to protheus
+    
+    func sendOrderToProtheus(_ order: NewOrder) {
+        
     }
     
     // MARK: - Support Classes

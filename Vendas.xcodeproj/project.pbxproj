@@ -11,6 +11,7 @@
 		4859E251204567EC2B244C16 /* Pods_VendasUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A84AF0C8550326E704B2ECE5 /* Pods_VendasUITests.framework */; };
 		4B08107A2314553E00770BAC /* Transportadora.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0810792314553E00770BAC /* Transportadora.swift */; };
 		4B08107C231455C400770BAC /* CondicaoDePagamento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B08107B231455C400770BAC /* CondicaoDePagamento.swift */; };
+		4B17BCBE23199E97004F685A /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B17BCBD23199E97004F685A /* JSON.swift */; };
 		4B1BB511230AD1E1005C6FA8 /* SignatureDrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BB50F230AD1E0005C6FA8 /* SignatureDrawingViewController.swift */; };
 		4B1BB51A230AD241005C6FA8 /* SignatureDrawingModelAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BB515230AD240005C6FA8 /* SignatureDrawingModelAsync.swift */; };
 		4B1BB51B230AD241005C6FA8 /* SignatureDrawingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BB516230AD240005C6FA8 /* SignatureDrawingModel.swift */; };
@@ -22,6 +23,8 @@
 		4B1BE6E722D77F830043F5E0 /* offline.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B1BE6E622D77F830043F5E0 /* offline.json */; };
 		4B1BE6E922D784760043F5E0 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BE6E822D784760043F5E0 /* DataService.swift */; };
 		4B1BE6EB22D78D340043F5E0 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BE6EA22D78D340043F5E0 /* Enums.swift */; };
+		4B21ADC623157F4E00DBC487 /* TransportadorasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B21ADC523157F4E00DBC487 /* TransportadorasTableViewController.swift */; };
+		4B21ADC82315977F00DBC487 /* CondicaoDePagamentoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B21ADC72315977F00DBC487 /* CondicaoDePagamentoTableViewController.swift */; };
 		4B5DB53022CA80D80062E64D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5DB52F22CA80D80062E64D /* AppDelegate.swift */; };
 		4B5DB53222CA80D80062E64D /* LoadingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5DB53122CA80D80062E64D /* LoadingScreenViewController.swift */; };
 		4B5DB53722CA80E10062E64D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B5DB53622CA80E10062E64D /* Assets.xcassets */; };
@@ -32,6 +35,7 @@
 		4B6FA6C722CFCA6800138303 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B6FA6C622CFCA6800138303 /* loading.json */; };
 		4B6FA6C922CFD00C00138303 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6FA6C822CFD00C00138303 /* LoginViewController.swift */; };
 		4B6FA6CB22CFE89100138303 /* BackupDataDownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6FA6CA22CFE89100138303 /* BackupDataDownloadViewController.swift */; };
+		4B770CB02319922B00D76403 /* RegraDeDesconto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B770CAF2319922B00D76403 /* RegraDeDesconto.swift */; };
 		4B7B02D622D3B8FB00408443 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7B02D522D3B8FB00408443 /* User.swift */; };
 		4B7B02D822D3B9F700408443 /* NewOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7B02D722D3B9F700408443 /* NewOrderViewController.swift */; };
 		4B7B02DB22D3BEFD00408443 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7B02DA22D3BEFD00408443 /* HomeViewController.swift */; };
@@ -44,7 +48,9 @@
 		4B831B6222DD147F009D390D /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B831B6122DD147F009D390D /* Client.swift */; };
 		4B831B6422DD184B009D390D /* NewOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B831B6322DD184B009D390D /* NewOrder.swift */; };
 		4B8AE69122D6605D006E1AD7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AE69022D6605D006E1AD7 /* NetworkManager.swift */; };
+		4B9137BF2319AF7B0038BE54 /* produtos.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B9137BE2319AF7B0038BE54 /* produtos.json */; };
 		4BAF9F3222FC88A600C30739 /* Produto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAF9F3122FC88A600C30739 /* Produto.swift */; };
+		4BB5F4442319B68C00B0843F /* clientesfile.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BB5F4432319B68C00B0843F /* clientesfile.json */; };
 		4BB72FD922CBB0D000058239 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BB72FD822CBB0D000058239 /* GoogleService-Info.plist */; };
 		4BB72FDD22CBCF8400058239 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB72FDC22CBCF8400058239 /* RealmService.swift */; };
 		4BBA3C8522CD2B6800D4D49B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBA3C8422CD2B6800D4D49B /* NetworkService.swift */; };
@@ -78,6 +84,7 @@
 		439AE58B54BA5855A75FB86E /* Pods_Vendas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vendas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B0810792314553E00770BAC /* Transportadora.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transportadora.swift; sourceTree = "<group>"; };
 		4B08107B231455C400770BAC /* CondicaoDePagamento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CondicaoDePagamento.swift; sourceTree = "<group>"; };
+		4B17BCBD23199E97004F685A /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		4B1BB50F230AD1E0005C6FA8 /* SignatureDrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignatureDrawingViewController.swift; sourceTree = "<group>"; };
 		4B1BB515230AD240005C6FA8 /* SignatureDrawingModelAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignatureDrawingModelAsync.swift; sourceTree = "<group>"; };
 		4B1BB516230AD240005C6FA8 /* SignatureDrawingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignatureDrawingModel.swift; sourceTree = "<group>"; };
@@ -89,6 +96,8 @@
 		4B1BE6E622D77F830043F5E0 /* offline.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = offline.json; sourceTree = "<group>"; };
 		4B1BE6E822D784760043F5E0 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		4B1BE6EA22D78D340043F5E0 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		4B21ADC523157F4E00DBC487 /* TransportadorasTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportadorasTableViewController.swift; sourceTree = "<group>"; };
+		4B21ADC72315977F00DBC487 /* CondicaoDePagamentoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CondicaoDePagamentoTableViewController.swift; sourceTree = "<group>"; };
 		4B5DB52C22CA80D80062E64D /* Vendas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vendas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B5DB52F22CA80D80062E64D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4B5DB53122CA80D80062E64D /* LoadingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoadingScreenViewController.swift; path = ../LoadingScreenViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +114,7 @@
 		4B6FA6C622CFCA6800138303 /* loading.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = loading.json; path = Vendas/loading.json; sourceTree = "<group>"; };
 		4B6FA6C822CFD00C00138303 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4B6FA6CA22CFE89100138303 /* BackupDataDownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupDataDownloadViewController.swift; sourceTree = "<group>"; };
+		4B770CAF2319922B00D76403 /* RegraDeDesconto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegraDeDesconto.swift; sourceTree = "<group>"; };
 		4B7B02D522D3B8FB00408443 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4B7B02D722D3B9F700408443 /* NewOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrderViewController.swift; sourceTree = "<group>"; };
 		4B7B02DA22D3BEFD00408443 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -117,7 +127,9 @@
 		4B831B6122DD147F009D390D /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		4B831B6322DD184B009D390D /* NewOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrder.swift; sourceTree = "<group>"; };
 		4B8AE69022D6605D006E1AD7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		4B9137BE2319AF7B0038BE54 /* produtos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = produtos.json; sourceTree = "<group>"; };
 		4BAF9F3122FC88A600C30739 /* Produto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Produto.swift; sourceTree = "<group>"; };
+		4BB5F4432319B68C00B0843F /* clientesfile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = clientesfile.json; sourceTree = "<group>"; };
 		4BB72FD822CBB0D000058239 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4BB72FDC22CBCF8400058239 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		4BBA3C8422CD2B6800D4D49B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -181,6 +193,8 @@
 		4B5DB52322CA80D80062E64D = {
 			isa = PBXGroup;
 			children = (
+				4B9137BE2319AF7B0038BE54 /* produtos.json */,
+				4BB5F4432319B68C00B0843F /* clientesfile.json */,
 				4B1BE6E622D77F830043F5E0 /* offline.json */,
 				4B6FA6C622CFCA6800138303 /* loading.json */,
 				4B5DB52E22CA80D80062E64D /* Vendas */,
@@ -243,6 +257,8 @@
 				4B7B02E022D3C3A400408443 /* NewOrderThirdViewController.swift */,
 				4B7B02E222D3C3B700408443 /* ItemsSelectionViewController.swift */,
 				4B1BB51F230AD3A3005C6FA8 /* SignatureCollectorViewController.swift */,
+				4B21ADC523157F4E00DBC487 /* TransportadorasTableViewController.swift */,
+				4B21ADC72315977F00DBC487 /* CondicaoDePagamentoTableViewController.swift */,
 			);
 			path = NewOrderVCs;
 			sourceTree = "<group>";
@@ -272,6 +288,8 @@
 				4BAF9F3122FC88A600C30739 /* Produto.swift */,
 				4B0810792314553E00770BAC /* Transportadora.swift */,
 				4B08107B231455C400770BAC /* CondicaoDePagamento.swift */,
+				4B770CAF2319922B00D76403 /* RegraDeDesconto.swift */,
+				4B17BCBD23199E97004F685A /* JSON.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -425,6 +443,8 @@
 			files = (
 				4B5DB53A22CA80E10062E64D /* LaunchScreen.storyboard in Resources */,
 				4BB72FD922CBB0D000058239 /* GoogleService-Info.plist in Resources */,
+				4B9137BF2319AF7B0038BE54 /* produtos.json in Resources */,
+				4BB5F4442319B68C00B0843F /* clientesfile.json in Resources */,
 				4B1BE6E722D77F830043F5E0 /* offline.json in Resources */,
 				4B6FA6C722CFCA6800138303 /* loading.json in Resources */,
 				4B5DB53722CA80E10062E64D /* Assets.xcassets in Resources */,
@@ -541,10 +561,12 @@
 				4B8AE69122D6605D006E1AD7 /* NetworkManager.swift in Sources */,
 				4B6FA6C922CFD00C00138303 /* LoginViewController.swift in Sources */,
 				4B7B02E122D3C3A400408443 /* NewOrderThirdViewController.swift in Sources */,
+				4B770CB02319922B00D76403 /* RegraDeDesconto.swift in Sources */,
 				4B1BB51E230AD241005C6FA8 /* SignatureBezierProvider.swift in Sources */,
 				4BAF9F3222FC88A600C30739 /* Produto.swift in Sources */,
 				4B69B41422D8C98800F367C7 /* NewClient.swift in Sources */,
 				4B1BB51B230AD241005C6FA8 /* SignatureDrawingModel.swift in Sources */,
+				4B21ADC82315977F00DBC487 /* CondicaoDePagamentoTableViewController.swift in Sources */,
 				4B1BE6E522D77E440043F5E0 /* OfflineViewController.swift in Sources */,
 				4B1BB520230AD3A3005C6FA8 /* SignatureCollectorViewController.swift in Sources */,
 				4B1BE6EB22D78D340043F5E0 /* Enums.swift in Sources */,
@@ -563,8 +585,10 @@
 				4B7B02E322D3C3B700408443 /* ItemsSelectionViewController.swift in Sources */,
 				4B7B02E522D3C82800408443 /* NewClientViewController.swift in Sources */,
 				4B7B02DB22D3BEFD00408443 /* HomeViewController.swift in Sources */,
+				4B17BCBE23199E97004F685A /* JSON.swift in Sources */,
 				4B6FA6CB22CFE89100138303 /* BackupDataDownloadViewController.swift in Sources */,
 				4B7B02D822D3B9F700408443 /* NewOrderViewController.swift in Sources */,
+				4B21ADC623157F4E00DBC487 /* TransportadorasTableViewController.swift in Sources */,
 				4B1BB51C230AD241005C6FA8 /* CGPoint+Extensions.swift in Sources */,
 				4B1BB51D230AD241005C6FA8 /* UIBezierPath+WeightedPoint.swift in Sources */,
 				4B7B02E722D3E1DE00408443 /* SyncDataViewController.swift in Sources */,

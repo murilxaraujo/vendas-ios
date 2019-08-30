@@ -49,7 +49,7 @@ class NewOrderThirdViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "thirdviewcell") as! ThirdOrderViewTableViewCell
-        cell.titleLabel.text = "\(products[indexPath.item].quantidade!)\(products[indexPath.item].produto.unidademedida) \(products[indexPath.item].produto.nome)"
+        cell.titleLabel.text = "\(products[indexPath.item].quantidade)\(products[indexPath.item].produto!.unidademedida) \(products[indexPath.item].produto!.nome)"
         return cell
     }
     

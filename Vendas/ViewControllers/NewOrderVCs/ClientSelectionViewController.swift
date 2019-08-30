@@ -14,7 +14,8 @@ class ClientSelectionViewController: UIViewController, UITableViewDelegate, UITa
     // MARK: - Variables and constants
     
     var mainViewController: NewOrderSecondViewController?
-    
+    var items: [Client] = []
+    var filteredItems: [Client] = []
     let searchController = UISearchController(searchResultsController: nil)
     
     // MARK: - View elements
@@ -42,7 +43,7 @@ class ClientSelectionViewController: UIViewController, UITableViewDelegate, UITa
     // MARK: - Table view routine functions
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

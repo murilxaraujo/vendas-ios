@@ -81,7 +81,6 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         setupViewElements()
-        DataService.shared.getRealmPath()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

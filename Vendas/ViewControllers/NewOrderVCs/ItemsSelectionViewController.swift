@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
+class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     
@@ -45,17 +45,17 @@ class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITab
     func setupSearchBar() {
         self.navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.delegate = self
         self.navigationItem.title = "Itens"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         let backbutton = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(closeView(sender:)))
         self.navigationItem.setLeftBarButton(backbutton, animated: true)
         
-    }
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        filterContentForSearchText(searchController.searchBar.text!)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Buscar item"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
     }
     
     func searchBarIsEmpty() -> Bool {
@@ -63,16 +63,16 @@ class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITab
         return searchController.searchBar.text?.isEmpty ?? true
     }
     
-    func isFiltering() -> Bool {
-        return searchController.isActive && !searchBarIsEmpty()
-    }
-    
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        itemsFiltered = items.filter({( product : Product) -> Bool in
-            return product.getCodeAndName().lowercased().contains(searchText.lowercased())
+        itemsFiltered = items.filter({( candy : Product) -> Bool in
+            return candy.getCodeAndName().lowercased().contains(searchText.lowercased())
         })
         
         tableView.reloadData()
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive || !searchBarIsEmpty()
     }
     
     // MARK: - TableView routine functions
@@ -80,26 +80,32 @@ class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering() {
             return itemsFiltered.count
-        } else {
-            return items.count
         }
+        
+        return items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! ItemSelectionTableViewCell
-        
+        let item: Product
         if isFiltering() {
-            cell.titleLabel.text = itemsFiltered[indexPath.item].getCodeAndName()
-            cell.uMedidaLabel.text = "Medida: \(itemsFiltered[indexPath.item].unidademedida), saldo: \(itemsFiltered[indexPath.item].saldo)"
+            item = itemsFiltered[indexPath.row]
         } else {
-            cell.titleLabel.text = items[indexPath.item].getCodeAndName()
-            cell.uMedidaLabel.text = "Medida: \(items[indexPath.item].unidademedida), saldo: \(items[indexPath.item].saldo)"
+            item = items[indexPath.row]
         }
+        cell.titleLabel.text = item.getCodeAndName()
+        cell.uMedidaLabel.text = "Medida: \(item.unidademedida), saldo: \(item.saldo)"
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let item: Product
+        if isFiltering() {
+            item = itemsFiltered[indexPath.row]
+        } else {
+            item = items[indexPath.row]
+        }
         var textfieldd: UITextField?
         let alertView = UIAlertController(title: "Quantidade", message: nil, preferredStyle: .alert)
         alertView.addTextField { (uitextfield) in
@@ -109,14 +115,7 @@ class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITab
         }
         
         let alertViewAction = UIAlertAction(title: "Ok", style: .default) { (action) in
-            let item: ProdutoPedido = {
-                if self.isFiltering() {
-                   return ProdutoPedido(quantidade: Float("\(textfieldd!.text!)")!, produto: self.itemsFiltered[indexPath.item])
-                } else {
-                   return ProdutoPedido(quantidade: Float("\(textfieldd!.text!)")!, produto: self.items[indexPath.item])
-                }
-            }()
-            self.formerViewController?.addItem(item)
+            self.formerViewController?.addItem(ProdutoPedido(quantidade: Float("\(textfieldd!.text!)")!, produto: item))
             self.closeView(sender: alertView)
         }
         
@@ -159,6 +158,12 @@ class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     // MARK: - Callback method
+}
+
+extension ItemsSelectionViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
 }
 
 class ItemSelectionTableViewCell: UITableViewCell {

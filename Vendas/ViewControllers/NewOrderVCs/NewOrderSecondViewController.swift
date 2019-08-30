@@ -313,14 +313,26 @@ class NewOrderSecondViewController: UIViewController {
         tipodeFreteSegmentedControlLabel.centerYAnchor.constraint(equalTo: tipodeFreteSegmentedControl.centerYAnchor).isActive = true
         
         scrollView.addSubview(transportadoraTextInput)
+        let transportadoraTextFieldButton = UIButton(type: .custom)
+        transportadoraTextFieldButton.setImage(UIImage(named: "round_search_black_24pt"), for: .normal)
+        transportadoraTextFieldButton.frame = CGRect(x: 0, y: 0, width: 28, height: 28);
+        transportadoraTextFieldButton.addTarget(self, action: #selector(openTransportadoraSelection(_:)), for: .touchUpInside)
         transportadoraTextInput.topAnchor.constraint(equalTo: tipodeFreteSegmentedControl.bottomAnchor, constant: 20).isActive = true
         transportadoraTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         transportadoraTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        transportadoraTextInput.rightView = transportadoraTextFieldButton
+        transportadoraTextInput.rightViewMode = .always
         
         scrollView.addSubview(condicaoDePagamentoTextInput)
+        let condPagamentoTextFieldInputButton = UIButton(type: .custom)
+        condPagamentoTextFieldInputButton.setImage(UIImage(named: "round_search_black_24pt"), for: .normal)
+        condPagamentoTextFieldInputButton.frame = CGRect(x: 0, y: 0, width: 28, height: 28)
+        condPagamentoTextFieldInputButton.addTarget(self, action: #selector(openCondsPagamentoSelection(_:)), for: .touchUpInside)
         condicaoDePagamentoTextInput.topAnchor.constraint(equalTo: transportadoraTextInput.bottomAnchor, constant: 0).isActive = true
         condicaoDePagamentoTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         condicaoDePagamentoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        condicaoDePagamentoTextInput.rightView = condPagamentoTextFieldInputButton
+        condicaoDePagamentoTextInput.rightViewMode = .always
         
         scrollView.addSubview(descDasCondicoesDePagamentoTextInput)
         descDasCondicoesDePagamentoTextInput.topAnchor.constraint(equalTo: condicaoDePagamentoTextInput.bottomAnchor, constant: 0).isActive = true
@@ -362,9 +374,32 @@ class NewOrderSecondViewController: UIViewController {
         fillInfoWithClientDetais(client)
     }
     
+    func onTransportadoraSelected(_ transportadora: Transportadora) {
+        newOrderItem?.transportadora = transportadora.codigo
+        transportadoraTextInput.text = transportadora.nome
+    }
+    
+    func onCondPagamentoSelected(_ condPagamento: CondicaoDePagamento) {
+        newOrderItem?.condPagamento = condPagamento.codigo
+        condicaoDePagamentoTextInput.text = condPagamento.codigo
+        descDasCondicoesDePagamentoTextInput.text = condPagamento.descricao
+    }
+    
     @objc fileprivate func openClientSelection(_ sender: Any) {
         let vc = ClientSelectionViewController()
         vc.mainViewController = self
+        self.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
+    }
+    
+    @objc fileprivate func openTransportadoraSelection(_ sender: Any) {
+        let vc = TransportadorasTableViewController()
+        vc.previousVC = self
+        self.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
+    }
+    
+    @objc fileprivate func openCondsPagamentoSelection(_ sender: Any) {
+        let vc = CondicaoDePagamentoTableViewController()
+        vc.previousVC = self
         self.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
     }
     

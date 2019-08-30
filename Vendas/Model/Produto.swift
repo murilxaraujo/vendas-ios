@@ -10,16 +10,16 @@ import Foundation
 import RealmSwift
 
 class Product: Object {
-    @objc dynamic var codigo: Int = 0
+    @objc dynamic var codigo: String = ""
     @objc dynamic var nome = ""
     @objc dynamic var unidademedida: String = ""
     @objc dynamic var saldo: Float = 0
     
     convenience init(codigo: String, nome: String, unidadeDeMedida: String, saldo: String) {
         self.init()
-        self.codigo = Int(codigo) ?? 0
-        self.nome = nome
-        self.unidademedida = unidadeDeMedida
+        self.codigo = codigo.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.nome = nome.trimmingCharacters(in: .newlines)
+        self.unidademedida = unidadeDeMedida.trimmingCharacters(in: .whitespacesAndNewlines)
         self.saldo = Float(saldo) ?? 0
     }
     
@@ -28,11 +28,12 @@ class Product: Object {
     }
 }
 
-struct ProdutoPedido {
-    var quantidade: Float!
-    var produto: Product
+class ProdutoPedido: Object {
+    @objc dynamic var quantidade: Float = 0.0
+    @objc dynamic var produto: Product? = nil
     
-    init(quantidade: Float!, produto: Product) {
+    convenience init(quantidade: Float, produto: Product) {
+        self.init()
         self.quantidade = quantidade
         self.produto = produto
     }

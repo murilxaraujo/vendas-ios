@@ -84,14 +84,14 @@ class NewOrderViewController: UIViewController, UITableViewDelegate, UITableView
     
     @objc func poloSelected(_ sender: Any) {
         let vc = NewOrderSecondViewController()
-        newOrderItem.filial = 1
+        newOrderItem.filial = "02"
         vc.newOrderItem = newOrderItem
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func brSelected(_ sender: Any) {
         let vc = NewOrderSecondViewController()
-        newOrderItem.filial = 2
+        newOrderItem.filial = "01"
         vc.newOrderItem = newOrderItem
         self.navigationController?.pushViewController(vc, animated: true)
     }
