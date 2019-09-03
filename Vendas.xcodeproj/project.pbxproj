@@ -31,6 +31,8 @@
 		4B5DB53A22CA80E10062E64D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B5DB53822CA80E10062E64D /* LaunchScreen.storyboard */; };
 		4B5DB54522CA80E10062E64D /* VendasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5DB54422CA80E10062E64D /* VendasTests.swift */; };
 		4B5DB55022CA80E10062E64D /* VendasUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5DB54F22CA80E10062E64D /* VendasUITests.swift */; };
+		4B668AD3231D809E007F63FE /* RegraDeDescontoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B668AD2231D809E007F63FE /* RegraDeDescontoTableViewController.swift */; };
+		4B668AD5231DA1B7007F63FE /* SummaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B668AD4231DA1B7007F63FE /* SummaryTableViewController.swift */; };
 		4B69B41422D8C98800F367C7 /* NewClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B69B41322D8C98800F367C7 /* NewClient.swift */; };
 		4B6FA6C722CFCA6800138303 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B6FA6C622CFCA6800138303 /* loading.json */; };
 		4B6FA6C922CFD00C00138303 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6FA6C822CFD00C00138303 /* LoginViewController.swift */; };
@@ -110,6 +112,8 @@
 		4B5DB54B22CA80E10062E64D /* VendasUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VendasUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B5DB54F22CA80E10062E64D /* VendasUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendasUITests.swift; sourceTree = "<group>"; };
 		4B5DB55122CA80E10062E64D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4B668AD2231D809E007F63FE /* RegraDeDescontoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegraDeDescontoTableViewController.swift; sourceTree = "<group>"; };
+		4B668AD4231DA1B7007F63FE /* SummaryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTableViewController.swift; sourceTree = "<group>"; };
 		4B69B41322D8C98800F367C7 /* NewClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewClient.swift; sourceTree = "<group>"; };
 		4B6FA6C622CFCA6800138303 /* loading.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = loading.json; path = Vendas/loading.json; sourceTree = "<group>"; };
 		4B6FA6C822CFD00C00138303 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -259,6 +263,8 @@
 				4B1BB51F230AD3A3005C6FA8 /* SignatureCollectorViewController.swift */,
 				4B21ADC523157F4E00DBC487 /* TransportadorasTableViewController.swift */,
 				4B21ADC72315977F00DBC487 /* CondicaoDePagamentoTableViewController.swift */,
+				4B668AD2231D809E007F63FE /* RegraDeDescontoTableViewController.swift */,
+				4B668AD4231DA1B7007F63FE /* SummaryTableViewController.swift */,
 			);
 			path = NewOrderVCs;
 			sourceTree = "<group>";
@@ -558,6 +564,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B668AD5231DA1B7007F63FE /* SummaryTableViewController.swift in Sources */,
 				4B8AE69122D6605D006E1AD7 /* NetworkManager.swift in Sources */,
 				4B6FA6C922CFD00C00138303 /* LoginViewController.swift in Sources */,
 				4B7B02E122D3C3A400408443 /* NewOrderThirdViewController.swift in Sources */,
@@ -572,6 +579,7 @@
 				4B1BE6EB22D78D340043F5E0 /* Enums.swift in Sources */,
 				4B1BB51A230AD241005C6FA8 /* SignatureDrawingModelAsync.swift in Sources */,
 				4B5DB53222CA80D80062E64D /* LoadingScreenViewController.swift in Sources */,
+				4B668AD3231D809E007F63FE /* RegraDeDescontoTableViewController.swift in Sources */,
 				4B1BB511230AD1E1005C6FA8 /* SignatureDrawingViewController.swift in Sources */,
 				4B08107C231455C400770BAC /* CondicaoDePagamento.swift in Sources */,
 				4B831B6422DD184B009D390D /* NewOrder.swift in Sources */,

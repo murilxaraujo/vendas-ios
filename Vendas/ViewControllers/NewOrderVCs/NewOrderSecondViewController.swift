@@ -340,9 +340,15 @@ class NewOrderSecondViewController: UIViewController {
         descDasCondicoesDePagamentoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(regraDeDescontoTextInput)
+        let regrasDeDescontoTextFieldInputButton = UIButton(type: .custom)
+        regrasDeDescontoTextFieldInputButton.setImage(UIImage(named: "round_search_black_24pt"), for: .normal)
+        regrasDeDescontoTextFieldInputButton.frame = CGRect(x: 0, y: 0, width: 28, height: 28)
+        regrasDeDescontoTextFieldInputButton.addTarget(self, action: #selector(openRegraDeDescontoSelection(_:)), for: .touchUpInside)
         regraDeDescontoTextInput.topAnchor.constraint(equalTo: descDasCondicoesDePagamentoTextInput.bottomAnchor, constant: 0).isActive = true
         regraDeDescontoTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         regraDeDescontoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        regraDeDescontoTextInput.rightView = regrasDeDescontoTextFieldInputButton
+        regraDeDescontoTextInput.rightViewMode = .always
         
         scrollView.addSubview(descontoTextInput)
         descontoTextInput.topAnchor.constraint(equalTo: regraDeDescontoTextInput.bottomAnchor, constant: 0).isActive = true
@@ -370,7 +376,10 @@ class NewOrderSecondViewController: UIViewController {
     
     func onClientSelected(_ client: Client) {
         newOrderItem?.client = client
-        clientTextInput.text = client.Nome
+        clientTextInput.text = client.codigo
+        lojaTextInput.text = client.loja
+        clienteDeEntregaTextInput.text = client.codigo
+        clientNameTextInput.text = client.Nome
         fillInfoWithClientDetais(client)
     }
     
@@ -383,6 +392,10 @@ class NewOrderSecondViewController: UIViewController {
         newOrderItem?.condPagamento = condPagamento.codigo
         condicaoDePagamentoTextInput.text = condPagamento.codigo
         descDasCondicoesDePagamentoTextInput.text = condPagamento.descricao
+    }
+    
+    func onRegrasDeDescontoSelected(_ regra: RegraDeDesconto) {
+        regraDeDescontoTextInput.text = regra.descricao
     }
     
     @objc fileprivate func openClientSelection(_ sender: Any) {
@@ -399,6 +412,12 @@ class NewOrderSecondViewController: UIViewController {
     
     @objc fileprivate func openCondsPagamentoSelection(_ sender: Any) {
         let vc = CondicaoDePagamentoTableViewController()
+        vc.previousVC = self
+        self.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
+    }
+    
+    @objc fileprivate func openRegraDeDescontoSelection(_ sender: Any) {
+        let vc = RegraDeDescontoTableViewController()
         vc.previousVC = self
         self.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
     }

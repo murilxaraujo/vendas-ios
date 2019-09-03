@@ -47,7 +47,18 @@ class ClientSelectionViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "celli") as! ItemSelectionTableViewCell
+        cell.titleLabel.text = items[indexPath.item].Nome
+        cell.uMedidaLabel.text = items[indexPath.item].codigo
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        sendClientBackToPreviousVC(items[indexPath.item])
     }
     
     // MARK: - Search controller routine functions
@@ -64,6 +75,11 @@ class ClientSelectionViewController: UIViewController, UITableViewDelegate, UITa
         tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(ItemSelectionTableViewCell.self, forCellReuseIdentifier: "celli")
+        items = DataService.shared.getClients()
+        tableView.reloadData()
     }
     
     func setupSearchBar() {

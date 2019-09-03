@@ -87,7 +87,7 @@ class DataService {
     
     fileprivate func getClientsFromRealDB() -> [Client] {
         let clients = realm.objects(Client.self)
-        return Array(clients.sorted(byKeyPath: "name"))
+        return Array(clients.sorted(byKeyPath: "Nome"))
     }
     
     fileprivate struct ClientsFileParsingStruct: Decodable {
@@ -272,6 +272,11 @@ class DataService {
                 print("Erro", error)
             }
         }.resume()
+    }
+    
+    func getRegrasDeDesconto() -> [RegraDeDesconto] {
+        let transportadoras = realm.objects(RegraDeDesconto.self)
+        return Array(transportadoras.sorted(byKeyPath: "descricao"))
     }
     
     fileprivate struct regraDeDescontoParseStruct: Decodable {

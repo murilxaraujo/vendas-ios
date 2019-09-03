@@ -48,7 +48,8 @@ class SignatureCollectorViewController: UIViewController, SignatureDrawingViewCo
         signatureComponent.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
         signatureComponent.view.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
         setDeviceToLandscapeMode(true)
-        
+        let netxButton = UIBarButtonItem(title: "Enviar", style: .plain, target: self, action: #selector(nextView(_:)))
+        self.navigationItem.setRightBarButton(netxButton, animated: true)
     }
     
     func setDeviceToLandscapeMode(_ orientation: Bool) {
@@ -60,6 +61,10 @@ class SignatureCollectorViewController: UIViewController, SignatureDrawingViewCo
         }
         
         UIDevice.current.setValue(value, forKey: "orientation")
+    }
+    
+    @objc func nextView(_ sender: Any) {
+        
     }
     
     //MARK: - Signature collection routine functions
