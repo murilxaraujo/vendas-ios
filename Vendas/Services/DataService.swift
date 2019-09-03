@@ -295,15 +295,40 @@ class DataService {
     
     func sendSignatureToCloud(_ signatureImage: UIImage, completionHandler: @escaping (_ fileURL: String, _ error: Error?) -> Void) {
         let storage = Storage.storage().reference()
-        let signatureRef = storage.child("signatures/\(NSDate().timeIntervalSinceReferenceDate)")
+        let signatureRef = storage.child("signatures/\(NSDate().timeIntervalSinceReferenceDate).jpg")
+        let metadata: StorageMetadata = {
+            let mdata = StorageMetadata()
+            mdata.contentType = "image/jpg"
+            return mdata
+        }()
+        let data = signatureImage.jpegData(compressionQuality: 1)
         
-        let uploadTask = signatureRef.putData(<#T##uploadData: Data##Data#>, metadata: <#T##StorageMetadata?#>) { (metadata, error) in
+        if data == nil {
+            completionHandler("erro", SignatureUploadErrors.imageFailedToConvertToData)
+        }
+        
+        signatureRef.putData(data!, metadata: metadata) { (uploadMetadata, error) in
             if error != nil {
                 completionHandler("erro", error)
                 return
             }
             
+            if uploadMetadata == nil {
+                completionHandler("erro", SignatureUploadErrors.uploadReturnedNilMetadata)
+            }
             
+            uploadMetadata!.storageReference!.downloadURL(completion: { (url, error) in
+                if error != nil {
+                    completionHandler("erro", error)
+                    return
+                }
+                
+                if url == nil {
+                    completionHandler("erro", SignatureUploadErrors.downloadURLIsnil)
+                }
+                
+                completionHandler("\(url!)", nil)
+            })
         }
     }
     

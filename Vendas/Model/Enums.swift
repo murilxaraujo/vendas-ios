@@ -17,3 +17,9 @@ enum LoginError: Error {
     case wrongPassword
     case networkError
 }
+
+enum SignatureUploadErrors: Error {
+    case imageFailedToConvertToData
+    case downloadURLIsnil
+    case uploadReturnedNilMetadata
+}

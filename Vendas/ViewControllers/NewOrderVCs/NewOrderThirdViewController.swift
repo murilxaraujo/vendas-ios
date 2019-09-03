@@ -94,7 +94,8 @@ class NewOrderThirdViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @objc func nextView(_ sender: Any) {
-        let vc = SignatureCollectorViewController()
+        let vc = SummaryTableViewController()
+        vc.orderItem = newOrderItem
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

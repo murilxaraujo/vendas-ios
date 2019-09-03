@@ -23,14 +23,50 @@ class SummaryTableViewController: UITableViewController {
         super.viewDidLoad()
         
         tableViewSetup()
+        setupClientData()
+        setupInfoData()
+        setupTransportadoraData()
+        tableView.reloadData()
     }
     
     // MARK: - TableView Setup
     
     func tableViewSetup() {
-        //tableView.register(nil, forCellReuseIdentifier: cellID)
+        tableView.register(ItemSelectionTableViewCell.self, forCellReuseIdentifier: cellID)
         self.navigationItem.title = "Resumo do pedido"
+        tableView.allowsSelection = false
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        
+    }
+    
+    // MARK: - Data setup methods
+    
+    func setupClientData() {
+        var clientSection = TVSection(title: "Cliente")
+        var rowItems = [RowItem]()
+        rowItems.append(RowItem(title: "Código", content: orderItem!.client!.codigo, height: 60))
+        rowItems.append(RowItem(title: "Nome", content: orderItem!.client!.Nome, height: 60))
+        rowItems.append(RowItem(title: "Loja", content: orderItem!.client!.loja, height: 60))
+        
+        clientSection.items = rowItems
+        sections.append(clientSection)
+    }
+    
+    func setupInfoData() {
+        var infoSection = TVSection(title: "Detalhes")
+        var rowItems = [RowItem]()
+        rowItems.append(RowItem(title: "Kit", content: orderItem!.kit, height: 60))
+        rowItems.append(RowItem(title: "Express", content: orderItem!.express, height: 60))
+        
+        infoSection.items = rowItems
+        sections.append(infoSection)
+    }
+    
+    func setupTransportadoraData() {
+        var transportadoraData = TVSection(title: "Transporte")
+        var rowItems: [RowItem] = []
+        rowItems.append(RowItem(title: "Transportadora", content: orderItem!.transportadora, height: 60))
+        rowItems.append(RowItem(title: "Tipo", content: orderItem!.tipoDeFrete, height: 60))
     }
 
     // MARK: - Table view data source
@@ -48,8 +84,9 @@ class SummaryTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! ItemSelectionTableViewCell
+        cell.titleLabel.text = sections[indexPath.section].items[indexPath.item].title
+        cell.uMedidaLabel.text = sections[indexPath.section].items[indexPath.item].content
         return cell
     }
     
