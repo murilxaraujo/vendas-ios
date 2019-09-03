@@ -81,6 +81,7 @@ class NewOrderSecondViewController: UIViewController {
         let input = UISwitch()
         input.translatesAutoresizingMaskIntoConstraints = false
         input.isOn = true
+        input.addTarget(self, action: #selector(kitValueChanged(_:)), for: .valueChanged)
         return input
     }()
     
@@ -437,19 +438,37 @@ class NewOrderSecondViewController: UIViewController {
         if (sender.isOn) {
             unidadeDeMedidaSegmentedControl.selectedSegmentIndex = 1
             unidadeDeMedidaSegmentedControl.setEnabled(false, forSegmentAt: 0)
+            newOrderItem?.express = "S"
         } else {
             unidadeDeMedidaSegmentedControl.setEnabled(true, forSegmentAt: 0)
+            newOrderItem?.express = "N"
+        }
+    }
+    
+    @objc func kitValueChanged(_ sender: UISwitch) {
+        if sender.isOn {
+            newOrderItem?.kit = "S"
+        } else {
+            newOrderItem?.kit = "N"
         }
     }
     
     //MARK: - Segmented controls targets
     
     @objc func unidadeDeMedidaChangedValue(_ sender: UISegmentedControl) {
-        
+        if sender.selectedSegmentIndex == 0 {
+            newOrderItem?.uMedida = "KG"
+        } else {
+            newOrderItem?.uMedida = "PC"
+        }
     }
     
     @objc func tipoDeFreteChangedValue(_ sender: UISegmentedControl) {
-        
+        if sender.selectedSegmentIndex == 0 {
+            newOrderItem?.tipoDeFrete = "C"
+        } else {
+            newOrderItem?.tipoDeFrete = "F"
+        }
     }
     
 }

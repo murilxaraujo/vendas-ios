@@ -26,6 +26,7 @@ class SummaryTableViewController: UITableViewController {
         setupClientData()
         setupInfoData()
         setupTransportadoraData()
+        setupItensData()
         tableView.reloadData()
     }
     
@@ -37,6 +38,8 @@ class SummaryTableViewController: UITableViewController {
         tableView.allowsSelection = false
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
+        let netxButton = UIBarButtonItem(title: "Próximo", style: .plain, target: self, action: #selector(nextView(_:)))
+        self.navigationItem.setRightBarButton(netxButton, animated: true)
     }
     
     // MARK: - Data setup methods
@@ -67,6 +70,20 @@ class SummaryTableViewController: UITableViewController {
         var rowItems: [RowItem] = []
         rowItems.append(RowItem(title: "Transportadora", content: orderItem!.transportadora, height: 60))
         rowItems.append(RowItem(title: "Tipo", content: orderItem!.tipoDeFrete, height: 60))
+        
+        transportadoraData.items = rowItems
+        sections.append(transportadoraData)
+    }
+    
+    func setupItensData() {
+        var itensSection = TVSection(title: "Itens")
+        var rowItems = [RowItem]()
+        for item in orderItem!.items {
+            rowItems.append(RowItem(title: item.produto!.nome, content: "\(item.quantidade)\(item.produto!.unidademedida.lowercased())", height: 60))
+        }
+        
+        itensSection.items = rowItems
+        sections.append(itensSection)
     }
 
     // MARK: - Table view data source
@@ -92,6 +109,12 @@ class SummaryTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return sections[indexPath.section].items[indexPath.row].height
+    }
+    
+    @objc func nextView(_ sender: UIBarButtonItem) {
+        let vc = SignatureCollectorViewController()
+        vc.orderItem = orderItem
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     private struct TVSection {

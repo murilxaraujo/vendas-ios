@@ -116,6 +116,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             AuthService.shared.saveLoginCredentials(username: username, password: password)
             AuthService.shared.saveUserID(id: newUser.id)
             
+            DataService.shared.getCondsPagamentoFromCloudToLocal()
+            DataService.shared.getRegraDeDescontoFromCloudToLocal()
+            DataService.shared.saveClientsInitialFileToDB()
+            DataService.shared.saveProductsInitialFileToDB()
+            DataService.shared.getTransportadorasDataFromCloudToLocal()
+            
+            
             self.present(HomeViewController(), animated: true, completion: nil)
             
         } catch LoginError.networkError {

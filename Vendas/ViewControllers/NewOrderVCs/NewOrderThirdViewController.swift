@@ -17,7 +17,6 @@ class NewOrderThirdViewController: UIViewController, UITableViewDelegate, UITabl
     var previousVC: NewOrderSecondViewController?
     var newOrderItem: NewOrder?
     var products: [ProdutoPedido] = []
-    
     // MARK: - View elements
     
     let addItemButton: MDCFloatingButton = {
@@ -94,6 +93,9 @@ class NewOrderThirdViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @objc func nextView(_ sender: Any) {
+        for item in products {
+            newOrderItem?.items.append(item)
+        }
         let vc = SummaryTableViewController()
         vc.orderItem = newOrderItem
         self.navigationController?.pushViewController(vc, animated: true)

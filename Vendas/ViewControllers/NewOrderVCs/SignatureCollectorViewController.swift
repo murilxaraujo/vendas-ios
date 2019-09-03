@@ -10,8 +10,9 @@ import UIKit
 
 class SignatureCollectorViewController: UIViewController, SignatureDrawingViewControllerDelegate {
     
-    
     //MARK: - Variables and functions
+    
+    var orderItem: NewOrder?
     
     //MARK: - View elements
     
@@ -64,7 +65,24 @@ class SignatureCollectorViewController: UIViewController, SignatureDrawingViewCo
     }
     
     @objc func nextView(_ sender: Any) {
-        
+        setDeviceToLandscapeMode(false)
+        DataService.shared.sendSignatureToCloud(signatureComponent.fullSignatureImage!) { (urlString, error) in
+            if error != nil {
+                print(error!)
+                return
+            }
+            self.orderItem?.signatureURL = urlString
+            
+            DataService.shared.sendOrderToProtheus(self.orderItem!, completionHandler: { (order, error) in
+                if error != nil {
+                    print(error!)
+                    self.setDeviceToLandscapeMode(true)
+                }
+                
+                RealmService.shared.save(order!)
+                self.dismiss(animated: true, completion: nil)
+            })
+        }
     }
     
     //MARK: - Signature collection routine functions
@@ -73,6 +91,4 @@ class SignatureCollectorViewController: UIViewController, SignatureDrawingViewCo
      
     }
 
-    
-    
 }

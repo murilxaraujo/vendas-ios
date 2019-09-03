@@ -287,8 +287,42 @@ class DataService {
     
     // MARK: - Send order to protheus
     
-    func sendOrderToProtheus(_ order: NewOrder) {
-        
+    func sendOrderToProtheus(_ order: NewOrder, completionHandler: @escaping (_ order: Order?, _ error: String?) -> Void) {
+        if !order.isValid() {
+            //Order is not valid
+        } else {
+            order.getJson { (json, error) in
+                if error != nil {
+                    return
+                }
+                
+                let jsonData = try? JSONSerialization.data(withJSONObject: json)
+                let url = URL(string: "http://189.112.124.67:8013/PEDIDOS")!
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                request.httpBody = jsonData
+                
+                let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                    guard let data = data, error == nil else {
+                        completionHandler(nil, "\(error!)")
+                        return
+                    }
+                    
+                    let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                    if let responseJSON = responseJSON as? [String: Any] {
+                        if responseJSON["ERRO"] as! String == "S" {
+                            completionHandler(nil, responseJSON["RETORNO"] as? String)
+                        } else {
+                            let order = Order()
+                            order.codigo = "\(responseJSON["RETORNO"] as! String)"
+                            completionHandler(order, nil)
+                        }
+                    }
+                })
+                
+                task.resume()
+            }
+        }
     }
     
     // MARK: - Signature functions
