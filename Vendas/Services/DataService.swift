@@ -12,6 +12,7 @@ import Alamofire
 import SwiftyJSON
 import HandyJSON
 import PromiseKit
+import Firebase
 
 class DataService {
     
@@ -290,6 +291,22 @@ class DataService {
         
     }
     
+    // MARK: - Signature functions
+    
+    func sendSignatureToCloud(_ signatureImage: UIImage, completionHandler: @escaping (_ fileURL: String, _ error: Error?) -> Void) {
+        let storage = Storage.storage().reference()
+        let signatureRef = storage.child("signatures/\(NSDate().timeIntervalSinceReferenceDate)")
+        
+        let uploadTask = signatureRef.putData(<#T##uploadData: Data##Data#>, metadata: <#T##StorageMetadata?#>) { (metadata, error) in
+            if error != nil {
+                completionHandler("erro", error)
+                return
+            }
+            
+            
+        }
+    }
+    
     // MARK: - Support Classes
     
     struct clientsJsonBasicTypes: HandyJSON {
@@ -298,6 +315,7 @@ class DataService {
     
     func getRealmPath() {
         print(realm.configuration.fileURL)
+        
     }
     
 }

@@ -9,6 +9,8 @@ target 'Vendas' do
 
   pod 'RealmSwift'
   pod 'Firebase/Core'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Analytics'
   pod 'lottie-ios'
   pod 'MaterialComponents'
   pod 'IQKeyboardManager'
