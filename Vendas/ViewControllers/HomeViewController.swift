@@ -81,6 +81,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         setupViewElements()
+        downloadInitialData()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -125,19 +126,10 @@ class HomeViewController: UIViewController {
         syncDataButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         syncDataButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         syncDataButton.isEnabled = false
-        /*
+
         if !DataService.shared.hasDownloadedData() {
-            DataService.shared.getTransportadorasDataFromCloudToLocal()
-            DataService.shared.getCondsPagamentoFromCloudToLocal()
-            DataService.shared.getRegraDeDescontoFromCloudToLocal()
-            DataService.shared.saveClientsInitialFileToDB()
-            DataService.shared.saveProductsInitialFileToDB()
-            DataService.shared.getRealmPath()
-            let  message = MDCSnackbarMessage(text: "Dados foram baixados com sucesso")
-            MDCSnackbarManager.show(message)
-            DataService.shared.setHasDownloadedData(true)
+           
         }
- */
     }
     
     @objc func newOrder(sender: Any) {
@@ -152,6 +144,62 @@ class HomeViewController: UIViewController {
 
     @objc func dataLocalBackup(sender: Any) {
         self.show(BackupDataDownloadViewController(), sender: nil)
+    }
+    
+    func downloadInitialData() {
+        
+        // Regra de desconto Download
+        do {
+            let success = try DataService.shared.getRegraDeDescontoFromCloudToLocal()
+            
+            if success != true {
+                let  message = MDCSnackbarMessage(text: "Erro ao baixar Regras de desconto")
+                MDCSnackbarManager.show(message)
+            }
+        } catch {
+            let  message = MDCSnackbarMessage(text: "Erro ao baixar Regras de desconto")
+            MDCSnackbarManager.show(message)
+        }
+        
+        // Transportadoras download
+        
+        do {
+            try DataService.shared.getTransportadorasDataFromCloudToLocal()
+        } catch {
+            let  message = MDCSnackbarMessage(text: "Erro ao baixar transportadoras")
+            MDCSnackbarManager.show(message)
+        }
+        
+        // Cond. Pag download
+        
+        do {
+            try DataService.shared.getCondsPagamentoFromCloudToLocal()
+        } catch {
+            let  message = MDCSnackbarMessage(text: "Erro ao baixar Cond. Pagamento")
+            MDCSnackbarManager.show(message)
+        }
+        
+        // Products saving
+        
+        do {
+            try DataService.shared.saveProductsInitialFileToDB()
+        } catch {
+            let  message = MDCSnackbarMessage(text: "Erro ao salvar produtos")
+            MDCSnackbarManager.show(message)
+        }
+        
+        // Clients saving
+        
+        do {
+            try DataService.shared.saveClientsInitialFileToDB()
+        } catch {
+            let  message = MDCSnackbarMessage(text: "Erro ao salvar clientes")
+            MDCSnackbarManager.show(message)
+        }
+        
+        let  message = MDCSnackbarMessage(text: "Dados foram baixados com sucesso")
+        MDCSnackbarManager.show(message)
+        DataService.shared.setHasDownloadedData(true)
     }
     
 }

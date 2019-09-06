@@ -69,12 +69,12 @@ class DataService {
         return []
     }
     
-    func saveClientsInitialFileToDB() {
+    func saveClientsInitialFileToDB() throws {
         if let path = Bundle.main.path(forResource: "clientesfile", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let clientes = try JSONDecoder().decode([ClientsFileParsingStruct].self, from: data)
-                print("Clientes em arquivo:",clientes.count)
+                print("Clientes em arquivo: ",clientes.count)
                 var items: [Client] = []
                 for item in clientes {
                     let object = Client(codigo: item.CODIGO.trimmingCharacters(in: .whitespacesAndNewlines), loja: item.LOJA.trimmingCharacters(in: .whitespacesAndNewlines), Nome: item.NOME, Cidade: item.CIDADE, Estado: item.ESTADO, Endereco: item.ENDERECO, Cep: item.CEP.trimmingCharacters(in: .whitespacesAndNewlines))
@@ -88,6 +88,7 @@ class DataService {
                 }
             } catch {
                 print("Erro:", error)
+                throw DataDownloadError.UndefinedError
             }
         }
     }
@@ -118,12 +119,12 @@ class DataService {
         return Array(products.sorted(byKeyPath: "nome"))
     }
     
-    func saveProductsInitialFileToDB() {
+    func saveProductsInitialFileToDB() throws {
         if let path = Bundle.main.path(forResource: "produtos", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let produtos = try JSONDecoder().decode([ProductsFileParsingStruct].self, from: data)
-                print("Produtos em arquivo:",produtos.count)
+                print("Produtos em arquivo: ",produtos.count)
                 var items: [Product] = []
                 for item in produtos {
                     let object = Product(codigo: item.codigo, nome: item.nome, unidadeDeMedida: item.unidademedida, saldo: item.saldo)
@@ -138,6 +139,7 @@ class DataService {
                 
             } catch {
                 print("Erro:", error)
+                throw DataDownloadError.UndefinedError
             }
         }
     }
@@ -181,29 +183,45 @@ class DataService {
         return Array(transportadoras.sorted(byKeyPath: "nome"))
     }
     
-    func getTransportadorasDataFromCloudToLocal() {
+    func getTransportadorasDataFromCloudToLocal() throws {
         let jsonString = "http://189.112.124.67:8013/transportadores_pv"
-        guard let url = URL(string: jsonString) else {return}
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            do {
-                if error != nil {return}
-                if response == nil {return}
-                if data == nil {return}
-                let transportadoras = try JSONDecoder().decode([TransportadoraParseStruct].self, from: data!)
-                var items: [Transportadora] = []
-                for item in transportadoras {
-                    let object = Transportadora(codigo: item.Codigo, nome: item.Nome)
-                    items.append(object)
-                }
-                let realmInstance = try! Realm()
-                
-                try! realmInstance.write {
-                    realmInstance.add(items)
-                }
-            } catch {
-                print("Erro", error)
-            }
+        guard let url = URL(string: jsonString) else {throw DataDownloadError.ErrorConvertingUrl}
+        
+        var data: Data?
+        var response: URLResponse?
+        var error: DataDownloadError?
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        URLSession.shared.dataTask(with: url) { (innerData, innerResponse, innerError) in
+            if error != nil {error = DataDownloadError.SessionError}
+            if response == nil {error =  DataDownloadError.ResponseIsNil}
+            if data == nil {error = DataDownloadError.DataIsNil}
+            data = innerData
+            response = innerResponse
+            
+            semaphore.signal()
         }.resume()
+        
+        _ = semaphore.wait(timeout: .distantFuture)
+        
+        do {
+            let transportadoras = try JSONDecoder().decode([TransportadoraParseStruct].self, from: data!)
+            var items: [Transportadora] = []
+            for item in transportadoras {
+                let object = Transportadora(codigo: item.Codigo, nome: item.Nome)
+                items.append(object)
+            }
+            
+            let realmInstance = try! Realm()
+            
+            try! realmInstance.write {
+                realmInstance.add(items)
+            }
+        } catch {
+            print("Erro", error)
+            throw DataDownloadError.UndefinedError
+        }
     }
     
     fileprivate struct TransportadoraParseStruct: Decodable {
@@ -218,39 +236,53 @@ class DataService {
         return Array(condspagamento.sorted(byKeyPath: "descricao"))
     }
     
-    func getCondsPagamentoFromCloudToLocal() {
+    func getCondsPagamentoFromCloudToLocal() throws {
         let jsonString = "http://189.112.124.67:8013/condpag_pv"
         guard let url = URL(string: jsonString) else {
             print("Eroor converting to url")
-            return
+            throw DataDownloadError.ErrorConvertingUrl
         }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
+        
+        var error: DataDownloadError?
+        var data: Data?
+        var response: URLResponse?
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        URLSession.shared.dataTask(with: url) { (innerData, innerResponse, innerError) in
             if error != nil {
-                print(error!)
-                return
+                error = DataDownloadError.SessionError
             }
             if response == nil {
-                print("nil response")
-                return
+                error = DataDownloadError.ResponseIsNil
             }
             if data == nil {
-                print("nil Data")
-                return
+                error = DataDownloadError.DataIsNil
             }
-            do {
-                let condPagamentos = try JSONDecoder().decode([CondPagamentoParseStruct].self, from: data!)
-                
-                for item in condPagamentos {
-                    let object = CondicaoDePagamento()
-                    object.codigo = item.Codigo
-                    object.descricao = item.Descricao
-                    RealmService.shared.save(object)
-                    print("Saved", object)
-                }
-            } catch {
-                print("Erro", error)
-            }
+            
+            data = innerData
+            response = innerResponse
+            
+            semaphore.signal()
+            
         }.resume()
+        
+        _ = semaphore.wait(timeout: .distantFuture)
+        
+        do {
+            let condPagamentos = try JSONDecoder().decode([CondPagamentoParseStruct].self, from: data!)
+            var items = [CondicaoDePagamento]()
+            for item in condPagamentos {
+                let object = CondicaoDePagamento()
+                object.codigo = item.Codigo
+                object.descricao = item.Descricao
+                items.append(object)
+            }
+            RealmService.shared.realm.add(items)
+        } catch {
+            print("Erro:",error)
+            throw DataDownloadError.UndefinedError
+        }
     }
     
     fileprivate struct CondPagamentoParseStruct: Decodable {
@@ -260,42 +292,71 @@ class DataService {
     
     // MARK: - Regra de desconto functions
     
-    func getRegraDeDescontoFromCloudToLocal() {
+    enum DataDownloadError: Error {
+        case ErrorConvertingUrl
+        case ResponseIsNil
+        case DataIsNil
+        case UndefinedError
+        case SessionError
+    }
+    
+    func getRegraDeDescontoFromCloudToLocal() throws -> Bool {
         let jsonString = "http://189.112.124.67:8013/regradesconto_pv"
         guard let url = URL(string: jsonString) else {
-            print("Error converting to url")
-            return
+            throw DataDownloadError.ErrorConvertingUrl
         }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if error != nil {
-                print(error!)
-                return
+        
+        var error: DataDownloadError?
+        var response: URLResponse?
+        var data: Data?
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        URLSession.shared.dataTask(with: url) { (innerData, innerResponse, innerError) in
+            if innerError != nil {
+                error = DataDownloadError.SessionError
             }
-            if response == nil {
-                print("nil response")
-                return
+            if innerResponse == nil {
+                error = DataDownloadError.ResponseIsNil
             }
             if data == nil {
-                print("nil Data")
-                return
+                error = DataDownloadError.DataIsNil
             }
-            do {
-                let regrasDeDesconto = try JSONDecoder().decode([regraDeDescontoParseStruct].self, from: data!)
-                var items = [RegraDeDesconto]()
-                for item in regrasDeDesconto {
-                    let object = RegraDeDesconto(codigo: item.Codigo, descricao: item.Descricao)
-                    items.append(object)
-                }
-                
-                let realmInstance = try! Realm()
-                
-                try! realmInstance.write {
-                    realmInstance.add(items)
-                }
-            } catch {
-                print("Erro", error)
-            }
+            data = innerData
+            response = innerResponse
+            semaphore.signal()
         }.resume()
+        _ = semaphore.wait(timeout: .distantFuture)
+        if error != nil {
+            switch error! {
+            case DataDownloadError.ErrorConvertingUrl:
+                throw DataDownloadError.ErrorConvertingUrl
+            case DataDownloadError.ResponseIsNil:
+                throw DataDownloadError.ResponseIsNil
+            case DataDownloadError.DataIsNil:
+                throw DataDownloadError.DataIsNil
+            default:
+                throw DataDownloadError.UndefinedError
+            }
+        }
+        do {
+            let regrasDeDesconto = try JSONDecoder().decode([regraDeDescontoParseStruct].self, from: data!)
+            var items = [RegraDeDesconto]()
+            for item in regrasDeDesconto {
+                let object = RegraDeDesconto(codigo: item.Codigo, descricao: item.Descricao)
+                items.append(object)
+            }
+            let secondSemaphone = DispatchSemaphore(value: 0)
+            let realmInstance = try! Realm()
+            try! realmInstance.write {
+                realmInstance.add(items)
+                secondSemaphone.signal()
+            }
+            _ = secondSemaphone.wait(timeout: .distantFuture)
+            return true
+        } catch {
+            throw error
+        }
     }
     
     func getRegrasDeDesconto() -> [RegraDeDesconto] {
