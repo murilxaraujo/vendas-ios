@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MaterialComponents.MaterialSnackbar
 
 class SignatureCollectorViewController: UIViewController, SignatureDrawingViewControllerDelegate {
     
@@ -69,6 +70,8 @@ class SignatureCollectorViewController: UIViewController, SignatureDrawingViewCo
         DataService.shared.sendSignatureToCloud(signatureComponent.fullSignatureImage!) { (urlString, error) in
             if error != nil {
                 print(error!)
+                let message = MDCSnackbarMessage(text: "Erro: \(error!)")
+                MDCSnackbarManager.show(message)
                 return
             }
             self.orderItem?.signatureURL = urlString
@@ -76,10 +79,14 @@ class SignatureCollectorViewController: UIViewController, SignatureDrawingViewCo
             DataService.shared.sendOrderToProtheus(self.orderItem!, completionHandler: { (order, error) in
                 if error != nil {
                     print(error!)
-                    self.setDeviceToLandscapeMode(true)
+                    let message = MDCSnackbarMessage(text: "Erro: \(error!)")
+                    MDCSnackbarManager.show(message)
+                    return
                 }
                 
                 RealmService.shared.save(order!)
+                let message = MDCSnackbarMessage(text: "Pedido incluído com sucesso")
+                MDCSnackbarManager.show(message)
                 self.dismiss(animated: true, completion: nil)
             })
         }

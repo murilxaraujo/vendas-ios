@@ -18,6 +18,7 @@ target 'Vendas' do
   pod 'SwiftyJSON'
   pod 'HandyJSON'
   pod 'PromiseKit'
+  pod 'Just'
   
   target 'VendasTests' do
     inherit! :search_paths

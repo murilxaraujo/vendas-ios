@@ -25,7 +25,7 @@ class DataService {
     }
     
     // MARK: -Variables and constants
-    let realm = try! Realm()
+
     let defaults = UserDefaults.standard
     
     // MARK: -Singleton declaration
@@ -61,7 +61,7 @@ class DataService {
     }
     
     func getClients() -> [Client] {
-        return getClientsFromRealDB()
+        return getClientsFromRealmDB()
     }
     
     fileprivate func getClientsFromCloud() -> [Client] {
@@ -75,10 +75,16 @@ class DataService {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let clientes = try JSONDecoder().decode([ClientsFileParsingStruct].self, from: data)
                 print("Clientes em arquivo:",clientes.count)
-                
+                var items: [Client] = []
                 for item in clientes {
                     let object = Client(codigo: item.CODIGO.trimmingCharacters(in: .whitespacesAndNewlines), loja: item.LOJA.trimmingCharacters(in: .whitespacesAndNewlines), Nome: item.NOME, Cidade: item.CIDADE, Estado: item.ESTADO, Endereco: item.ENDERECO, Cep: item.CEP.trimmingCharacters(in: .whitespacesAndNewlines))
-                    RealmService.shared.save(object)
+                    items.append(object)
+                }
+                
+                let realmInstance = try! Realm()
+                
+                try! realmInstance.write {
+                    realmInstance.add(items)
                 }
             } catch {
                 print("Erro:", error)
@@ -86,8 +92,8 @@ class DataService {
         }
     }
     
-    fileprivate func getClientsFromRealDB() -> [Client] {
-        let clients = realm.objects(Client.self)
+    fileprivate func getClientsFromRealmDB() -> [Client] {
+        let clients = RealmService.shared.realm.objects(Client.self)
         return Array(clients.sorted(byKeyPath: "Nome"))
     }
     
@@ -104,30 +110,11 @@ class DataService {
     // MARK: - Produtos functions
     
     func getProdutos() -> [Product] {
-        if NetworkService.shared.networkIsAvailable() {
-            return getProductsFromDB()
-        } else {
-            return getProductsFromDB()
-        }
-    }
-    
-    fileprivate func getProductsFromCloud() -> [Product] {
-        guard let url = URL(string: "http://189.112.124.67:8013/PRODUTOS_PV") else { return [] }
-        var products: [Product] = []
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            
-            guard let data = data else { return }
-            
-            let dataAsString = String(data: data, encoding: .utf8)
-            
-            print(dataAsString)
-        }
-        
-        return products
+        return getProductsFromDB()
     }
     
     fileprivate func getProductsFromDB() -> [Product] {
-        let products = realm.objects(Product.self)
+        let products = RealmService.shared.realm.objects(Product.self)
         return Array(products.sorted(byKeyPath: "nome"))
     }
     
@@ -137,16 +124,47 @@ class DataService {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let produtos = try JSONDecoder().decode([ProductsFileParsingStruct].self, from: data)
                 print("Produtos em arquivo:",produtos.count)
-                
+                var items: [Product] = []
                 for item in produtos {
                     let object = Product(codigo: item.codigo, nome: item.nome, unidadeDeMedida: item.unidademedida, saldo: item.saldo)
-                    print("Saving:", object)
-                    RealmService.shared.save(object)
+                    items.append(object)
                 }
+                
+                let realmInstance = try! Realm()
+                
+                try! realmInstance.write {
+                    realmInstance.add(items)
+                }
+                
             } catch {
                 print("Erro:", error)
             }
         }
+    }
+    
+    func getProductSaldo(_ product: Product, completionHandler: @escaping (_ saldo: String?, _ error: Error?) -> Void) {
+        
+        let jsonDic: [String: Any] = ["CODIGO": product.codigo.trimmingCharacters(in: .whitespacesAndNewlines)]
+        let jsonData = try? JSONSerialization.data(withJSONObject: jsonDic)
+        
+        var request = URLRequest(url: URL(string: "http://189.112.124.67:8013/saldo_pv")!)
+        request.httpMethod = "POST"
+        request.httpBody = jsonData
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                completionHandler(nil, error)
+                return
+            }
+            let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary ?? nil
+            if json == nil {
+                completionHandler(nil, SwiftyJSONError.notExist)
+            }
+            let saldo = "\(json!["saldo"]!)"
+            completionHandler(saldo, nil)
+        }
+        task.resume()
     }
     
     fileprivate struct ProductsFileParsingStruct: Decodable {
@@ -159,7 +177,7 @@ class DataService {
     // MARK: - Get transportadoras functions
     
     func getTransportadorasFromDB() -> [Transportadora] {
-        let transportadoras = realm.objects(Transportadora.self)
+        let transportadoras = RealmService.shared.realm.objects(Transportadora.self)
         return Array(transportadoras.sorted(byKeyPath: "nome"))
     }
     
@@ -168,17 +186,19 @@ class DataService {
         guard let url = URL(string: jsonString) else {return}
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             do {
-                
                 if error != nil {return}
                 if response == nil {return}
                 if data == nil {return}
                 let transportadoras = try JSONDecoder().decode([TransportadoraParseStruct].self, from: data!)
-                
+                var items: [Transportadora] = []
                 for item in transportadoras {
                     let object = Transportadora(codigo: item.Codigo, nome: item.Nome)
-                    print("Saving:", item)
-                    RealmService.shared.save(object)
-                    print("Saved:", object)
+                    items.append(object)
+                }
+                let realmInstance = try! Realm()
+                
+                try! realmInstance.write {
+                    realmInstance.add(items)
                 }
             } catch {
                 print("Erro", error)
@@ -194,7 +214,7 @@ class DataService {
     // MARK: - Get condições de pagamento functions
     
     func getCondsPagamentoFromDB() -> [CondicaoDePagamento] {
-        let condspagamento = realm.objects(CondicaoDePagamento.self)
+        let condspagamento = RealmService.shared.realm.objects(CondicaoDePagamento.self)
         return Array(condspagamento.sorted(byKeyPath: "descricao"))
     }
     
@@ -217,7 +237,6 @@ class DataService {
                 print("nil Data")
                 return
             }
-            
             do {
                 let condPagamentos = try JSONDecoder().decode([CondPagamentoParseStruct].self, from: data!)
                 
@@ -260,14 +279,18 @@ class DataService {
                 print("nil Data")
                 return
             }
-            
             do {
                 let regrasDeDesconto = try JSONDecoder().decode([regraDeDescontoParseStruct].self, from: data!)
-                
+                var items = [RegraDeDesconto]()
                 for item in regrasDeDesconto {
                     let object = RegraDeDesconto(codigo: item.Codigo, descricao: item.Descricao)
-                    RealmService.shared.save(object)
-                    print("Saved:", object)
+                    items.append(object)
+                }
+                
+                let realmInstance = try! Realm()
+                
+                try! realmInstance.write {
+                    realmInstance.add(items)
                 }
             } catch {
                 print("Erro", error)
@@ -276,7 +299,7 @@ class DataService {
     }
     
     func getRegrasDeDesconto() -> [RegraDeDesconto] {
-        let transportadoras = realm.objects(RegraDeDesconto.self)
+        let transportadoras = RealmService.shared.realm.objects(RegraDeDesconto.self)
         return Array(transportadoras.sorted(byKeyPath: "descricao"))
     }
     
@@ -290,6 +313,7 @@ class DataService {
     func sendOrderToProtheus(_ order: NewOrder, completionHandler: @escaping (_ order: Order?, _ error: String?) -> Void) {
         if !order.isValid() {
             //Order is not valid
+            print("Erro, order is not valid")
         } else {
             order.getJson { (json, error) in
                 if error != nil {
@@ -297,12 +321,12 @@ class DataService {
                 }
                 
                 let jsonData = try? JSONSerialization.data(withJSONObject: json)
-                let url = URL(string: "http://189.112.124.67:8013/PEDIDOS")!
+                let url = URL(string: "http://189.112.124.67:8013/PEDIDO_PV")!
                 var request = URLRequest(url: url)
                 request.httpMethod = "POST"
                 request.httpBody = jsonData
-                
-                let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+
+                let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
                     guard let data = data, error == nil else {
                         completionHandler(nil, "\(error!)")
                         return
@@ -310,8 +334,11 @@ class DataService {
                     
                     let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
                     if let responseJSON = responseJSON as? [String: Any] {
-                        if responseJSON["ERRO"] as! String == "S" {
+                        print(responseJSON)
+                        if responseJSON["ERRO"] != nil {
                             completionHandler(nil, responseJSON["RETORNO"] as? String)
+                        } else if responseJSON["errorCode"] != nil {
+                            completionHandler(nil, responseJSON["errorMessage"] as? String)
                         } else {
                             let order = Order()
                             order.codigo = "\(responseJSON["RETORNO"] as! String)"
@@ -349,9 +376,11 @@ class DataService {
             
             if uploadMetadata == nil {
                 completionHandler("erro", SignatureUploadErrors.uploadReturnedNilMetadata)
+                return
             }
             
-            uploadMetadata!.storageReference!.downloadURL(completion: { (url, error) in
+            
+            signatureRef.downloadURL(completion: { (url, error) in
                 if error != nil {
                     completionHandler("erro", error)
                     return
@@ -359,9 +388,11 @@ class DataService {
                 
                 if url == nil {
                     completionHandler("erro", SignatureUploadErrors.downloadURLIsnil)
+                    return
                 }
                 
                 completionHandler("\(url!)", nil)
+                return
             })
         }
     }
@@ -373,7 +404,7 @@ class DataService {
     }
     
     func getRealmPath() {
-        print(realm.configuration.fileURL)
+        print(RealmService.shared.realm.configuration.fileURL)
         
     }
     

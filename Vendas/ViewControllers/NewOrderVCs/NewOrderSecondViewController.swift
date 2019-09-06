@@ -384,6 +384,10 @@ class NewOrderSecondViewController: UIViewController {
         fillInfoWithClientDetais(client)
     }
     
+    func onDeliveryClientSelected(_ client: Client) {
+        
+    }
+    
     func onTransportadoraSelected(_ transportadora: Transportadora) {
         newOrderItem?.transportadora = transportadora.codigo
         transportadoraTextInput.text = transportadora.nome

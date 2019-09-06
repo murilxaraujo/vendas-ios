@@ -1,14 +1,14 @@
 //
-//  ClientSelectionViewController.swift
+//  DeliveryClientSelectionViewController.swift
 //  Vendas
 //
-//  Created by Murilo Araujo on 08/07/19.
+//  Created by Murilo Araujo on 05/09/19.
 //  Copyright © 2019 Murilo Araujo. All rights reserved.
 //
 
 import UIKit
 
-class ClientSelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class DeliveryClientSelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     
     // MARK: - Variables and constants
@@ -33,7 +33,7 @@ class ClientSelectionViewController: UIViewController, UITableViewDelegate, UITa
     }()
     
     // MARK: - Class routine functions
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchBar()
@@ -130,7 +130,7 @@ class ClientSelectionViewController: UIViewController, UITableViewDelegate, UITa
     // MARK: - Callback function
     
     func sendClientBackToPreviousVC(_ client: Client) {
-        mainViewController?.onClientSelected(client)
+        mainViewController?.onDeliveryClientSelected(client)
         self.dismiss(animated: true, completion: nil)
     }
     

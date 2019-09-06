@@ -7,10 +7,9 @@
 //
 
 import UIKit
+import MaterialComponents.MaterialSnackbar
 
 class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    
     
     // MARK: - Variables and constants
     
@@ -94,7 +93,7 @@ class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITab
             item = items[indexPath.row]
         }
         cell.titleLabel.text = item.getCodeAndName()
-        cell.uMedidaLabel.text = "Medida: \(item.unidademedida), saldo: \(item.saldo)"
+        cell.uMedidaLabel.text = "Medida: \(item.unidademedida)"
         return cell
     }
     
@@ -106,27 +105,36 @@ class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITab
         } else {
             item = items[indexPath.row]
         }
-        var textfieldd: UITextField?
-        let alertView = UIAlertController(title: "Quantidade", message: nil, preferredStyle: .alert)
-        alertView.addTextField { (uitextfield) in
-            uitextfield.placeholder = "Quantidade"
-            uitextfield.keyboardType = .numberPad
-            textfieldd = uitextfield
-        }
         
-        let alertViewAction = UIAlertAction(title: "Ok", style: .default) { (action) in
-            self.formerViewController?.addItem(ProdutoPedido(quantidade: Float("\(textfieldd!.text!)")!, produto: item))
-            self.closeView(sender: alertView)
-        }
-        
-        let alertViewCancelAction = UIAlertAction(title: "cancelar", style: .cancel) { (action) in
+        DataService.shared.getProductSaldo(item) { (saldo, erro) in
+            
+            if erro != nil {
+                let message = MDCSnackbarMessage(text: "Erro ao buscar saldo dos produtos")
+                MDCSnackbarManager.show(message)
+                return
+            }
+            
+            var textfieldd: UITextField?
+            let alertView = UIAlertController(title: "Saldo: \(saldo ?? "Saldo não encontrado")", message: nil, preferredStyle: .alert)
+            alertView.addTextField { (uitextfield) in
+                uitextfield.placeholder = "Quantidade"
+                uitextfield.keyboardType = .numberPad
+                textfieldd = uitextfield
+            }
+            
+            let alertViewAction = UIAlertAction(title: "Ok", style: .default) { (action) in
+                self.formerViewController?.addItem(ProdutoPedido(quantidade: Float("\(textfieldd!.text!)")!, produto: item))
+                self.closeView(sender: alertView)
+            }
+            
+            let alertViewCancelAction = UIAlertAction(title: "cancelar", style: .cancel) { (action) in }
+            
+            alertView.addAction(alertViewAction)
+            alertView.addAction(alertViewCancelAction)
+            
+            self.present(alertView, animated: true, completion: nil)
             
         }
-        //condpag_pv transportadores_pv vendedores_pv
-        alertView.addAction(alertViewAction)
-        alertView.addAction(alertViewCancelAction)
-        
-        present(alertView, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -9,6 +9,7 @@
 import UIKit
 import MaterialComponents.MaterialTextFields
 import MaterialComponents.MaterialButtons
+import MaterialComponents.MaterialSnackbar
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
@@ -105,7 +106,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func authenticate(sender: Any) {
-        
         let username: String = userNameTextField.text!
         let password: String = senhaTextField.text!
         
@@ -122,21 +122,32 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             DataService.shared.saveProductsInitialFileToDB()
             DataService.shared.getTransportadorasDataFromCloudToLocal()
             
-            
             self.present(HomeViewController(), animated: true, completion: nil)
             
         } catch LoginError.networkError {
-            
+            let message = MDCSnackbarMessage()
+            message.text = "Erro de rede"
+            MDCSnackbarManager.show(message)
         } catch LoginError.blockedUser {
-            
+            let message = MDCSnackbarMessage()
+            message.text = "Usuário Bloqueado"
+            MDCSnackbarManager.show(message)
         } catch LoginError.notAttachedSeller {
-            
+            let message = MDCSnackbarMessage()
+            message.text = "Não há vendedor vinculado"
+            MDCSnackbarManager.show(message)
         } catch LoginError.userNotFound {
-            
+            let message = MDCSnackbarMessage()
+            message.text = "Usuário não encontrado"
+            MDCSnackbarManager.show(message)
         } catch LoginError.wrongPassword {
-            
+            let message = MDCSnackbarMessage()
+            message.text = "Senha incorreta"
+            MDCSnackbarManager.show(message)
         } catch {
-            
+            let message = MDCSnackbarMessage()
+            message.text = "Opa! Ocorreu um erro não identificado: \(error)"
+            MDCSnackbarManager.show(message)
         }
         
     }

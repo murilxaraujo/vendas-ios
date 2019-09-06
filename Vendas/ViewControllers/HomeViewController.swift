@@ -125,6 +125,19 @@ class HomeViewController: UIViewController {
         syncDataButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         syncDataButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         syncDataButton.isEnabled = false
+        /*
+        if !DataService.shared.hasDownloadedData() {
+            DataService.shared.getTransportadorasDataFromCloudToLocal()
+            DataService.shared.getCondsPagamentoFromCloudToLocal()
+            DataService.shared.getRegraDeDescontoFromCloudToLocal()
+            DataService.shared.saveClientsInitialFileToDB()
+            DataService.shared.saveProductsInitialFileToDB()
+            DataService.shared.getRealmPath()
+            let  message = MDCSnackbarMessage(text: "Dados foram baixados com sucesso")
+            MDCSnackbarManager.show(message)
+            DataService.shared.setHasDownloadedData(true)
+        }
+ */
     }
     
     @objc func newOrder(sender: Any) {

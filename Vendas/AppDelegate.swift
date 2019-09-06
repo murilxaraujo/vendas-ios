@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = .white
         IQKeyboardManager.shared().isEnabled = true
         
-         
+        //Add avalista back
         return true
     }
 

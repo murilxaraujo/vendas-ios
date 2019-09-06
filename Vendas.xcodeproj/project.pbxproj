@@ -37,6 +37,7 @@
 		4B6FA6C722CFCA6800138303 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B6FA6C622CFCA6800138303 /* loading.json */; };
 		4B6FA6C922CFD00C00138303 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6FA6C822CFD00C00138303 /* LoginViewController.swift */; };
 		4B6FA6CB22CFE89100138303 /* BackupDataDownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6FA6CA22CFE89100138303 /* BackupDataDownloadViewController.swift */; };
+		4B7594A22321783900AF9FDA /* DeliveryClientSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7594A12321783900AF9FDA /* DeliveryClientSelectionViewController.swift */; };
 		4B770CB02319922B00D76403 /* RegraDeDesconto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B770CAF2319922B00D76403 /* RegraDeDesconto.swift */; };
 		4B7B02D622D3B8FB00408443 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7B02D522D3B8FB00408443 /* User.swift */; };
 		4B7B02D822D3B9F700408443 /* NewOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7B02D722D3B9F700408443 /* NewOrderViewController.swift */; };
@@ -51,6 +52,8 @@
 		4B831B6422DD184B009D390D /* NewOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B831B6322DD184B009D390D /* NewOrder.swift */; };
 		4B8AE69122D6605D006E1AD7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AE69022D6605D006E1AD7 /* NetworkManager.swift */; };
 		4B9137BF2319AF7B0038BE54 /* produtos.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B9137BE2319AF7B0038BE54 /* produtos.json */; };
+		4BAF576D231FD90800815A28 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAF576C231FD90800815A28 /* UploadViewController.swift */; };
+		4BAF576F231FDD1C00815A28 /* loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BAF576E231FDD1C00815A28 /* loader.json */; };
 		4BAF9F3222FC88A600C30739 /* Produto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAF9F3122FC88A600C30739 /* Produto.swift */; };
 		4BB5F4442319B68C00B0843F /* clientesfile.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BB5F4432319B68C00B0843F /* clientesfile.json */; };
 		4BB72FD922CBB0D000058239 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BB72FD822CBB0D000058239 /* GoogleService-Info.plist */; };
@@ -118,6 +121,8 @@
 		4B6FA6C622CFCA6800138303 /* loading.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = loading.json; path = Vendas/loading.json; sourceTree = "<group>"; };
 		4B6FA6C822CFD00C00138303 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4B6FA6CA22CFE89100138303 /* BackupDataDownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupDataDownloadViewController.swift; sourceTree = "<group>"; };
+		4B7299582320048500BB2182 /* Vendas.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Vendas.entitlements; sourceTree = "<group>"; };
+		4B7594A12321783900AF9FDA /* DeliveryClientSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryClientSelectionViewController.swift; sourceTree = "<group>"; };
 		4B770CAF2319922B00D76403 /* RegraDeDesconto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegraDeDesconto.swift; sourceTree = "<group>"; };
 		4B7B02D522D3B8FB00408443 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4B7B02D722D3B9F700408443 /* NewOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrderViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +137,8 @@
 		4B831B6322DD184B009D390D /* NewOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrder.swift; sourceTree = "<group>"; };
 		4B8AE69022D6605D006E1AD7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		4B9137BE2319AF7B0038BE54 /* produtos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = produtos.json; sourceTree = "<group>"; };
+		4BAF576C231FD90800815A28 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
+		4BAF576E231FDD1C00815A28 /* loader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loader.json; sourceTree = "<group>"; };
 		4BAF9F3122FC88A600C30739 /* Produto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Produto.swift; sourceTree = "<group>"; };
 		4BB5F4432319B68C00B0843F /* clientesfile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = clientesfile.json; sourceTree = "<group>"; };
 		4BB72FD822CBB0D000058239 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -201,6 +208,7 @@
 				4BB5F4432319B68C00B0843F /* clientesfile.json */,
 				4B1BE6E622D77F830043F5E0 /* offline.json */,
 				4B6FA6C622CFCA6800138303 /* loading.json */,
+				4BAF576E231FDD1C00815A28 /* loader.json */,
 				4B5DB52E22CA80D80062E64D /* Vendas */,
 				4B5DB54322CA80E10062E64D /* VendasTests */,
 				4B5DB54E22CA80E10062E64D /* VendasUITests */,
@@ -223,6 +231,7 @@
 		4B5DB52E22CA80D80062E64D /* Vendas */ = {
 			isa = PBXGroup;
 			children = (
+				4B7299582320048500BB2182 /* Vendas.entitlements */,
 				4BBA3C8922CD370400D4D49B /* ViewControllers */,
 				4BB72FDB22CBCF3400058239 /* Model */,
 				4BB72FDA22CBCF2800058239 /* Services */,
@@ -265,6 +274,8 @@
 				4B21ADC72315977F00DBC487 /* CondicaoDePagamentoTableViewController.swift */,
 				4B668AD2231D809E007F63FE /* RegraDeDescontoTableViewController.swift */,
 				4B668AD4231DA1B7007F63FE /* SummaryTableViewController.swift */,
+				4BAF576C231FD90800815A28 /* UploadViewController.swift */,
+				4B7594A12321783900AF9FDA /* DeliveryClientSelectionViewController.swift */,
 			);
 			path = NewOrderVCs;
 			sourceTree = "<group>";
@@ -411,6 +422,11 @@
 				TargetAttributes = {
 					4B5DB52B22CA80D80062E64D = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					4B5DB53F22CA80E10062E64D = {
 						CreatedOnToolsVersion = 10.2.1;
@@ -449,6 +465,7 @@
 			files = (
 				4B5DB53A22CA80E10062E64D /* LaunchScreen.storyboard in Resources */,
 				4BB72FD922CBB0D000058239 /* GoogleService-Info.plist in Resources */,
+				4BAF576F231FDD1C00815A28 /* loader.json in Resources */,
 				4B9137BF2319AF7B0038BE54 /* produtos.json in Resources */,
 				4BB5F4442319B68C00B0843F /* clientesfile.json in Resources */,
 				4B1BE6E722D77F830043F5E0 /* offline.json in Resources */,
@@ -574,6 +591,7 @@
 				4BAF9F3222FC88A600C30739 /* Produto.swift in Sources */,
 				4B69B41422D8C98800F367C7 /* NewClient.swift in Sources */,
 				4B1BB51B230AD241005C6FA8 /* SignatureDrawingModel.swift in Sources */,
+				4B7594A22321783900AF9FDA /* DeliveryClientSelectionViewController.swift in Sources */,
 				4B21ADC82315977F00DBC487 /* CondicaoDePagamentoTableViewController.swift in Sources */,
 				4B1BE6E522D77E440043F5E0 /* OfflineViewController.swift in Sources */,
 				4B1BB520230AD3A3005C6FA8 /* SignatureCollectorViewController.swift in Sources */,
@@ -582,6 +600,7 @@
 				4B5DB53222CA80D80062E64D /* LoadingScreenViewController.swift in Sources */,
 				4B668AD3231D809E007F63FE /* RegraDeDescontoTableViewController.swift in Sources */,
 				4B1BB511230AD1E1005C6FA8 /* SignatureDrawingViewController.swift in Sources */,
+				4BAF576D231FD90800815A28 /* UploadViewController.swift in Sources */,
 				4B08107C231455C400770BAC /* CondicaoDePagamento.swift in Sources */,
 				4B831B6422DD184B009D390D /* NewOrder.swift in Sources */,
 				4B7B02DF22D3C31D00408443 /* ClientSelectionViewController.swift in Sources */,
@@ -771,6 +790,7 @@
 			baseConfigurationReference = 37EDA6204D9BC7513BC793D9 /* Pods-Vendas.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Vendas/Vendas.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29346794D4;
 				INFOPLIST_FILE = Vendas/Info.plist;
@@ -790,6 +810,7 @@
 			baseConfigurationReference = 507EF6C9D84F4BD38BD2C13B /* Pods-Vendas.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Vendas/Vendas.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29346794D4;
 				INFOPLIST_FILE = Vendas/Info.plist;

@@ -67,7 +67,7 @@ class SummaryTableViewController: UITableViewController {
     
     func setupTransportadoraData() {
         var transportadoraData = TVSection(title: "Transporte")
-        var rowItems: [RowItem] = []
+        var rowItems = [RowItem]()
         rowItems.append(RowItem(title: "Transportadora", content: orderItem!.transportadora, height: 60))
         rowItems.append(RowItem(title: "Tipo", content: orderItem!.tipoDeFrete, height: 60))
         

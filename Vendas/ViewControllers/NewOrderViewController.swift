@@ -62,7 +62,7 @@ class NewOrderViewController: UIViewController, UITableViewDelegate, UITableView
     //MARK: -Functions
     
     func setupViewElements() {
-        
+        newOrderItem.vendedor = "000115"
         self.view.backgroundColor = .white
         self.navigationItem.title = "Novo pedido"
         let backbutton = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(closeView(sender:)))
