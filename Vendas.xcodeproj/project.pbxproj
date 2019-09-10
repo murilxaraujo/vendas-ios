@@ -24,6 +24,7 @@
 		4B1BE6EB22D78D340043F5E0 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BE6EA22D78D340043F5E0 /* Enums.swift */; };
 		4B21ADC623157F4E00DBC487 /* TransportadorasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B21ADC523157F4E00DBC487 /* TransportadorasTableViewController.swift */; };
 		4B21ADC82315977F00DBC487 /* CondicaoDePagamentoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B21ADC72315977F00DBC487 /* CondicaoDePagamentoTableViewController.swift */; };
+		4B3C88242326CB19008FF083 /* ProductSelectedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C88232326CB19008FF083 /* ProductSelectedViewController.swift */; };
 		4B441519231EC3C60018343D /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B441518231EC3C60018343D /* Order.swift */; };
 		4B5DB53022CA80D80062E64D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5DB52F22CA80D80062E64D /* AppDelegate.swift */; };
 		4B5DB53222CA80D80062E64D /* LoadingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5DB53122CA80D80062E64D /* LoadingScreenViewController.swift */; };
@@ -102,6 +103,7 @@
 		4B1BE6EA22D78D340043F5E0 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		4B21ADC523157F4E00DBC487 /* TransportadorasTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportadorasTableViewController.swift; sourceTree = "<group>"; };
 		4B21ADC72315977F00DBC487 /* CondicaoDePagamentoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CondicaoDePagamentoTableViewController.swift; sourceTree = "<group>"; };
+		4B3C88232326CB19008FF083 /* ProductSelectedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSelectedViewController.swift; sourceTree = "<group>"; };
 		4B441518231EC3C60018343D /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		4B5DB52C22CA80D80062E64D /* Vendas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vendas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B5DB52F22CA80D80062E64D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 				4B668AD4231DA1B7007F63FE /* SummaryTableViewController.swift */,
 				4BAF576C231FD90800815A28 /* UploadViewController.swift */,
 				4B7594A12321783900AF9FDA /* DeliveryClientSelectionViewController.swift */,
+				4B3C88232326CB19008FF083 /* ProductSelectedViewController.swift */,
 			);
 			path = NewOrderVCs;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				4BBA3C8722CD323E00D4D49B /* Reachability.swift in Sources */,
 				4B5DB53022CA80D80062E64D /* AppDelegate.swift in Sources */,
 				4B1BE6E922D784760043F5E0 /* DataService.swift in Sources */,
+				4B3C88242326CB19008FF083 /* ProductSelectedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

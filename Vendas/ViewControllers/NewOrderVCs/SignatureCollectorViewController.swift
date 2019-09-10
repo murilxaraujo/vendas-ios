@@ -66,7 +66,6 @@ class SignatureCollectorViewController: UIViewController, SignatureDrawingViewCo
     }
     
     @objc func nextView(_ sender: Any) {
-        setDeviceToLandscapeMode(false)
         DataService.shared.sendSignatureToCloud(signatureComponent.fullSignatureImage!) { (urlString, error) in
             if error != nil {
                 print(error!)

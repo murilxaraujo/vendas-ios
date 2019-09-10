@@ -42,7 +42,7 @@ class NewOrder: Object {
         json["filial"] = self.filial
         json["loja"] = self.client!.loja
         json["kit"] = self.kit
-        json["vendedor"] = AuthService.shared.getSavedUserID()
+        json["vendedor"] = self.vendedor
         json["express"] = self.express
         json["tipoDeFrete"] = self.tipoDeFrete
         json["transportadora"] = self.transportadora
@@ -52,7 +52,7 @@ class NewOrder: Object {
         json["obs"] = self.obs
         json["pesoLq"] = self.pesoLq
         json["pesoBt"] = self.pesoBt
-        json["items"] = Array<[String:Any]>()
+        json["itens"] = Array<[String:Any]>()
         json["assinatura"] = self.signatureURL
         var items = Array<[String:Any]>()
         
@@ -61,7 +61,7 @@ class NewOrder: Object {
         }
         
         json["items"] = items
-        
+        print(json)
         completionHandler(json, nil)
     }
     

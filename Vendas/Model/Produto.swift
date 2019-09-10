@@ -31,10 +31,12 @@ class Product: Object {
 class ProdutoPedido: Object {
     @objc dynamic var quantidade: Float = 0.0
     @objc dynamic var produto: Product? = nil
+    @objc dynamic var price: String = ""
     
-    convenience init(quantidade: Float, produto: Product) {
+    convenience init(quantidade: Float, produto: Product, price: String) {
         self.init()
         self.quantidade = quantidade
         self.produto = produto
+        self.price = price
     }
 }

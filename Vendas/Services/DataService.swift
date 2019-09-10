@@ -162,12 +162,49 @@ class DataService {
             let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary ?? nil
             if json == nil {
                 completionHandler(nil, SwiftyJSONError.notExist)
+                return
             }
             let saldo = "\(json!["saldo"]!)"
             completionHandler(saldo, nil)
         }
         task.resume()
     }
+    
+    func getProductPrice(clientID: String, clientLoja: String, productID: String, completionHandler: @escaping (_ preco: String?, _ error: Error?) -> Void) {
+        let jsonDic: [String: Any] = [
+            "CODIGO": clientID,
+            "LOJA": clientLoja,
+            "PRODUTO": productID
+        ]
+        let jsonData = try? JSONSerialization.data(withJSONObject: jsonDic)
+        
+        var request = URLRequest(url: URL(string: "http://189.112.124.67:8013/PRECO_PV")!)
+        request.httpMethod = "POST"
+        request.httpBody = jsonData
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                completionHandler(nil, SwiftyJSONError.notExist)
+                return
+            }
+            let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary ?? nil
+            if json == nil {
+                completionHandler(nil, SwiftyJSONError.notExist)
+                return
+            }
+            
+            if json!["RETORNO"] != nil {
+                completionHandler(nil, SwiftyJSONError.notExist)
+                return
+            }
+            
+            let price = "\(json!["PRECO"]!)"
+            completionHandler(price, nil)
+        }
+        task.resume()
+    }
+    // send CODIGO LOJA PRODUTO, preco PRECO_PV, erro RETORNO
     
     fileprivate struct ProductsFileParsingStruct: Decodable {
         var codigo: String
@@ -278,7 +315,11 @@ class DataService {
                 object.descricao = item.Descricao
                 items.append(object)
             }
-            RealmService.shared.realm.add(items)
+            let realmInstance = try! Realm()
+            
+            try! realmInstance.write {
+                realmInstance.add(items)
+            }
         } catch {
             print("Erro:",error)
             throw DataDownloadError.UndefinedError
@@ -319,7 +360,7 @@ class DataService {
             if innerResponse == nil {
                 error = DataDownloadError.ResponseIsNil
             }
-            if data == nil {
+            if innerData == nil {
                 error = DataDownloadError.DataIsNil
             }
             data = innerData
@@ -346,13 +387,10 @@ class DataService {
                 let object = RegraDeDesconto(codigo: item.Codigo, descricao: item.Descricao)
                 items.append(object)
             }
-            let secondSemaphone = DispatchSemaphore(value: 0)
             let realmInstance = try! Realm()
             try! realmInstance.write {
                 realmInstance.add(items)
-                secondSemaphone.signal()
             }
-            _ = secondSemaphone.wait(timeout: .distantFuture)
             return true
         } catch {
             throw error

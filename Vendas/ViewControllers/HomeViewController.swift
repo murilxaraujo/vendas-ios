@@ -81,7 +81,12 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         setupViewElements()
-        downloadInitialData()
+        DataService.shared.getRealmPath()
+        if !DataService.shared.hasDownloadedData() {
+            downloadInitialData()
+            DataService.shared.setHasDownloadedData(true)
+        }
+
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -127,9 +132,7 @@ class HomeViewController: UIViewController {
         syncDataButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         syncDataButton.isEnabled = false
 
-        if !DataService.shared.hasDownloadedData() {
-           
-        }
+        
     }
     
     @objc func newOrder(sender: Any) {

@@ -47,9 +47,9 @@ class SummaryTableViewController: UITableViewController {
     func setupClientData() {
         var clientSection = TVSection(title: "Cliente")
         var rowItems = [RowItem]()
-        rowItems.append(RowItem(title: "Código", content: orderItem!.client!.codigo, height: 60))
-        rowItems.append(RowItem(title: "Nome", content: orderItem!.client!.Nome, height: 60))
-        rowItems.append(RowItem(title: "Loja", content: orderItem!.client!.loja, height: 60))
+        rowItems.append(RowItem(title: "Código", content: orderItem!.client?.codigo ?? "Cliente não selecionado", height: 60))
+        rowItems.append(RowItem(title: "Nome", content: orderItem!.client?.Nome ?? "Cliente não selecionado", height: 60))
+        rowItems.append(RowItem(title: "Loja", content: orderItem!.client?.loja ?? "Cliente não selecionado", height: 60))
         
         clientSection.items = rowItems
         sections.append(clientSection)

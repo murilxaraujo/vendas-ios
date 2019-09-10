@@ -106,6 +106,13 @@ class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITab
             item = items[indexPath.row]
         }
         
+        let modalView = ProductSelectedViewController()
+        modalView.modalPresentationStyle = .overFullScreen
+        modalView.productID = item.codigo.trimmingCharacters(in: .whitespacesAndNewlines)
+        modalView.clientID = self.formerViewController?.newOrderItem?.client?.codigo.trimmingCharacters(in: .whitespacesAndNewlines)
+        modalView.clientLoja = self.formerViewController?.newOrderItem?.client?.loja.trimmingCharacters(in: .whitespacesAndNewlines)
+        modalView.previousVC = self
+        modalView.product = Product(codigo: item.codigo, nome: item.nome, unidadeDeMedida: item.unidademedida, saldo: "\(item.saldo)")
         DataService.shared.getProductSaldo(item) { (saldo, erro) in
             
             if erro != nil {
@@ -114,6 +121,9 @@ class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITab
                 return
             }
             
+            modalView.saldo = saldo!
+            self.present(modalView, animated: true, completion: nil)
+            /*
             var textfieldd: UITextField?
             let alertView = UIAlertController(title: "Saldo: \(saldo ?? "Saldo não encontrado")", message: nil, preferredStyle: .alert)
             alertView.addTextField { (uitextfield) in
@@ -133,7 +143,7 @@ class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITab
             alertView.addAction(alertViewCancelAction)
             
             self.present(alertView, animated: true, completion: nil)
-            
+            */
         }
     }
     
@@ -157,6 +167,11 @@ class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITab
     
     @objc func closeView(sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func onProductSelected(_ product: ProdutoPedido) {
+        self.formerViewController?.addItem(product)
+        self.closeView(sender: self)
     }
     
     func getData() {
