@@ -9,39 +9,21 @@
 import UIKit
 import MaterialComponents.MaterialButtons
 
-class NewOrderViewController: UIViewController {
+class NewOrderViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     //MARK: -Variables and constants
-    
+    let cellid = "itemCell"
     let newOrderItem = NewOrder()
+    let menuOptions = ["Metalforte Polo", "MetalforteBR"]
+    //MARK: -View elements
     
-    let label: UILabel = {
-        let label = UILabel()
-        label.text = "Selecione a filial"
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    let tableView: UITableView = {
+        let tv = UITableView()
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        return tv
     }()
     
-    let brButton: MDCButton = {
-        let button = MDCButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Metalforte BR", for: .normal)
-        button.backgroundColor = UIColor(red:0.25, green:0.32, blue:0.71, alpha:1.0)
-        button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(brSelected(_:)), for: .touchUpInside)
-        return button
-    }()
-    
-    let poloButton: MDCButton = {
-        let button = MDCButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Metalforte Polo", for: .normal)
-        button.backgroundColor = UIColor(red:0.25, green:0.32, blue:0.71, alpha:1.0)
-        button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(poloSelected(_:)), for: .touchUpInside)
-        return button
-    }()
+    //MARK: -Class routine functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,28 +31,51 @@ class NewOrderViewController: UIViewController {
         setupViewElements()
     }
     
+    //MARK: -TableView routine functions
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return menuOptions.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellid) as! newOrderFirstPageTableViewCell
+        cell.title = menuOptions[indexPath.item]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        switch indexPath.item {
+        case 0:
+            poloSelected(tableView)
+        case 1:
+            brSelected(tableView)
+        default:
+            print("error")
+        }
+    }
+    
+    //MARK: -Functions
+    
     func setupViewElements() {
-        
+        newOrderItem.vendedor = "000115"
         self.view.backgroundColor = .white
         self.navigationItem.title = "Novo pedido"
         let backbutton = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(closeView(sender:)))
         self.navigationItem.setLeftBarButton(backbutton, animated: true)
-        
-        self.view.addSubview(label)
-        label.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        label.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
-        label.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
-        
-        self.view.addSubview(brButton)
-        brButton.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20).isActive = true
-        brButton.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
-        brButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
-        
-        self.view.addSubview(poloButton)
-        poloButton.topAnchor.constraint(equalTo: brButton.bottomAnchor, constant: 20).isActive = true
-        poloButton.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
-        poloButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
-        
+        self.view.addSubview(tableView)
+        tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(newOrderFirstPageTableViewCell.self, forCellReuseIdentifier: cellid)
+        tableView.tableFooterView = UIView()
     }
     
     @objc func closeView(sender: Any) {
@@ -79,16 +84,45 @@ class NewOrderViewController: UIViewController {
     
     @objc func poloSelected(_ sender: Any) {
         let vc = NewOrderSecondViewController()
-        newOrderItem.filial = 1
+        newOrderItem.filial = "02"
         vc.newOrderItem = newOrderItem
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func brSelected(_ sender: Any) {
         let vc = NewOrderSecondViewController()
-        newOrderItem.filial = 2
+        newOrderItem.filial = "01"
         vc.newOrderItem = newOrderItem
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+}
+
+class newOrderFirstPageTableViewCell: UITableViewCell {
+    let label: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    public var title : String! {
+        didSet {
+            label.text = title
+        }
+    }
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setup() {
+        addSubview(label)
+        label.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
+        label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    }
 }

@@ -14,6 +14,13 @@ import MaterialComponents.MaterialButtons
 class NewClientViewController: UIViewController {
     // MARK: - Variables and constants
     
+    // MARK: - View elements
+    
+    let tabController: UISegmentedControl = {
+        let segmentedControl = UISegmentedControl(items: ["PF", "PJ"])
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        return segmentedControl
+    }()
     
     // MARK: - View elements
     
@@ -161,11 +168,20 @@ class NewClientViewController: UIViewController {
 
         let backbutton = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(closeView(sender:)))
         self.navigationItem.setLeftBarButton(backbutton, animated: true)
-        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         self.view.backgroundColor = .white
         
+        tabController.selectedSegmentIndex = 0
+        tabController.setWidth(60, forSegmentAt: 0)
+        tabController.setWidth(60, forSegmentAt: 1)
+        tabController.sizeToFit()
+        tabController.addTarget(self, action: #selector(tabChangedValue(_:)), for: .valueChanged)
+        tabController.selectedSegmentIndex = 0
+        tabController.sendActions(for: .valueChanged)
+        self.navigationItem.titleView = tabController
+        
         self.view.addSubview(scrollView)
-        scrollView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20).isActive = true
         scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
@@ -229,6 +245,29 @@ class NewClientViewController: UIViewController {
     
     @objc func closeView(sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - Segmented control tab
+    
+    @objc func tabChangedValue(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            showPessoaFisicaPage()
+        default:
+            showPessoaJuridicaPage()
+        }
+    }
+    
+    func showPessoaFisicaPage() {
+        cpfcnpjTextFieldController.placeholderText = "CPF"
+        nomeFantasiaTextFieldController.placeholderText = "Sobrenome"
+        nomeTextFieldController.placeholderText = "Nome"
+    }
+    
+    func showPessoaJuridicaPage() {
+        cpfcnpjTextFieldController.placeholderText = "CNPJ"
+        nomeTextFieldController.placeholderText = "Razão Social"
+        nomeFantasiaTextFieldController.placeholderText = "Nome fantasia"
     }
     
     @objc func saveInfo() {

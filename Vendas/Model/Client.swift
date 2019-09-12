@@ -10,14 +10,22 @@ import Foundation
 import RealmSwift
 
 class Client: Object {
-    @objc dynamic var id: String = ""
-    @objc dynamic var name: String = ""
-    @objc dynamic var telefone: String = ""
+    @objc dynamic var codigo = ""
+    @objc dynamic var loja = ""
+    @objc dynamic var Nome = ""
+    @objc dynamic var Cidade = ""
+    @objc dynamic var Estado = ""
+    @objc dynamic var Endereco = ""
+    @objc dynamic var Cep = ""
     
-    convenience init(id: String, name: String, telefone: String) {
+    convenience init(codigo: String, loja: String, Nome: String, Cidade: String, Estado: String, Endereco: String, Cep: String) {
         self.init()
-        self.id = id
-        self.name = name
-        self.telefone = telefone
+        self.codigo = codigo
+        self.loja = loja
+        self.Nome = Nome
+        self.Cidade = Cidade
+        self.Estado = Estado
+        self.Endereco = Endereco
+        self.Cep = Cep
     }
 }
