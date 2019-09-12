@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Firebase
+import IQKeyboardManager
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +19,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        FirebaseApp.configure()
+        
+        let migrationBlock: MigrationBlock = { migration, oldSchemaVersion in
+            //Leave the block empty
+        }
+        Realm.Configuration.defaultConfiguration = Realm.Configuration(schemaVersion: 6, migrationBlock: migrationBlock)
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = HomeViewController()
+        window?.makeKeyAndVisible()
+        window?.backgroundColor = .white
+        IQKeyboardManager.shared().isEnabled = true
+        
+        //Add avalista back
         return true
     }
 

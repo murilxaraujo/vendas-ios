@@ -32,3 +32,7 @@ class VendasTests: XCTestCase {
     }
 
 }
+
+class DataServiceTests: XCTestCase {
+    
+}
