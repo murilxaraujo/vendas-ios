@@ -29,13 +29,14 @@ class ProductSelectedViewController: UIViewController {
         return tf
     }()
     
-    let closeButton: UIButton = {
-        let button = UIButton()
+    let closeButton: MDCFloatingButton = {
+        let button = MDCFloatingButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "round_close_black_24pt"), for: .normal)
         button.backgroundColor = .white
         button.tintColor = .lightGray
-        button.layer.cornerRadius = 15
+        //button.layer.cornerRadius = 15
+        button.isUserInteractionEnabled = true
         return button
     }()
     
@@ -181,21 +182,21 @@ class ProductSelectedViewController: UIViewController {
         
 
         
-        modalView.addSubview(closeButton)
+        view.addSubview(closeButton)
         closeButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         closeButton.bottomAnchor.constraint(equalTo: modalView.topAnchor, constant: -20).isActive = true
         closeButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         closeButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        closeButton.addTarget(self, action: #selector(closeView(_:)), for: .touchUpInside)
+        closeButton.addTarget(self, action: #selector(closeCurrentView(_:)), for: .touchUpInside)
     }
     
     @objc func sendDataBack(_ sender: Any) {
         let productin = ProdutoPedido(quantidade: Float("\(productQuantityTextView.text!)")!, produto: product!, price: price)
         previousVC?.onProductSelected(productin)
-        closeView(sender)
+        closeCurrentView(sender)
     }
     
-    @objc func closeView(_ sender: Any) {
+    @objc func closeCurrentView(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -207,6 +208,7 @@ class ProductSelectedViewController: UIViewController {
             }
             
             self.priceText.text = "R$ \(price!)"
+            self.price = "\(price!)"
         }
     }
 }

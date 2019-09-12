@@ -42,7 +42,7 @@ class NewOrder: Object {
         json["filial"] = self.filial
         json["loja"] = self.client!.loja
         json["kit"] = self.kit
-        json["vendedor"] = self.vendedor
+        json["vendedor"] = AuthService.shared.getSavedUserID() ?? "000115"
         json["express"] = self.express
         json["tipoDeFrete"] = self.tipoDeFrete
         json["transportadora"] = self.transportadora
@@ -50,17 +50,17 @@ class NewOrder: Object {
         json["regraDeDesconto"] = self.regraDeDesconto
         json["desconto"] = self.desconto
         json["obs"] = self.obs
-        json["pesoLq"] = self.pesoLq
-        json["pesoBt"] = self.pesoBt
+        json["pesoLq"] = "\(self.pesoLq)"
+        json["pesoBt"] = "\(self.pesoBt)"
         json["itens"] = Array<[String:Any]>()
         json["assinatura"] = self.signatureURL
         var items = Array<[String:Any]>()
         
         for item in self.items {
-            items.append(["produto": item.produto!.codigo, "quantidade": item.quantidade])
+            items.append(["produto": item.produto!.codigo, "quantidade": "\(item.quantidade)", "preco": item.price])
         }
-        
-        json["items"] = items
+
+        json["itens"] = items
         print(json)
         completionHandler(json, nil)
     }

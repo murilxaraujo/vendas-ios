@@ -66,29 +66,37 @@ class SignatureCollectorViewController: UIViewController, SignatureDrawingViewCo
     }
     
     @objc func nextView(_ sender: Any) {
-        DataService.shared.sendSignatureToCloud(signatureComponent.fullSignatureImage!) { (urlString, error) in
-            if error != nil {
-                print(error!)
-                let message = MDCSnackbarMessage(text: "Erro: \(error!)")
-                MDCSnackbarManager.show(message)
-                return
-            }
-            self.orderItem?.signatureURL = urlString
-            
-            DataService.shared.sendOrderToProtheus(self.orderItem!, completionHandler: { (order, error) in
+        let vc = UploadViewController()
+        vc.orderItem = orderItem
+        vc.signatureImage = signatureComponent.fullSignatureImage
+        navigationController?.pushViewController(vc, animated: true)
+        
+        /*
+        func sendDataToCloud() {
+            DataService.shared.sendSignatureToCloud(signatureImage ?? UIImage()) { (urlString, error) in
                 if error != nil {
                     print(error!)
                     let message = MDCSnackbarMessage(text: "Erro: \(error!)")
                     MDCSnackbarManager.show(message)
+                    self.loadingAnimation.stop()
                     return
                 }
+                self.orderItem?.signatureURL = urlString
                 
-                RealmService.shared.save(order!)
-                let message = MDCSnackbarMessage(text: "Pedido incluído com sucesso")
-                MDCSnackbarManager.show(message)
-                self.dismiss(animated: true, completion: nil)
-            })
+                DataService.shared.sendOrderToProtheus(self.orderItem!, completionHandlerr: { (order, error) in
+                    if error != nil {
+                        print(error!)
+                        let message = MDCSnackbarMessage(text: "Erro: \(error!)")
+                        MDCSnackbarManager.show(message)
+                        self.loadingAnimation.stop()
+                        return
+                    }
+                    
+                    self.dismiss(animated: true, completion: nil)
+                })
+            }
         }
+        */
     }
     
     //MARK: - Signature collection routine functions

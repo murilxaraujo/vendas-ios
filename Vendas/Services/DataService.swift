@@ -184,23 +184,26 @@ class DataService {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if error != nil {
-                completionHandler(nil, SwiftyJSONError.notExist)
-                return
-            }
-            let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary ?? nil
-            if json == nil {
-                completionHandler(nil, SwiftyJSONError.notExist)
-                return
+            DispatchQueue.main.async {
+                if error != nil {
+                    completionHandler(nil, SwiftyJSONError.notExist)
+                    return
+                }
+                let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary ?? nil
+                if json == nil {
+                    completionHandler(nil, SwiftyJSONError.notExist)
+                    return
+                }
+                
+                if json!["RETORNO"] != nil {
+                    completionHandler(nil, SwiftyJSONError.notExist)
+                    return
+                }
+                
+                let price = "\(json!["PRECO"]!)"
+                completionHandler(price, nil)
             }
             
-            if json!["RETORNO"] != nil {
-                completionHandler(nil, SwiftyJSONError.notExist)
-                return
-            }
-            
-            let price = "\(json!["PRECO"]!)"
-            completionHandler(price, nil)
         }
         task.resume()
     }
@@ -409,7 +412,7 @@ class DataService {
     
     // MARK: - Send order to protheus
     
-    func sendOrderToProtheus(_ order: NewOrder, completionHandler: @escaping (_ order: Order?, _ error: String?) -> Void) {
+    func sendOrderToProtheus(_ order: NewOrder, completion: @escaping (_ retorno: String?, _ error: String?) -> Void) {
         if !order.isValid() {
             //Order is not valid
             print("Erro, order is not valid")
@@ -426,22 +429,29 @@ class DataService {
                 request.httpBody = jsonData
 
                 let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
-                    guard let data = data, error == nil else {
-                        completionHandler(nil, "\(error!)")
+                    if error != nil {
+                        completion(nil, "\(error!)")
                         return
                     }
                     
-                    let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-                    if let responseJSON = responseJSON as? [String: Any] {
-                        print(responseJSON)
-                        if responseJSON["ERRO"] != nil {
-                            completionHandler(nil, responseJSON["RETORNO"] as? String)
-                        } else if responseJSON["errorCode"] != nil {
-                            completionHandler(nil, responseJSON["errorMessage"] as? String)
-                        } else {
-                            let order = Order()
-                            order.codigo = "\(responseJSON["RETORNO"] as! String)"
-                            completionHandler(order, nil)
+                    if data == nil {
+                        completion(nil, "Data is nil")
+                    }
+                    
+                    let responseJSON = try? JSONSerialization.jsonObject(with: data!, options: [])
+                    
+                    DispatchQueue.main.async {
+                        if let responseJSON = responseJSON as? [String: Any] {
+                            print(responseJSON)
+                            print("ERRO value", responseJSON["ERRO"] as! String)
+                            print("ERRO EQUALS S:", responseJSON["ERRO"] as! String == "S")
+                            if responseJSON["ERRO"] as! String == "S" {
+                                completion(nil, responseJSON["RETORNO"] as? String)
+                            } else if responseJSON["errorCode"] != nil {
+                                completion(nil, responseJSON["errorMessage"] as? String)
+                            } else {
+                                completion(responseJSON["RETORNO"] as? String, nil)
+                            }
                         }
                     }
                 })
@@ -477,7 +487,6 @@ class DataService {
                 completionHandler("erro", SignatureUploadErrors.uploadReturnedNilMetadata)
                 return
             }
-            
             
             signatureRef.downloadURL(completion: { (url, error) in
                 if error != nil {

@@ -115,35 +115,17 @@ class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITab
         modalView.product = Product(codigo: item.codigo, nome: item.nome, unidadeDeMedida: item.unidademedida, saldo: "\(item.saldo)")
         DataService.shared.getProductSaldo(item) { (saldo, erro) in
             
-            if erro != nil {
-                let message = MDCSnackbarMessage(text: "Erro ao buscar saldo dos produtos")
-                MDCSnackbarManager.show(message)
-                return
+            
+            DispatchQueue.main.async {
+                if erro != nil {
+                    let message = MDCSnackbarMessage(text: "Erro ao buscar saldo dos produtos")
+                    MDCSnackbarManager.show(message)
+                    return
+                }
+                
+                modalView.saldo = saldo!
+                self.present(modalView, animated: true, completion: nil)
             }
-            
-            modalView.saldo = saldo!
-            self.present(modalView, animated: true, completion: nil)
-            /*
-            var textfieldd: UITextField?
-            let alertView = UIAlertController(title: "Saldo: \(saldo ?? "Saldo não encontrado")", message: nil, preferredStyle: .alert)
-            alertView.addTextField { (uitextfield) in
-                uitextfield.placeholder = "Quantidade"
-                uitextfield.keyboardType = .numberPad
-                textfieldd = uitextfield
-            }
-            
-            let alertViewAction = UIAlertAction(title: "Ok", style: .default) { (action) in
-                self.formerViewController?.addItem(ProdutoPedido(quantidade: Float("\(textfieldd!.text!)")!, produto: item))
-                self.closeView(sender: alertView)
-            }
-            
-            let alertViewCancelAction = UIAlertAction(title: "cancelar", style: .cancel) { (action) in }
-            
-            alertView.addAction(alertViewAction)
-            alertView.addAction(alertViewCancelAction)
-            
-            self.present(alertView, animated: true, completion: nil)
-            */
         }
     }
     

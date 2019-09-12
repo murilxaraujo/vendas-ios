@@ -17,6 +17,8 @@ class RegraDeDescontoTableViewController: UITableViewController {
         super.viewDidLoad()
         self.navigationItem.title = "Regras de desconto"
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        let backbutton = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(closeView(sender:)))
+        self.navigationItem.setLeftBarButton(backbutton, animated: true)
         tableView.register(ItemSelectionTableViewCell.self, forCellReuseIdentifier: "celli")
         items = DataService.shared.getRegrasDeDesconto()
         tableView.reloadData()
@@ -50,6 +52,10 @@ class RegraDeDescontoTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         previousVC?.onRegrasDeDescontoSelected(items[indexPath.item])
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func closeView(sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
 

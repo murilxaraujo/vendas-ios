@@ -75,7 +75,6 @@ class ClientSelectionViewController: UIViewController, UITableViewDelegate, UITa
             cell.titleLabel.text = items[indexPath.item].Nome
             cell.uMedidaLabel.text = items[indexPath.item].codigo
         }
-        
         return cell
     }
     
@@ -121,6 +120,9 @@ class ClientSelectionViewController: UIViewController, UITableViewDelegate, UITa
         self.navigationController?.navigationBar.prefersLargeTitles = true
         let backbutton = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(closeView(sender:)))
         self.navigationItem.setLeftBarButton(backbutton, animated: true)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        definesPresentationContext = true
     }
     
     @objc func closeView(sender: Any) {
@@ -135,4 +137,11 @@ class ClientSelectionViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     
+}
+
+extension ClientSelectionViewController: UISearchResultsUpdating {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
 }

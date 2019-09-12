@@ -138,6 +138,7 @@ class NewOrderSecondViewController: UIViewController {
         let input = MDCTextField()
         input.translatesAutoresizingMaskIntoConstraints = false
         input.placeholder = "Desconto"
+        input.keyboardType = UIKeyboardType.decimalPad
         return input
     }()
     
@@ -237,9 +238,15 @@ class NewOrderSecondViewController: UIViewController {
         lojaTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
         scrollView.addSubview(clienteDeEntregaTextInput)
+        let clienteDeEntregaButton = UIButton(type: .custom)
+        clienteDeEntregaButton.setImage(UIImage(named: "round_search_black_24pt"), for: .normal)
+        clienteDeEntregaButton.frame = CGRect(x: 0, y: 0, width: 28, height: 28);
+        clienteDeEntregaButton.addTarget(self, action: #selector(openDeliveryClientSelection(_:)), for: .touchUpInside)
         clienteDeEntregaTextInput.topAnchor.constraint(equalTo: lojaTextInput.bottomAnchor, constant: 0).isActive = true
         clienteDeEntregaTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         clienteDeEntregaTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        clienteDeEntregaTextInput.rightView = clienteDeEntregaButton
+        clienteDeEntregaTextInput.rightViewMode = .always
         
         scrollView.addSubview(clientNameTextInput)
         clientNameTextInput.topAnchor.constraint(equalTo: clienteDeEntregaTextInput.bottomAnchor, constant: 0).isActive = true
@@ -385,7 +392,8 @@ class NewOrderSecondViewController: UIViewController {
     }
     
     func onDeliveryClientSelected(_ client: Client) {
-        
+        clienteDeEntregaTextInput.text = client.codigo
+        clientNameTextInput.text = client.Nome
     }
     
     func onTransportadoraSelected(_ transportadora: Transportadora) {
@@ -401,10 +409,17 @@ class NewOrderSecondViewController: UIViewController {
     
     func onRegrasDeDescontoSelected(_ regra: RegraDeDesconto) {
         regraDeDescontoTextInput.text = regra.descricao
+        newOrderItem?.regraDeDesconto = regra.codigo
     }
     
     @objc fileprivate func openClientSelection(_ sender: Any) {
         let vc = ClientSelectionViewController()
+        vc.mainViewController = self
+        self.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
+    }
+    
+    @objc fileprivate func openDeliveryClientSelection(_ sender: Any) {
+        let vc = DeliveryClientSelectionViewController()
         vc.mainViewController = self
         self.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
     }
@@ -435,6 +450,18 @@ class NewOrderSecondViewController: UIViewController {
         let vc = NewOrderThirdViewController()
         vc.previousVC = self
         vc.newOrderItem = newOrderItem
+        vc.newOrderItem?.kit = {
+            if kitSwitch.isOn {
+                return "S"
+            }
+            return "N"
+        }()
+        vc.newOrderItem?.express = {
+            if expressSwitch.isOn {
+                return "S"
+            }
+            return "N"
+        }()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
