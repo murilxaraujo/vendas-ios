@@ -27,6 +27,7 @@ class SummaryTableViewController: UITableViewController {
         setupInfoData()
         setupTransportadoraData()
         setupItensData()
+        setupFinance()
         tableView.reloadData()
     }
     
@@ -89,7 +90,13 @@ class SummaryTableViewController: UITableViewController {
     func setupFinance() {
         var financeSection = TVSection(title: "Orçamento")
         var rowItems = [RowItem]()
-        //rowItems.append(RowItem()
+        var finalprice: Double = 0
+        for item in orderItem!.items {
+            finalprice = finalprice + Double(item.price)!;
+        }
+        rowItems.append(RowItem(title: "Valor final", content: "R$\(finalprice)", height: 60))
+        financeSection.items = rowItems
+        sections.append(financeSection)
     }
 
     // MARK: - Table view data source

@@ -252,7 +252,7 @@ class DataService {
                 let object = Transportadora(codigo: item.Codigo, nome: item.Nome)
                 items.append(object)
             }
-            
+
             let realmInstance = try! Realm()
             
             try! realmInstance.write {
@@ -482,7 +482,7 @@ class DataService {
                 completionHandler("erro", error)
                 return
             }
-            
+            // EXPRESS =! POLO
             if uploadMetadata == nil {
                 completionHandler("erro", SignatureUploadErrors.uploadReturnedNilMetadata)
                 return
