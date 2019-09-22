@@ -368,6 +368,7 @@
 				4B5DB52922CA80D80062E64D /* Frameworks */,
 				4B5DB52A22CA80D80062E64D /* Resources */,
 				0544564EA77D407A3264C9F5 /* [CP] Embed Pods Frameworks */,
+				4B12A46D2338029F0010066A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -514,6 +515,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vendas/Pods-Vendas-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		4B12A46D2338029F0010066A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
 		};
 		4B4BCBFDC3752558F737B401 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
