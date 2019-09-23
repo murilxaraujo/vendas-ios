@@ -450,6 +450,8 @@ class NewOrderSecondViewController: UIViewController {
         let vc = NewOrderThirdViewController()
         vc.previousVC = self
         vc.newOrderItem = newOrderItem
+        vc.newOrderItem?.obs = observacaoTextInput.text ?? ""
+        vc.newOrderItem?.desconto = descontoTextInput.text ?? ""
         vc.newOrderItem?.kit = {
             if kitSwitch.isOn {
                 return "S"
