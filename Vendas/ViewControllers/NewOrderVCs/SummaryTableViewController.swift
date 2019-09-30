@@ -80,7 +80,7 @@ class SummaryTableViewController: UITableViewController {
         var itensSection = TVSection(title: "Itens")
         var rowItems = [RowItem]()
         for item in orderItem!.items {
-            rowItems.append(RowItem(title: item.produto!.nome, content: "R$\(item.price)x\(item.quantidade)\(item.produto!.unidademedida.lowercased())", height: 60))
+            rowItems.append(RowItem(title: item.produto!.nome, content: "R$\(item.price)x\(item.quantidade)\(item.produto!.primeiraunidade.lowercased())", height: 60))
         }
         
         itensSection.items = rowItems

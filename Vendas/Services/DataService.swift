@@ -120,14 +120,14 @@ class DataService {
     }
     
     func saveProductsInitialFileToDB() throws {
-        if let path = Bundle.main.path(forResource: "produtos", ofType: "json") {
+        if let path = Bundle.main.path(forResource: "produtos2", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let produtos = try JSONDecoder().decode([ProductsFileParsingStruct].self, from: data)
                 print("Produtos em arquivo: ",produtos.count)
                 var items: [Product] = []
                 for item in produtos {
-                    let object = Product(codigo: item.codigo, nome: item.nome, unidadeDeMedida: item.unidademedida, saldo: item.saldo)
+                    let object = Product(codigo: item.codigo, nome: item.nome, primeiraunidade: item.primeiraunidade, saldo: item.saldo, segundaunidade: item.segundaunidade)
                     items.append(object)
                 }
                 
@@ -212,7 +212,8 @@ class DataService {
     fileprivate struct ProductsFileParsingStruct: Decodable {
         var codigo: String
         var nome: String
-        var unidademedida: String
+        var primeiraunidade: String
+        var segundaunidade: String
         var saldo: String
     }
     
@@ -387,7 +388,7 @@ class DataService {
             let regrasDeDesconto = try JSONDecoder().decode([regraDeDescontoParseStruct].self, from: data!)
             var items = [RegraDeDesconto]()
             for item in regrasDeDesconto {
-                let object = RegraDeDesconto(codigo: item.Codigo, descricao: item.Descricao)
+                let object = RegraDeDesconto(codigo: item.Codigo, descricao: item.Descricao, desconto: item.Desconto)
                 items.append(object)
             }
             let realmInstance = try! Realm()
@@ -408,6 +409,7 @@ class DataService {
     fileprivate struct regraDeDescontoParseStruct: Decodable {
         var Codigo: String
         var Descricao: String
+        var Desconto: String
     }
     
     // MARK: - Send order to protheus
