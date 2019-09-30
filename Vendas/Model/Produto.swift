@@ -28,18 +28,23 @@ class Product: Object {
     func getCodeAndName() -> String {
         return "\(codigo) - \(nome)"
     }
+    
+    func hasSecondMeasureUnit() -> Bool {
+        return !segundaunidade.isEmpty
+    }
 }
 
 class ProdutoPedido: Object {
     @objc dynamic var quantidade: Float = 0.0
     @objc dynamic var produto: Product? = nil
     @objc dynamic var price: String = ""
-    @objc dynamic var selectedUnidadeDeMedida: String = ""
+    @objc dynamic var um: String = ""
     
-    convenience init(quantidade: Float, produto: Product, price: String) {
+    convenience init(quantidade: Float, produto: Product, price: String, selectedUM: String) {
         self.init()
         self.quantidade = quantidade
         self.produto = produto
         self.price = price
+        self.um = selectedUM
     }
 }

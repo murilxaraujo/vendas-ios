@@ -490,9 +490,9 @@ class NewOrderSecondViewController: UIViewController {
     
     @objc func unidadeDeMedidaChangedValue(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            newOrderItem?.uMedida = "KG"
+            newOrderItem?.um = "KG"
         } else {
-            newOrderItem?.uMedida = "PC"
+            newOrderItem?.um = "PC"
         }
     }
     

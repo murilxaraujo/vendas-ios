@@ -13,6 +13,7 @@ import MaterialComponents.MaterialTextFields
 class ProductSelectedViewController: UIViewController {
     
     //Variables and constants
+    var selectedUM = ""
     var saldo: String = ""
     var price: String = ""
     var clientID: String?
@@ -70,6 +71,7 @@ class ProductSelectedViewController: UIViewController {
     func setupView() {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         view.isOpaque = false
+        
         
         let modalView: UIView = {
             let view = UIView()
@@ -149,7 +151,7 @@ class ProductSelectedViewController: UIViewController {
                 label.translatesAutoresizingMaskIntoConstraints = false
                 label.textColor = .black
                 label.font = UIFont.systemFont(ofSize: 20)
-                label.text = "\(saldo)"
+                label.text = "\(saldo) \(product?.primeiraunidade ?? "")"
                 return label
             }()
             
@@ -166,12 +168,22 @@ class ProductSelectedViewController: UIViewController {
         
         
         modalView.addSubview(priceView)
+        if (product!.hasSecondMeasureUnit()) {
+            priceView.bottomAnchor.constraint(equalTo: productQuantityTextView.topAnchor, constant: -50).isActive = true
+        } else {
+            priceView.bottomAnchor.constraint(equalTo: productQuantityTextView.topAnchor, constant: -15).isActive = true
+        }
         priceView.bottomAnchor.constraint(equalTo: productQuantityTextView.topAnchor, constant: -15).isActive = true
         priceView.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         priceView.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor, constant: -10).isActive = true
         priceView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
         modalView.addSubview(saldoView)
+        if (product!.hasSecondMeasureUnit()) {
+            saldoView.bottomAnchor.constraint(equalTo: productQuantityTextView.topAnchor, constant: -50).isActive = true
+        } else {
+            saldoView.bottomAnchor.constraint(equalTo: productQuantityTextView.topAnchor, constant: -15).isActive = true
+        }
         saldoView.bottomAnchor.constraint(equalTo: productQuantityTextView.topAnchor, constant: -15).isActive = true
         saldoView.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor, constant: 10).isActive = true
         saldoView.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
@@ -188,10 +200,42 @@ class ProductSelectedViewController: UIViewController {
         closeButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         closeButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
         closeButton.addTarget(self, action: #selector(closeCurrentView(_:)), for: .touchUpInside)
+        
+        if (product!.hasSecondMeasureUnit()) {
+            let unitylabel: UILabel = {
+                let label = UILabel()
+                label.translatesAutoresizingMaskIntoConstraints = false
+                label.text = "Unidade de medida"
+                return label
+            }()
+            
+            modalView.addSubview(unitylabel)
+            unitylabel.bottomAnchor.constraint(equalTo: productQuantityTextView.topAnchor, constant: -10).isActive = true
+            unitylabel.leftAnchor.constraint(equalTo: returnButton.leftAnchor).isActive = true
+            
+            let unidadeSegmentedControl: UISegmentedControl = {
+                let seg = UISegmentedControl(items: [product!.primeiraunidade, product!.segundaunidade])
+                seg.selectedSegmentIndex = 0
+                seg.translatesAutoresizingMaskIntoConstraints = false
+                seg.addTarget(self, action: #selector(changeum(_:)), for: .valueChanged)
+                return seg
+            }()
+            
+            modalView.addSubview(unidadeSegmentedControl)
+            unidadeSegmentedControl.bottomAnchor.constraint(equalTo: productQuantityTextView.topAnchor, constant: -10).isActive = true
+            unidadeSegmentedControl.rightAnchor.constraint(equalTo: returnButton.rightAnchor).isActive = true
+            
+        }
     }
     
     @objc func sendDataBack(_ sender: Any) {
-        let productin = ProdutoPedido(quantidade: Float("\(productQuantityTextView.text!)")!, produto: product!, price: price)
+        var um = ""
+        if (product!.hasSecondMeasureUnit()) {
+            um = selectedUM
+        } else {
+            um = product!.primeiraunidade
+        }
+        let productin = ProdutoPedido(quantidade: Float("\(productQuantityTextView.text!)")!, produto: product!, price: price, selectedUM: um)
         previousVC?.onProductSelected(productin)
         closeCurrentView(sender)
     }
@@ -200,15 +244,24 @@ class ProductSelectedViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @objc func changeum(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            selectedUM = product!.primeiraunidade
+        } else {
+            selectedUM = product!.segundaunidade
+        }
+    }
+    
     func getPrice() {
         DataService.shared.getProductPrice(clientID: clientID!, clientLoja: clientLoja!, productID: productID!) { (price, error) in
             if error != nil {
                 self.priceText.text = "erro"
                 return
             }
-            
-            self.priceText.text = "R$ \(price!)"
-            self.price = "\(price!)"
+            let discount = 100.0 - Double(self.previousVC!.formerViewController!.newOrderItem!.desconto)!
+            let pricein = Double(price!)!*discount/100
+            self.priceText.text = "R$ \(String(format: "%.2f", pricein))"
+            self.price = "\(String(format: "%.2f", pricein))"
         }
     }
 }

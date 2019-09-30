@@ -93,7 +93,12 @@ class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITab
             item = items[indexPath.row]
         }
         cell.titleLabel.text = item.getCodeAndName()
-        cell.uMedidaLabel.text = "Medida: \(item.primeiraunidade)"
+        if item.hasSecondMeasureUnit() {
+            cell.uMedidaLabel.text = "Medida: \(item.primeiraunidade) ou \(item.segundaunidade)"
+        } else {
+            cell.uMedidaLabel.text = "Medida: \(item.primeiraunidade)"
+        }
+        
         return cell
     }
     

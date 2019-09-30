@@ -120,14 +120,14 @@ class DataService {
     }
     
     func saveProductsInitialFileToDB() throws {
-        if let path = Bundle.main.path(forResource: "produtos2", ofType: "json") {
+        if let path = Bundle.main.path(forResource: "jsonformatter", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let produtos = try JSONDecoder().decode([ProductsFileParsingStruct].self, from: data)
                 print("Produtos em arquivo: ",produtos.count)
                 var items: [Product] = []
                 for item in produtos {
-                    let object = Product(codigo: item.codigo, nome: item.nome, primeiraunidade: item.primeiraunidade, saldo: item.saldo, segundaunidade: item.segundaunidade)
+                    let object = Product(codigo: item.codigo.trimmingCharacters(in: .whitespacesAndNewlines), nome: item.nome, primeiraunidade: item.primeiraunidade.trimmingCharacters(in: .whitespacesAndNewlines), saldo: item.saldo.trimmingCharacters(in: .whitespacesAndNewlines), segundaunidade: item.segundaunidade.trimmingCharacters(in: .whitespacesAndNewlines))
                     items.append(object)
                 }
                 

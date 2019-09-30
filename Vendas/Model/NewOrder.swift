@@ -27,7 +27,7 @@ class NewOrder: Object {
     @objc dynamic var pesoLq: Float = 0.0
     @objc dynamic var pesoBt: Float = 0.0
     @objc dynamic var signatureURL: String = ""
-    @objc dynamic var uMedida: String = ""
+    @objc dynamic var um: String = ""
     let items = List<ProdutoPedido>()
     //assinatura
     
@@ -54,10 +54,11 @@ class NewOrder: Object {
         json["pesoBt"] = "\(self.pesoBt)"
         json["itens"] = Array<[String:Any]>()
         json["assinatura"] = self.signatureURL
+        json["um"] = self.um
         var items = Array<[String:Any]>()
         
         for item in self.items {
-            items.append(["produto": item.produto!.codigo, "quantidade": "\(item.quantidade)", "preco": item.price])
+            items.append(["produto": item.produto!.codigo, "quantidade": "\(item.quantidade)", "preco": item.price, "um": item.um])
         }
 
         json["itens"] = items
