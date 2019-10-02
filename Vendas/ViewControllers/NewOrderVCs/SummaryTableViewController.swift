@@ -92,8 +92,9 @@ class SummaryTableViewController: UITableViewController {
         var rowItems = [RowItem]()
         var finalprice: Double = 0
         for item in orderItem!.items {
-            finalprice = finalprice + Double(item.price)!;
+            finalprice = finalprice + Double(item.price)! * Double(item.quantidade);
         }
+        
         rowItems.append(RowItem(title: "Valor final", content: "R$\(finalprice)", height: 60))
         financeSection.items = rowItems
         sections.append(financeSection)
