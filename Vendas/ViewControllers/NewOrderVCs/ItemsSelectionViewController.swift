@@ -117,7 +117,7 @@ class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITab
         modalView.clientID = self.formerViewController?.newOrderItem?.client?.codigo.trimmingCharacters(in: .whitespacesAndNewlines)
         modalView.clientLoja = self.formerViewController?.newOrderItem?.client?.loja.trimmingCharacters(in: .whitespacesAndNewlines)
         modalView.previousVC = self
-        modalView.product = Product(codigo: item.codigo, nome: item.nome, primeiraunidade: item.primeiraunidade, saldo: "\(item.saldo)", segundaunidade: item.segundaunidade)
+        modalView.product = Product(codigo: item.codigo, nome: item.nome, primeiraunidade: item.primeiraunidade, saldo: "\(item.saldo)", segundaunidade: item.segundaunidade, tipoDeConv: item.tipoconv, fatorDeConv: item.conv)
         DataService.shared.getProductSaldo(item) { (saldo, erro) in
             
             
@@ -128,7 +128,7 @@ class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITab
                     return
                 }
                 
-                modalView.saldo = saldo!
+                modalView.saldoone = saldo!
                 self.present(modalView, animated: true, completion: nil)
             }
         }

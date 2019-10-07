@@ -14,8 +14,11 @@ class ProductSelectedViewController: UIViewController {
     
     //Variables and constants
     var selectedUM = ""
-    var saldo: String = ""
-    var price: String = ""
+    var saldoone: String = ""
+    var saldotwo: String = ""
+    var priceone: String = ""
+    var pricetwo: String = ""
+    var originalPrice: String = ""
     var clientID: String?
     var clientLoja: String?
     var productID: String?
@@ -50,6 +53,14 @@ class ProductSelectedViewController: UIViewController {
         return label
     }()
     
+    let saldoText: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 20)
+        return label
+    }()
+    
     let productQuantityTextViewController: MDCTextInputControllerOutlined!
     
     override func viewDidLoad() {
@@ -71,7 +82,7 @@ class ProductSelectedViewController: UIViewController {
     func setupView() {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         view.isOpaque = false
-        
+        selectedUM = product!.primeiraunidade
         
         let modalView: UIView = {
             let view = UIView()
@@ -146,15 +157,6 @@ class ProductSelectedViewController: UIViewController {
                 return label
             }()
             
-            let saldoText: UILabel = {
-                let label = UILabel()
-                label.translatesAutoresizingMaskIntoConstraints = false
-                label.textColor = .black
-                label.font = UIFont.systemFont(ofSize: 20)
-                label.text = "\(saldo) \(product?.primeiraunidade ?? "")"
-                return label
-            }()
-            
             view.addSubview(saldoLabel)
             saldoLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 8).isActive = true
             saldoLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
@@ -225,7 +227,10 @@ class ProductSelectedViewController: UIViewController {
             unidadeSegmentedControl.bottomAnchor.constraint(equalTo: productQuantityTextView.topAnchor, constant: -10).isActive = true
             unidadeSegmentedControl.rightAnchor.constraint(equalTo: returnButton.rightAnchor).isActive = true
             
+            setSaldoTwo()
         }
+        
+        saldoText.text = "\(saldoone) \(product!.primeiraunidade)"
     }
     
     @objc func sendDataBack(_ sender: Any) {
@@ -235,7 +240,7 @@ class ProductSelectedViewController: UIViewController {
         } else {
             um = product!.primeiraunidade
         }
-        let productin = ProdutoPedido(quantidade: Float("\(productQuantityTextView.text!)")!, produto: product!, price: price, selectedUM: um)
+        let productin = ProdutoPedido(quantidade: Float("\(productQuantityTextView.text!)")!, produto: product!, price: priceone, selectedUM: um)
         previousVC?.onProductSelected(productin)
         closeCurrentView(sender)
     }
@@ -247,8 +252,12 @@ class ProductSelectedViewController: UIViewController {
     @objc func changeum(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             selectedUM = product!.primeiraunidade
+            saldoText.text = "\(String(format: "%.3f", Double(saldoone)!)) \(product!.primeiraunidade)"
+            priceText.text = "R$ \(String(format: "%.2f", Double(priceone)!))"
         } else {
             selectedUM = product!.segundaunidade
+            saldoText.text = "\(String(format: "%.3f", Double(saldotwo)!)) \(product!.segundaunidade)"
+            priceText.text = "R$ \(String(format: "%.2f", Double(pricetwo)!))"
         }
     }
     
@@ -258,10 +267,42 @@ class ProductSelectedViewController: UIViewController {
                 self.priceText.text = "erro"
                 return
             }
-            let discount = 100.0 - Double(self.previousVC!.formerViewController!.newOrderItem!.desconto)!
-            let pricein = Double(price!)!*discount/100
-            self.priceText.text = "R$ \(String(format: "%.2f", pricein))"
-            self.price = "\(String(format: "%.2f", pricein))"
+            self.originalPrice = price!
+            self.applyDiscount()
+            
+            if (self.product!.hasSecondMeasureUnit()) {
+                self.getPriceTwo()
+            }
+            
+            
+            self.priceText.text = "R$ \(String(format: "%.2f", Double(self.priceone)!))"
+        }
+    }
+    
+    func getDiscountMultiplier() -> Double {
+        let percentage = 100.0 - Double(self.previousVC!.formerViewController!.newOrderItem!.desconto)!
+        return percentage/100
+    }
+    
+    func applyDiscount() {
+        let pricewdiscount = Double(originalPrice)!*getDiscountMultiplier();
+        priceone = String(pricewdiscount)
+    }
+    
+    func setSaldoTwo() {
+        if product!.tipoconv == "D" {
+            let segsaldo = Double(saldoone)!/Double(product!.conv)!
+            saldotwo = String(segsaldo)
+        } else if product!.tipoconv == "M" {
+            let segsaldo = Double(saldoone)!*Double(product!.conv)!
+        }
+    }
+    
+    func getPriceTwo() {
+        if product!.tipoconv == "D" {
+            pricetwo = String(Double(priceone)!/(1/Double(product!.conv)!))
+        } else if product!.tipoconv == "M" {
+            pricetwo = String(Double(priceone)!/Double(product!.conv)!)
         }
     }
 }

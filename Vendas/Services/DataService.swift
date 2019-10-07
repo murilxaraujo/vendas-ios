@@ -127,7 +127,7 @@ class DataService {
                 print("Produtos em arquivo: ",produtos.count)
                 var items: [Product] = []
                 for item in produtos {
-                    let object = Product(codigo: item.codigo.trimmingCharacters(in: .whitespacesAndNewlines), nome: item.nome, primeiraunidade: item.primeiraunidade.trimmingCharacters(in: .whitespacesAndNewlines), saldo: item.saldo.trimmingCharacters(in: .whitespacesAndNewlines), segundaunidade: item.segundaunidade.trimmingCharacters(in: .whitespacesAndNewlines))
+                    let object = Product(codigo: item.codigo.trimmingCharacters(in: .whitespacesAndNewlines), nome: item.nome, primeiraunidade: item.primeiraunidade.trimmingCharacters(in: .whitespacesAndNewlines), saldo: item.saldo.trimmingCharacters(in: .whitespacesAndNewlines), segundaunidade: item.segundaunidade.trimmingCharacters(in: .whitespacesAndNewlines), tipoDeConv: item.tipoconv.trimmingCharacters(in: .whitespacesAndNewlines), fatorDeConv: item.conv.trimmingCharacters(in: .whitespacesAndNewlines))
                     items.append(object)
                 }
                 
@@ -215,6 +215,8 @@ class DataService {
         var primeiraunidade: String
         var segundaunidade: String
         var saldo: String
+        var tipoconv: String
+        var conv: String
     }
     
     // MARK: - Get transportadoras functions
