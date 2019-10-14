@@ -74,6 +74,7 @@ class NewOrderSecondViewController: UIViewController {
         let input = MDCTextField()
         input.translatesAutoresizingMaskIntoConstraints = false
         input.placeholder = "PV vinculado"
+        input.keyboardType = .numberPad
         return input
     }()
     
