@@ -17,11 +17,23 @@ import Firebase
 class DataService {
     
     struct ProdutosForParse: Decodable {
-        
+        var codigo: String
+        var nome: String
+        var primeiraunidade: String
+        var segundaunidade: String
+        var tipoconv: String
+        var conv: String
+        var saldo: String
     }
     
     struct ClientsForParse: Decodable {
-        
+        var CODIGO: String
+        var LOJA: String
+        var NOME: String
+        var CIDADE: String
+        var ESTADO: String
+        var ENDERECO: String
+        var CEP: String
     }
     
     // MARK: -Variables and constants
@@ -511,14 +523,358 @@ class DataService {
     
     // MARK: - Data update functions
     
-    func updateClients() {
+    
+    
+    func updateClients(completionHandler: @escaping (_ error: Error?) -> Void) {
+        let jsonDic: [String: Any] = [
+            "CODIGO" : getLastClientCode()
+        ]
+        let jsonData = try? JSONSerialization.data(withJSONObject: jsonDic)
         
+        var request = URLRequest(url: URL(string: "http://189.112.124.67:8013/cli_pv")!)
+        request.httpMethod = "POST"
+        request.httpBody = jsonData
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = URLSession.shared.dataTask(with: request) {
+            (data, response, error) in
+            DispatchQueue.main.sync {
+                if error != nil {
+                    completionHandler(error)
+                    return
+                }
+                if response == nil {
+                    completionHandler(DataDownloadError.ResponseIsNil)
+                    return
+                }
+                
+                if data == nil {
+                    completionHandler(DataDownloadError.DataIsNil)
+                    return
+                }
+                
+                do {
+                    let clients = try JSONDecoder().decode([ClientsForParse].self, from: data!)
+                    var items = [Client]()
+                    for item in clients {
+                        let object = Client()
+                        object.codigo = item.CODIGO
+                        object.Nome = item.NOME
+                        object.loja = item.LOJA
+                        object.Cidade = item.CIDADE
+                        object.Estado = item.ESTADO
+                        object.Endereco = item.ENDERECO
+                        object.Cep = item.CEP
+                        
+                        items.append(object)
+                    }
+                    
+                    let realmInstance = try Realm()
+                    
+                    try realmInstance.write {
+                        realmInstance.add(items)
+                    }
+                    
+                    print("new clients added")
+                    completionHandler(nil)
+                } catch {
+                    completionHandler(error)
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    func getLastClientCode() -> String {
+        let objects = RealmService.shared.realm.objects(Client.self).sorted(byKeyPath: "codigo", ascending: true)
+        let lastobjectindex = objects.count-1
+        return objects[lastobjectindex].codigo
+    }
+    
+    func updateProducts(completionHandler: @escaping (_ error: Error?) -> Void) {
+        let jsonDic: [String: Any] = [
+            "CODIGO": getLastProductCode()
+        ]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: jsonDic)
+        
+        var request = URLRequest(url: URL(string: "http://189.112.124.67:8013/prod_pv")!)
+        request.httpMethod = "POST"
+        request.httpBody = jsonData
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = URLSession.shared.dataTask(with: request) { (data
+        , response, error) in
+            if error != nil {
+                completionHandler(error)
+                return
+            }
+            if response == nil {
+                completionHandler(DataDownloadError.ResponseIsNil)
+                return
+            }
+            
+            if data == nil {
+                completionHandler(DataDownloadError.DataIsNil)
+                return
+            }
+            do {
+                let products = try JSONDecoder().decode([ProdutosForParse].self, from: data!)
+                var items = [Product]()
+                for item in products {
+                    let object = Product()
+                    object.codigo = item.codigo
+                    object.nome = item.nome
+                    object.primeiraunidade = item.primeiraunidade
+                    object.segundaunidade = item.segundaunidade
+                    object.tipoconv = item.tipoconv
+                    object.conv = item.conv
+                    items.append(object)
+                }
+                
+                let realmInstance = try Realm()
+                
+                try realmInstance.write {
+                    realmInstance.add(items)
+                }
+            } catch {
+                completionHandler(error)
+            }
+            
+        }
+        task.resume()
     }
     
     func getLastProductCode() -> String {
-        let objects = RealmService.shared.realm.objects(Client.self).sorted(byKeyPath: "codigo")
+        let objects = RealmService.shared.realm.objects(Product.self).sorted(byKeyPath: "codigo", ascending: true)
         let lastobjectindex = objects.count-1
         return objects[lastobjectindex].codigo
+    }
+    
+    func updateTransportadoras() throws {
+        let jsonString = "http://189.112.124.67:8013/transportadores_pv"
+        guard let url = URL(string: jsonString) else {throw DataDownloadError.ErrorConvertingUrl}
+        
+        var data: Data?
+        var response: URLResponse?
+        var error: DataDownloadError?
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        URLSession.shared.dataTask(with: url) { (innerData, innerResponse, innerError) in
+            if error != nil {error = DataDownloadError.SessionError}
+            if response == nil {error =  DataDownloadError.ResponseIsNil}
+            if data == nil {error = DataDownloadError.DataIsNil}
+            data = innerData
+            response = innerResponse
+            
+            semaphore.signal()
+        }.resume()
+        
+        _ = semaphore.wait(timeout: .distantFuture)
+        
+        do {
+            let transportadoras = try JSONDecoder().decode([TransportadoraParseStruct].self, from: data!)
+            var items: [Transportadora] = []
+            for item in transportadoras {
+                let object = Transportadora(codigo: item.Codigo, nome: item.Nome)
+                if !transportadoraExistsInTheDataBase(object) {
+                    items.append(object)
+                }
+            }
+
+            if items.count > 0 {
+                let realmInstance = try! Realm()
+                try! realmInstance.write {
+                    realmInstance.add(items)
+                }
+            }
+        } catch {
+            print("Erro", error)
+            throw DataDownloadError.UndefinedError
+        }
+    }
+    
+    func transportadoraExistsInTheDataBase(_ transportadoracomp: Transportadora) -> Bool {
+        let transportadoras = getTransportadorasFromDB()
+        for item in transportadoras {
+            if Int(transportadoracomp.codigo) == Int(item.codigo) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func updateRegrasDeDesconto() throws {
+        let jsonString = "http://189.112.124.67:8013/regradesconto_pv"
+        guard let url = URL(string: jsonString) else {
+            throw DataDownloadError.ErrorConvertingUrl
+        }
+        
+        var error: DataDownloadError?
+        var response: URLResponse?
+        var data: Data?
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        URLSession.shared.dataTask(with: url) { (innerData, innerResponse, innerError) in
+            if innerError != nil {
+                error = DataDownloadError.SessionError
+            }
+            if innerResponse == nil {
+                error = DataDownloadError.ResponseIsNil
+            }
+            if innerData == nil {
+                error = DataDownloadError.DataIsNil
+            }
+            data = innerData
+            response = innerResponse
+            semaphore.signal()
+        }.resume()
+        _ = semaphore.wait(timeout: .distantFuture)
+        if error != nil {
+            switch error! {
+            case DataDownloadError.ErrorConvertingUrl:
+                throw DataDownloadError.ErrorConvertingUrl
+            case DataDownloadError.ResponseIsNil:
+                throw DataDownloadError.ResponseIsNil
+            case DataDownloadError.DataIsNil:
+                throw DataDownloadError.DataIsNil
+            default:
+                throw DataDownloadError.UndefinedError
+            }
+        }
+        do {
+            let regrasDeDesconto = try JSONDecoder().decode([regraDeDescontoParseStruct].self, from: data!)
+            var items = [RegraDeDesconto]()
+            for item in regrasDeDesconto {
+                let object = RegraDeDesconto(codigo: item.Codigo, descricao: item.Descricao, desconto: item.Desconto)
+                if !regraDeDescontoExistsInTheDataBase(object) {
+                    items.append(object)
+                }
+                
+            }
+            
+            if items.count > 0 {
+                let realmInstance = try! Realm()
+                try! realmInstance.write {
+                    realmInstance.add(items)
+                }
+            }
+
+        } catch {
+            throw error
+        }
+    }
+    
+    func regraDeDescontoExistsInTheDataBase(_ regraDeDescontocomp: RegraDeDesconto) -> Bool {
+        let regrasDeDesconto = getRegrasDeDesconto()
+        for item in regrasDeDesconto {
+            if Int(regraDeDescontocomp.codigo) == Int(item.codigo) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func updateCondicoesDePagamento() throws {
+        let jsonString = "http://189.112.124.67:8013/condpag_pv"
+        guard let url = URL(string: jsonString) else {
+            print("Eroor converting to url")
+            throw DataDownloadError.ErrorConvertingUrl
+        }
+        
+        var error: DataDownloadError?
+        var data: Data?
+        var response: URLResponse?
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        URLSession.shared.dataTask(with: url) { (innerData, innerResponse, innerError) in
+            if error != nil {
+                error = DataDownloadError.SessionError
+            }
+            if response == nil {
+                error = DataDownloadError.ResponseIsNil
+            }
+            if data == nil {
+                error = DataDownloadError.DataIsNil
+            }
+            
+            data = innerData
+            response = innerResponse
+            
+            semaphore.signal()
+            
+        }.resume()
+        
+        _ = semaphore.wait(timeout: .distantFuture)
+        
+        do {
+            let condPagamentos = try JSONDecoder().decode([CondPagamentoParseStruct].self, from: data!)
+            var items = [CondicaoDePagamento]()
+            for item in condPagamentos {
+                let object = CondicaoDePagamento()
+                object.codigo = item.Codigo
+                object.descricao = item.Descricao
+                
+                if !condicaoDePagamentoExistsInTheDataBase(object) {
+                    items.append(object)
+                }
+                
+            }
+            
+            if items.count > 0 {
+                let realmInstance = try! Realm()
+                try! realmInstance.write {
+                    realmInstance.add(items)
+                }
+            }
+        } catch {
+            print("Erro:",error)
+            throw DataDownloadError.UndefinedError
+        }
+    }
+    
+    func condicaoDePagamentoExistsInTheDataBase(_ object: CondicaoDePagamento) -> Bool {
+        let condicoesDePagamento = getCondsPagamentoFromDB()
+        for item in condicoesDePagamento {
+            if Int(object.codigo) == Int(item.codigo) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func updateTables() {
+        do {
+            try updateTransportadoras()
+        } catch {
+            
+        }
+        
+        do {
+            try updateRegrasDeDesconto()
+        } catch {
+            
+        }
+        
+        do {
+            try updateCondicoesDePagamento()
+        } catch {
+            
+        }
+        
+        updateClients { (error) in
+            if error != nil {
+                return
+            }
+            self.updateProducts { (err) in
+                if err != nil {
+                    return
+                }
+            }
+        }
     }
     
     // MARK: - Support Classes
