@@ -651,6 +651,59 @@ class DataService {
         return objects[lastobjectindex].codigo
     }
     
+    func updateTransportadoras() throws {
+        let jsonString = "http://189.112.124.67:8013/transportadores_pv"
+        guard let url = URL(string: jsonString) else {throw DataDownloadError.ErrorConvertingUrl}
+        
+        var data: Data?
+        var response: URLResponse?
+        var error: DataDownloadError?
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        URLSession.shared.dataTask(with: url) { (innerData, innerResponse, innerError) in
+            if error != nil {error = DataDownloadError.SessionError}
+            if response == nil {error =  DataDownloadError.ResponseIsNil}
+            if data == nil {error = DataDownloadError.DataIsNil}
+            data = innerData
+            response = innerResponse
+            
+            semaphore.signal()
+        }.resume()
+        
+        _ = semaphore.wait(timeout: .distantFuture)
+        
+        do {
+            let transportadoras = try JSONDecoder().decode([TransportadoraParseStruct].self, from: data!)
+            var items: [Transportadora] = []
+            for item in transportadoras {
+                let object = Transportadora(codigo: item.Codigo, nome: item.Nome)
+                if !transportadoraExistsInTheDataBase(object) {
+                    items.append(object)
+                }
+            }
+
+            let realmInstance = try! Realm()
+            
+            try! realmInstance.write {
+                realmInstance.add(items)
+            }
+        } catch {
+            print("Erro", error)
+            throw DataDownloadError.UndefinedError
+        }
+    }
+    
+    func transportadoraExistsInTheDataBase(_ transportadoracomp: Transportadora) -> Bool {
+        let transportadoras = getTransportadorasFromDB()
+        for item in transportadoras {
+            if Int(transportadoracomp.codigo) == Int(item.codigo) {
+                return true
+            }
+        }
+        return false
+    }
+    
     // MARK: - Support Classes
     
     struct clientsJsonBasicTypes: HandyJSON {
