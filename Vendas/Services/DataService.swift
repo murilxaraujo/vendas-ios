@@ -509,6 +509,18 @@ class DataService {
         }
     }
     
+    // MARK: - Data update functions
+    
+    func updateClients() {
+        
+    }
+    
+    func getLastProductCode() -> String {
+        let objects = RealmService.shared.realm.objects(Client.self).sorted(byKeyPath: "codigo")
+        let lastobjectindex = objects.count-1
+        return objects[lastobjectindex].codigo
+    }
+    
     // MARK: - Support Classes
     
     struct clientsJsonBasicTypes: HandyJSON {
@@ -516,7 +528,7 @@ class DataService {
     }
     
     func getRealmPath() {
-        print(RealmService.shared.realm.configuration.fileURL)
+        print(RealmService.shared.realm.configuration.fileURL ?? "nopath")
         
     }
     
