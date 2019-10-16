@@ -17,7 +17,13 @@ import Firebase
 class DataService {
     
     struct ProdutosForParse: Decodable {
-        
+        var codigo: String
+        var nome: String
+        var primeiraunidade: String
+        var segundaunidade: String
+        var tipoconv: String
+        var conv: String
+        var saldo: String
     }
     
     struct ClientsForParse: Decodable {
@@ -535,13 +541,16 @@ class DataService {
             DispatchQueue.main.sync {
                 if error != nil {
                     completionHandler(error)
+                    return
                 }
                 if response == nil {
                     completionHandler(DataDownloadError.ResponseIsNil)
+                    return
                 }
                 
                 if data == nil {
                     completionHandler(DataDownloadError.DataIsNil)
+                    return
                 }
                 
                 do {
@@ -577,7 +586,67 @@ class DataService {
     }
     
     func getLastClientCode() -> String {
-        let objects = RealmService.shared.realm.objects(Client.self).sorted(byKeyPath: "codigo")
+        let objects = RealmService.shared.realm.objects(Client.self).sorted(byKeyPath: "codigo", ascending: true)
+        let lastobjectindex = objects.count-1
+        return objects[lastobjectindex].codigo
+    }
+    
+    func updateProducts(completionHandler: @escaping (_ error: Error?) -> Void) {
+        let jsonDic: [String: Any] = [
+            "CODIGO": getLastProductCode()
+        ]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: jsonDic)
+        
+        var request = URLRequest(url: URL(string: "http://189.112.124.67:8013/prod_pv")!)
+        request.httpMethod = "POST"
+        request.httpBody = jsonData
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = URLSession.shared.dataTask(with: request) { (data
+        , response, error) in
+            if error != nil {
+                completionHandler(error)
+                return
+            }
+            if response == nil {
+                completionHandler(DataDownloadError.ResponseIsNil)
+                return
+            }
+            
+            if data == nil {
+                completionHandler(DataDownloadError.DataIsNil)
+                return
+            }
+            do {
+                let products = try JSONDecoder().decode([ProdutosForParse].self, from: data!)
+                var items = [Product]()
+                for item in products {
+                    let object = Product()
+                    object.codigo = item.codigo
+                    object.nome = item.nome
+                    object.primeiraunidade = item.primeiraunidade
+                    object.segundaunidade = item.segundaunidade
+                    object.tipoconv = item.tipoconv
+                    object.conv = item.conv
+                    items.append(object)
+                }
+                
+                let realmInstance = try Realm()
+                
+                try realmInstance.write {
+                    realmInstance.add(items)
+                }
+            } catch {
+                completionHandler(error)
+            }
+            
+        }
+        task.resume()
+    }
+    
+    func getLastProductCode() -> String {
+        let objects = RealmService.shared.realm.objects(Product.self).sorted(byKeyPath: "codigo", ascending: true)
         let lastobjectindex = objects.count-1
         return objects[lastobjectindex].codigo
     }
