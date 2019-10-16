@@ -683,10 +683,11 @@ class DataService {
                 }
             }
 
-            let realmInstance = try! Realm()
-            
-            try! realmInstance.write {
-                realmInstance.add(items)
+            if items.count > 0 {
+                let realmInstance = try! Realm()
+                try! realmInstance.write {
+                    realmInstance.add(items)
+                }
             }
         } catch {
             print("Erro", error)
@@ -698,6 +699,78 @@ class DataService {
         let transportadoras = getTransportadorasFromDB()
         for item in transportadoras {
             if Int(transportadoracomp.codigo) == Int(item.codigo) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func updateRegrasDeDesconto() throws {
+        let jsonString = "http://189.112.124.67:8013/regradesconto_pv"
+        guard let url = URL(string: jsonString) else {
+            throw DataDownloadError.ErrorConvertingUrl
+        }
+        
+        var error: DataDownloadError?
+        var response: URLResponse?
+        var data: Data?
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        URLSession.shared.dataTask(with: url) { (innerData, innerResponse, innerError) in
+            if innerError != nil {
+                error = DataDownloadError.SessionError
+            }
+            if innerResponse == nil {
+                error = DataDownloadError.ResponseIsNil
+            }
+            if innerData == nil {
+                error = DataDownloadError.DataIsNil
+            }
+            data = innerData
+            response = innerResponse
+            semaphore.signal()
+        }.resume()
+        _ = semaphore.wait(timeout: .distantFuture)
+        if error != nil {
+            switch error! {
+            case DataDownloadError.ErrorConvertingUrl:
+                throw DataDownloadError.ErrorConvertingUrl
+            case DataDownloadError.ResponseIsNil:
+                throw DataDownloadError.ResponseIsNil
+            case DataDownloadError.DataIsNil:
+                throw DataDownloadError.DataIsNil
+            default:
+                throw DataDownloadError.UndefinedError
+            }
+        }
+        do {
+            let regrasDeDesconto = try JSONDecoder().decode([regraDeDescontoParseStruct].self, from: data!)
+            var items = [RegraDeDesconto]()
+            for item in regrasDeDesconto {
+                let object = RegraDeDesconto(codigo: item.Codigo, descricao: item.Descricao, desconto: item.Desconto)
+                if !regraDeDescontoExistsInTheDataBase(object) {
+                    items.append(object)
+                }
+                
+            }
+            
+            if items.count > 0 {
+                let realmInstance = try! Realm()
+                try! realmInstance.write {
+                    realmInstance.add(items)
+                }
+            }
+
+        } catch {
+            throw error
+        }
+    }
+    
+    func regraDeDescontoExistsInTheDataBase(_ regraDeDescontocomp: RegraDeDesconto) -> Bool {
+        let regrasDeDesconto = getRegrasDeDesconto()
+        for item in regrasDeDesconto {
+            if Int(regraDeDescontocomp.codigo) == Int(item.codigo) {
                 return true
             }
         }
