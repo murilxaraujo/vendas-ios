@@ -21,7 +21,13 @@ class DataService {
     }
     
     struct ClientsForParse: Decodable {
-        
+        var CODIGO: String
+        var LOJA: String
+        var NOME: String
+        var CIDADE: String
+        var ESTADO: String
+        var ENDERECO: String
+        var CEP: String
     }
     
     // MARK: -Variables and constants
@@ -511,11 +517,66 @@ class DataService {
     
     // MARK: - Data update functions
     
-    func updateClients() {
+    
+    
+    func updateClients(completionHandler: @escaping (_ error: Error?) -> Void) {
+        let jsonDic: [String: Any] = [
+            "CODIGO" : getLastClientCode()
+        ]
+        let jsonData = try? JSONSerialization.data(withJSONObject: jsonDic)
         
+        var request = URLRequest(url: URL(string: "http://189.112.124.67:8013/cli_pv")!)
+        request.httpMethod = "POST"
+        request.httpBody = jsonData
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = URLSession.shared.dataTask(with: request) {
+            (data, response, error) in
+            DispatchQueue.main.sync {
+                if error != nil {
+                    completionHandler(error)
+                }
+                if response == nil {
+                    completionHandler(DataDownloadError.ResponseIsNil)
+                }
+                
+                if data == nil {
+                    completionHandler(DataDownloadError.DataIsNil)
+                }
+                
+                do {
+                    let clients = try JSONDecoder().decode([ClientsForParse].self, from: data!)
+                    var items = [Client]()
+                    for item in clients {
+                        let object = Client()
+                        object.codigo = item.CODIGO
+                        object.Nome = item.NOME
+                        object.loja = item.LOJA
+                        object.Cidade = item.CIDADE
+                        object.Estado = item.ESTADO
+                        object.Endereco = item.ENDERECO
+                        object.Cep = item.CEP
+                        
+                        items.append(object)
+                    }
+                    
+                    let realmInstance = try Realm()
+                    
+                    try realmInstance.write {
+                        realmInstance.add(items)
+                    }
+                    
+                    print("new clients added")
+                    completionHandler(nil)
+                } catch {
+                    completionHandler(error)
+                }
+            }
+        }
+        task.resume()
     }
     
-    func getLastProductCode() -> String {
+    func getLastClientCode() -> String {
         let objects = RealmService.shared.realm.objects(Client.self).sorted(byKeyPath: "codigo")
         let lastobjectindex = objects.count-1
         return objects[lastobjectindex].codigo
