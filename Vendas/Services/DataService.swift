@@ -777,6 +777,75 @@ class DataService {
         return false
     }
     
+    func updateCondicoesDePagamento() throws {
+        let jsonString = "http://189.112.124.67:8013/condpag_pv"
+        guard let url = URL(string: jsonString) else {
+            print("Eroor converting to url")
+            throw DataDownloadError.ErrorConvertingUrl
+        }
+        
+        var error: DataDownloadError?
+        var data: Data?
+        var response: URLResponse?
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        URLSession.shared.dataTask(with: url) { (innerData, innerResponse, innerError) in
+            if error != nil {
+                error = DataDownloadError.SessionError
+            }
+            if response == nil {
+                error = DataDownloadError.ResponseIsNil
+            }
+            if data == nil {
+                error = DataDownloadError.DataIsNil
+            }
+            
+            data = innerData
+            response = innerResponse
+            
+            semaphore.signal()
+            
+        }.resume()
+        
+        _ = semaphore.wait(timeout: .distantFuture)
+        
+        do {
+            let condPagamentos = try JSONDecoder().decode([CondPagamentoParseStruct].self, from: data!)
+            var items = [CondicaoDePagamento]()
+            for item in condPagamentos {
+                let object = CondicaoDePagamento()
+                object.codigo = item.Codigo
+                object.descricao = item.Descricao
+                
+                if !condicaoDePagamentoExistsInTheDataBase(object) {
+                    items.append(object)
+                }
+                
+            }
+            
+            if items.count > 0 {
+                let realmInstance = try! Realm()
+                try! realmInstance.write {
+                    realmInstance.add(items)
+                }
+            }
+        } catch {
+            print("Erro:",error)
+            throw DataDownloadError.UndefinedError
+        }
+    }
+    
+    func condicaoDePagamentoExistsInTheDataBase(_ object: CondicaoDePagamento) -> Bool {
+        let condicoesDePagamento = getCondsPagamentoFromDB()
+        for item in condicoesDePagamento {
+            if Int(object.codigo) == Int(item.codigo) {
+                return true
+            }
+        }
+        return false
+    }
+    
     // MARK: - Support Classes
     
     struct clientsJsonBasicTypes: HandyJSON {
