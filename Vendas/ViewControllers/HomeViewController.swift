@@ -63,6 +63,7 @@ class HomeViewController: UIViewController {
         let dataDownloadIcon = UIImage(named: "baseline_refresh_black_24pt")?.withRenderingMode(.alwaysTemplate)
         button.setImage(dataDownloadIcon, for: .normal)
         button.setImageTintColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(updateTableButtonPressed(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -132,6 +133,13 @@ class HomeViewController: UIViewController {
 
     @objc func dataLocalBackup(sender: Any) {
         self.show(BackupDataDownloadViewController(), sender: nil)
+    }
+    
+    @objc func updateTableButtonPressed(_ sender: Any) {
+        let  message = MDCSnackbarMessage(text: "Atualizando tabelas...")
+        MDCSnackbarManager.show(message)
+        
+        DataService.shared.updateTables()
     }
     
     func downloadInitialData() {

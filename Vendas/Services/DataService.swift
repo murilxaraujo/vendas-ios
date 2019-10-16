@@ -846,6 +846,37 @@ class DataService {
         return false
     }
     
+    func updateTables() {
+        do {
+            try updateTransportadoras()
+        } catch {
+            
+        }
+        
+        do {
+            try updateRegrasDeDesconto()
+        } catch {
+            
+        }
+        
+        do {
+            try updateCondicoesDePagamento()
+        } catch {
+            
+        }
+        
+        updateClients { (error) in
+            if error != nil {
+                return
+            }
+            self.updateProducts { (err) in
+                if err != nil {
+                    return
+                }
+            }
+        }
+    }
+    
     // MARK: - Support Classes
     
     struct clientsJsonBasicTypes: HandyJSON {
