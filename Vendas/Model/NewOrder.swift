@@ -13,11 +13,13 @@ class NewOrder: Object {
     
     @objc dynamic var filial: String = ""
     @objc dynamic var client: Client? = nil
+    @objc dynamic var cliententrega: Client? = nil
     @objc dynamic var vendedor: String = ""
     @objc dynamic var empresa: String = ""
     @objc dynamic var filialClient: String = ""
     @objc dynamic var kit: String = ""
     @objc dynamic var pv: String = ""
+    @objc dynamic var pvcli: Client? = nil
     @objc dynamic var express: String = ""
     @objc dynamic var tipoDeFrete: String = ""
     @objc dynamic var transportadora: String = ""
@@ -57,6 +59,7 @@ class NewOrder: Object {
         json["assinatura"] = self.signatureURL
         json["um"] = self.um
         json["pv"] = self.pv
+        json["pvcli"] = self.pvcli?.codigo ?? ""
         var items = Array<[String:Any]>()
         
         for item in self.items {
