@@ -70,6 +70,13 @@ class NewOrderSecondViewController: UIViewController {
         return input
     }()
     
+    let clientVinculadoTextInput: MDCTextField = {
+        let input = MDCTextField()
+        input.translatesAutoresizingMaskIntoConstraints = false
+        input.placeholder = "PV vinculado"
+        return input
+    }()
+    
     let pvVinculadoTextInput: MDCTextField = {
         let input = MDCTextField()
         input.translatesAutoresizingMaskIntoConstraints = false
@@ -172,6 +179,7 @@ class NewOrderSecondViewController: UIViewController {
     let clienteDeEntregaTextInputController: MDCTextInputControllerOutlined!
     let clientNameTextInputController: MDCTextInputControllerOutlined!
     let pvVinculadoTextInputController: MDCTextInputControllerOutlined!
+    let clientVincculadoTextInputController: MDCTextInputControllerOutlined!
     let transportadoraTextInputController: MDCTextInputControllerOutlined!
     let condicaoDePagamentoTextInputController: MDCTextInputControllerOutlined!
     let descDasCondicoesDePagamentoTextInputController: MDCTextInputControllerOutlined!
@@ -196,6 +204,7 @@ class NewOrderSecondViewController: UIViewController {
         observacaoTextInputController = MDCTextInputControllerOutlined(textInput: observacaoTextInput)
         pesoLiquidoTextInputController = MDCTextInputControllerOutlined(textInput: pesoLiquidoTextInput)
         pesoBrutoTextInputController = MDCTextInputControllerOutlined(textInput: pesoBrutoTextInput)
+        clientVincculadoTextInputController = MDCTextInputControllerOutlined(textInput: clientVinculadoTextInput)
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
@@ -255,8 +264,17 @@ class NewOrderSecondViewController: UIViewController {
         clientNameTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         clientNameTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
+        scrollView.addSubview(clientVinculadoTextInput)
+        let clienteVinculadoButton = UIButton(type: .custom)
+        clienteVinculadoButton.setImage(UIImage(named: "round_search_black_24pt"), for: .normal)
+        clienteDeEntregaButton.frame = CGRect(x: 0, y: 0, width: 28, height: 28);
+        clienteDeEntregaButton.addTarget(self, action: #selector(openAttachedClientSelection(_:)), for: .touchUpInside)
+        clientVinculadoTextInput.topAnchor.constraint(equalTo: clientNameTextInput.bottomAnchor, constant: 0).isActive = true
+        clientVinculadoTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
+        clientVinculadoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        
         scrollView.addSubview(pvVinculadoTextInput)
-        pvVinculadoTextInput.topAnchor.constraint(equalTo: clientNameTextInput.bottomAnchor, constant: 0).isActive = true
+        pvVinculadoTextInput.topAnchor.constraint(equalTo: clientVinculadoTextInput.bottomAnchor, constant: 0).isActive = true
         pvVinculadoTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         pvVinculadoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
@@ -396,6 +414,12 @@ class NewOrderSecondViewController: UIViewController {
     func onDeliveryClientSelected(_ client: Client) {
         clienteDeEntregaTextInput.text = client.codigo
         clientNameTextInput.text = client.Nome
+        newOrderItem?.cliententrega = client
+    }
+    
+    func onAttachedClientSelected(_ client: Client) {
+        clientVinculadoTextInput.text = client.codigo
+        newOrderItem?.pvcli = client
     }
     
     func onTransportadoraSelected(_ transportadora: Transportadora) {
@@ -442,6 +466,12 @@ class NewOrderSecondViewController: UIViewController {
         let vc = RegraDeDescontoTableViewController()
         vc.previousVC = self
         self.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
+    }
+    
+    @objc fileprivate func openAttachedClientSelection(_ sender: Any) {
+        let vc = AttachedClientSelectionViewController()
+        vc.mainViewController = self
+        self.present(vc, animated: true, completion: nil)
     }
     
     fileprivate func fillInfoWithClientDetais(_ client: Client) {

@@ -65,6 +65,7 @@
 		4BBA3C8522CD2B6800D4D49B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBA3C8422CD2B6800D4D49B /* NetworkService.swift */; };
 		4BBA3C8722CD323E00D4D49B /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBA3C8622CD323E00D4D49B /* Reachability.swift */; };
 		4BDE2C1222D520C000743508 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDE2C1122D520C000743508 /* AuthService.swift */; };
+		4BF3263B236BE1730097AB5A /* AttachedClientSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF3263A236BE1730097AB5A /* AttachedClientSelection.swift */; };
 		BBD42A37264ED462D3BD779B /* Pods_Vendas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439AE58B54BA5855A75FB86E /* Pods_Vendas.framework */; };
 /* End PBXBuildFile section */
 
@@ -154,6 +155,7 @@
 		4BBA3C8422CD2B6800D4D49B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		4BBA3C8622CD323E00D4D49B /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		4BDE2C1122D520C000743508 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		4BF3263A236BE1730097AB5A /* AttachedClientSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachedClientSelection.swift; sourceTree = "<group>"; };
 		507EF6C9D84F4BD38BD2C13B /* Pods-Vendas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vendas.release.xcconfig"; path = "Target Support Files/Pods-Vendas/Pods-Vendas.release.xcconfig"; sourceTree = "<group>"; };
 		69AA472DB6A960C84F168055 /* Pods_VendasTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VendasTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A84AF0C8550326E704B2ECE5 /* Pods_VendasUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VendasUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -288,6 +290,7 @@
 				4BAF576C231FD90800815A28 /* UploadViewController.swift */,
 				4B7594A12321783900AF9FDA /* DeliveryClientSelectionViewController.swift */,
 				4B3C88232326CB19008FF083 /* ProductSelectedViewController.swift */,
+				4BF3263A236BE1730097AB5A /* AttachedClientSelection.swift */,
 			);
 			path = NewOrderVCs;
 			sourceTree = "<group>";
@@ -641,6 +644,7 @@
 				4BBA3C8522CD2B6800D4D49B /* NetworkService.swift in Sources */,
 				4B7B02D622D3B8FB00408443 /* User.swift in Sources */,
 				4B7B02DD22D3BFC700408443 /* NewOrderSecondViewController.swift in Sources */,
+				4BF3263B236BE1730097AB5A /* AttachedClientSelection.swift in Sources */,
 				4B831B6222DD147F009D390D /* Client.swift in Sources */,
 				4B08107A2314553E00770BAC /* Transportadora.swift in Sources */,
 				4B7B02E322D3C3B700408443 /* ItemsSelectionViewController.swift in Sources */,
