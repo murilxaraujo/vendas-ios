@@ -17,6 +17,7 @@ class NewOrder: Object {
     @objc dynamic var empresa: String = ""
     @objc dynamic var filialClient: String = ""
     @objc dynamic var kit: String = ""
+    @objc dynamic var pv: String = ""
     @objc dynamic var express: String = ""
     @objc dynamic var tipoDeFrete: String = ""
     @objc dynamic var transportadora: String = ""
@@ -55,6 +56,7 @@ class NewOrder: Object {
         json["itens"] = Array<[String:Any]>()
         json["assinatura"] = self.signatureURL
         json["um"] = self.um
+        json["pv"] = self.pv
         var items = Array<[String:Any]>()
         
         for item in self.items {
