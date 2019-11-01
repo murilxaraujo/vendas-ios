@@ -74,6 +74,7 @@ class NewOrderSecondViewController: UIViewController {
         let input = MDCTextField()
         input.translatesAutoresizingMaskIntoConstraints = false
         input.placeholder = "PV vinculado"
+        input.keyboardType = .numberPad
         return input
     }()
     
@@ -138,6 +139,7 @@ class NewOrderSecondViewController: UIViewController {
         let input = MDCTextField()
         input.translatesAutoresizingMaskIntoConstraints = false
         input.placeholder = "Desconto"
+        input.text = "0"
         input.keyboardType = UIKeyboardType.decimalPad
         return input
     }()
@@ -450,6 +452,9 @@ class NewOrderSecondViewController: UIViewController {
         let vc = NewOrderThirdViewController()
         vc.previousVC = self
         vc.newOrderItem = newOrderItem
+        vc.newOrderItem?.obs = observacaoTextInput.text ?? ""
+        vc.newOrderItem?.desconto = descontoTextInput.text ?? ""
+        vc.newOrderItem?.pv = pvVinculadoTextInput.text ?? ""
         vc.newOrderItem?.kit = {
             if kitSwitch.isOn {
                 return "S"
@@ -488,9 +493,9 @@ class NewOrderSecondViewController: UIViewController {
     
     @objc func unidadeDeMedidaChangedValue(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            newOrderItem?.uMedida = "KG"
+            newOrderItem?.um = "KG"
         } else {
-            newOrderItem?.uMedida = "PC"
+            newOrderItem?.um = "PC"
         }
     }
     

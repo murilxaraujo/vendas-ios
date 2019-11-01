@@ -44,7 +44,7 @@ class RegraDeDescontoTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "celli", for: indexPath) as! ItemSelectionTableViewCell
 
         cell.titleLabel.text = items[indexPath.item].descricao
-        cell.uMedidaLabel.text = items[indexPath.item].codigo
+        cell.uMedidaLabel.text = "até \(items[indexPath.item].desconto)% de desconto"
 
         return cell
     }

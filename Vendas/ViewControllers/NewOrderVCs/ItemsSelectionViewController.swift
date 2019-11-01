@@ -93,7 +93,12 @@ class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITab
             item = items[indexPath.row]
         }
         cell.titleLabel.text = item.getCodeAndName()
-        cell.uMedidaLabel.text = "Medida: \(item.unidademedida)"
+        if item.hasSecondMeasureUnit() {
+            cell.uMedidaLabel.text = "Medida: \(item.primeiraunidade) ou \(item.segundaunidade)"
+        } else {
+            cell.uMedidaLabel.text = "Medida: \(item.primeiraunidade)"
+        }
+        
         return cell
     }
     
@@ -112,7 +117,7 @@ class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITab
         modalView.clientID = self.formerViewController?.newOrderItem?.client?.codigo.trimmingCharacters(in: .whitespacesAndNewlines)
         modalView.clientLoja = self.formerViewController?.newOrderItem?.client?.loja.trimmingCharacters(in: .whitespacesAndNewlines)
         modalView.previousVC = self
-        modalView.product = Product(codigo: item.codigo, nome: item.nome, unidadeDeMedida: item.unidademedida, saldo: "\(item.saldo)")
+        modalView.product = Product(codigo: item.codigo, nome: item.nome, primeiraunidade: item.primeiraunidade, saldo: "\(item.saldo)", segundaunidade: item.segundaunidade, tipoDeConv: item.tipoconv, fatorDeConv: item.conv)
         DataService.shared.getProductSaldo(item) { (saldo, erro) in
             
             
@@ -123,7 +128,7 @@ class ItemsSelectionViewController: UIViewController, UITableViewDelegate, UITab
                     return
                 }
                 
-                modalView.saldo = saldo!
+                modalView.saldoone = saldo!
                 self.present(modalView, animated: true, completion: nil)
             }
         }

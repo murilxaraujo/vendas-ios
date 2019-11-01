@@ -38,6 +38,7 @@ class HomeViewController: UIViewController {
         let newClientIcon = UIImage(named: "round_person_add_black_24pt")?.withRenderingMode(.alwaysTemplate)
         button.setImage(newClientIcon, for: .normal)
         button.setImageTintColor(.white, for: .normal)
+        button.isEnabled = false
         return button
     }()
     
@@ -55,23 +56,14 @@ class HomeViewController: UIViewController {
     
     let downloadDataButton: MDCButton = {
         let button = MDCButton()
-        button.setTitle("Baixar tabelas", for: .normal)
+        button.setTitle("Atualizar tabelas", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setBackgroundColor(UIColor(red:0.25, green:0.32, blue:0.71, alpha:1.0))
         button.layer.cornerRadius = 10
-        let dataDownloadIcon = UIImage(named: "baseline_save_alt_black_24pt")?.withRenderingMode(.alwaysTemplate)
+        let dataDownloadIcon = UIImage(named: "baseline_refresh_black_24pt")?.withRenderingMode(.alwaysTemplate)
         button.setImage(dataDownloadIcon, for: .normal)
         button.setImageTintColor(.white, for: .normal)
-        return button
-    }()
-    
-    let syncDataButton: MDCFloatingButton = {
-        let button = MDCFloatingButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        let buttonImage = UIImage(named: "baseline_backup_black_24pt")?.withRenderingMode(.alwaysTemplate)
-        button.setImage(buttonImage, for: .normal)
-        button.backgroundColor = .white
-        button.setImageTintColor(UIColor(red:0.25, green:0.32, blue:0.71, alpha:1.0), for: .normal)
+        button.addTarget(self, action: #selector(updateTableButtonPressed(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -127,12 +119,6 @@ class HomeViewController: UIViewController {
         downloadDataButton.addTarget(self, action: #selector(dataLocalBackup(sender:)), for: .touchUpInside)
         downloadDataButton.isEnabled = false
         
-        self.topView.addSubview(syncDataButton)
-        syncDataButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        syncDataButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
-        syncDataButton.isEnabled = false
-
-        
     }
     
     @objc func newOrder(sender: Any) {
@@ -147,6 +133,13 @@ class HomeViewController: UIViewController {
 
     @objc func dataLocalBackup(sender: Any) {
         self.show(BackupDataDownloadViewController(), sender: nil)
+    }
+    
+    @objc func updateTableButtonPressed(_ sender: Any) {
+        let  message = MDCSnackbarMessage(text: "Atualizando tabelas...")
+        MDCSnackbarManager.show(message)
+        
+        DataService.shared.updateTables()
     }
     
     func downloadInitialData() {

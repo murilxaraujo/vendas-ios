@@ -24,12 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let migrationBlock: MigrationBlock = { migration, oldSchemaVersion in
             //Leave the block empty
         }
-        Realm.Configuration.defaultConfiguration = Realm.Configuration(schemaVersion: 6, migrationBlock: migrationBlock)
+        Realm.Configuration.defaultConfiguration = Realm.Configuration(schemaVersion: 9, migrationBlock: migrationBlock)
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = HomeViewController()
         window?.makeKeyAndVisible()
-        window?.backgroundColor = .white
+        window?.backgroundColor = UIColor(red:0.25, green:0.32, blue:0.71, alpha:1.0)
         IQKeyboardManager.shared().isEnabled = true
         
         //Add avalista back

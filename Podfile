@@ -19,6 +19,8 @@ target 'Vendas' do
   pod 'HandyJSON'
   pod 'PromiseKit'
   pod 'Just'
+  pod 'Fabric'
+  pod 'Crashlytics'
   
   target 'VendasTests' do
     inherit! :search_paths

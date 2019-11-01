@@ -58,6 +58,7 @@ class UploadViewController: UIViewController {
         
     
     func setupInitialView() {
+        view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
         view.addSubview(loadingView)
         view.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
@@ -117,7 +118,7 @@ class UploadViewController: UIViewController {
         }()
         
         successView.addSubview(successLabel)
-        successLabel.topAnchor.constraint(equalTo: successAnimation.bottomAnchor, constant: 40).isActive = true
+        successLabel.topAnchor.constraint(equalTo: successAnimation.bottomAnchor, constant: 0).isActive = true
         successLabel.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         successLabel.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         
