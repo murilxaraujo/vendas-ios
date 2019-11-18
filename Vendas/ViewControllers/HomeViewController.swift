@@ -116,8 +116,8 @@ class HomeViewController: UIViewController {
         downloadDataButton.topAnchor.constraint(equalTo: newOrderButton.bottomAnchor, constant: 20).isActive = true
         downloadDataButton.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         downloadDataButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
-        downloadDataButton.addTarget(self, action: #selector(dataLocalBackup(sender:)), for: .touchUpInside)
-        downloadDataButton.isEnabled = false
+        downloadDataButton.addTarget(self, action: #selector(updateTableButtonPressed(_:)), for: .touchUpInside)
+        downloadDataButton.isEnabled = true
         
     }
     

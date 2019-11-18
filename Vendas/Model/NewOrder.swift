@@ -60,7 +60,9 @@ class NewOrder: Object {
         json["um"] = self.um
         json["pv"] = self.pv
         json["pvcli"] = self.pvcli?.codigo ?? ""
+        json["pvloja"] = self.pvcli?.loja ?? ""
         json["clienteentrega"] = self.cliententrega?.codigo ?? ""
+        json["clientregaloja"] = self.cliententrega?.loja ?? ""
         var items = Array<[String:Any]>()
         
         for item in self.items {

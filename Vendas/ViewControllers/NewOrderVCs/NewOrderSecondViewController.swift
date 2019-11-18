@@ -73,7 +73,7 @@ class NewOrderSecondViewController: UIViewController {
     let clientVinculadoTextInput: MDCTextField = {
         let input = MDCTextField()
         input.translatesAutoresizingMaskIntoConstraints = false
-        input.placeholder = "PV vinculado"
+        input.placeholder = "Cliente vinculado"
         return input
     }()
     
@@ -229,7 +229,7 @@ class NewOrderSecondViewController: UIViewController {
         scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height: 1300)
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: 1400)
         scrollView.backgroundColor = .white
 
         let textFieldButton = UIButton(type: .custom)
@@ -267,11 +267,13 @@ class NewOrderSecondViewController: UIViewController {
         scrollView.addSubview(clientVinculadoTextInput)
         let clienteVinculadoButton = UIButton(type: .custom)
         clienteVinculadoButton.setImage(UIImage(named: "round_search_black_24pt"), for: .normal)
-        clienteDeEntregaButton.frame = CGRect(x: 0, y: 0, width: 28, height: 28);
-        clienteDeEntregaButton.addTarget(self, action: #selector(openAttachedClientSelection(_:)), for: .touchUpInside)
+        clienteVinculadoButton.frame = CGRect(x: 0, y: 0, width: 28, height: 28);
+        clienteVinculadoButton.addTarget(self, action: #selector(openAttachedClientSelection(_:)), for: .touchUpInside)
         clientVinculadoTextInput.topAnchor.constraint(equalTo: clientNameTextInput.bottomAnchor, constant: 0).isActive = true
         clientVinculadoTextInput.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         clientVinculadoTextInput.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        clientVinculadoTextInput.rightView = clienteVinculadoButton
+        clientVinculadoTextInput.rightViewMode = .always
         
         scrollView.addSubview(pvVinculadoTextInput)
         pvVinculadoTextInput.topAnchor.constraint(equalTo: clientVinculadoTextInput.bottomAnchor, constant: 0).isActive = true

@@ -673,6 +673,10 @@ class DataService {
         
         _ = semaphore.wait(timeout: .distantFuture)
         
+        if response == nil || data == nil || error != nil {
+            throw error!;
+        }
+        
         do {
             let transportadoras = try JSONDecoder().decode([TransportadoraParseStruct].self, from: data!)
             var items: [Transportadora] = []
@@ -809,6 +813,10 @@ class DataService {
         }.resume()
         
         _ = semaphore.wait(timeout: .distantFuture)
+        
+        if error != nil || data == nil || response == nil {
+            throw error!
+        }
         
         do {
             let condPagamentos = try JSONDecoder().decode([CondPagamentoParseStruct].self, from: data!)
