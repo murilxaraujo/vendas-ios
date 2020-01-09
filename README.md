@@ -1,26 +1,19 @@
-# Aplicativo de Agendamento
+# Aplicativo de vendas
 
-O aplicativo de agendamento fornece uma forma simples e rápida para que os clientes comprem os serviços de limpeza da sua empresa.
-O processo se torma completamente automatizado, a seleção de datas, horários, e pagamento. Após a confirmação do pagamento você pode checar os agendamentos através da plataforma de administração, disponível para Windows, Mac e Linux (Apliação de administrador produzida usando o framework Angular e Electron).
-
-## ⚠️ Atenção ⚠️
-Este projeto reflete apenas a interface e o fluxo de navegação do app e, para este fim, a lógica foi codificada diretamente nas classes ViewController, sem seguir algum design pattern, com um MockBackend Firebase para testes. Em um ambiente de produção a lógica deve ser programada separadamente.
+O aplicativo Vendas fornece aos vendedores externos uma forma mais prática, rápida e segura de realizar pedidos.
+A aplicação foi desenvolvida em Swift e se conecta ao Protheus através de APIs REST.
 
 ## Instalação
-Após clonar o repositório use o comando `pod install` no terminal para instalar as dependências e bibliotecas necessárias.
+Clone o repositório usando o comando
+`git clone` ou baixando o arquivo zip diretamente.
+Após baixar o repositório use o comando 
+`pod install` para instalar as dependências e bibliotecas.
 
-Caso queira usar o backend firebase para testes, antes de programar seu próprio, crie seu projeto no console e substitua o arquivo `.json` de configuração. Lembre-se de: <br>
-1. Ativar autenticação via email e senha no painel de autenticação<br>
-2. Definir as regras de read and write do cloud firestore para `true if auth.currentuser != null`
+* A aplicação já está conectada à uma API de testes
 
 ## Funcionalidades
-* Adicionar endereços
-* Apagar endereços
-* Agendar visita
-* Ver visitas agendadas
-* Avaliar visitas realizadas
-* Pagar a visita dentro da aplicação usando o gateway MercadoPago
-* Realizar login
-* Criar conta
-* Recuperar senha
-* Simular preço do serviço
+* Banco de dados local para funcionamento offline: A aplicação salva os dados localmente usando o banco de dados Realm, similar à biblioteca CoreData, salvando os objetos permitindo um query rápido e preciso.
+* Assinatura digital do cliente: A fim de envitar a burocracia de enviar um pdf do pedido, pedir para que ele assine, escaneie e retorne o pedido, a aplicação colherá a assinatura do cliente no final do pedido de forma digital que entrará como anexo junto ao pedido.
+* Atualização automática de dados: Toda vez que o usuário entra na aplicação, enquanto conectado à uma rede Wi-Fi a aplicação atualizará os dados de clientes e produtos no background, assim economizando dados móveis e garantindo que o vendedor sempre tenha em mãos informações atualizadas.
+
+<img src="https://i.imgur.com/JXRY25x.png" width="100px">
